@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MP Khadi Department Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <!-- Anime.js -->
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --success: #2ecc71;
+            --danger: #e74c3c;
+            --warning: #f39c12;
+            --info: #3498db;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+        }
+
+        .dashboard-header {
+            background: linear-gradient(135deg, var(--primary), #1a252f);
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(-20px);
+            opacity: 0;
+            animation: slideDown 0.6s forwards 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .dashboard-title span {
+            color: var(--warning);
+        }
+
+        .last-updated {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .financial-year-filter {
+            padding: 8px 15px;
+            font-size: 14px;
+        }
+
+        .financial-year-filter select {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+
+        .financial-year-filter select:focus {
+            outline: none;
+            border-color: var(--warning);
+        }
+
+        .kpi-card {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            transform: translateY(30px);
+            opacity: 0;
+            height: 180px;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .kpi-card:hover::before {
+            width: 7px;
+        }
+
+        .kpi-card.targets::before {
+            background-color: #9b59b6;
+        }
+
+        .kpi-card.production::before {
+            background-color: var(--info);
+        }
+
+        .kpi-card.sales::before {
+            background-color: var(--success);
+        }
+
+        .kpi-card.orders::before {
+            background-color: var(--danger);
+        }
+
+        .kpi-card.stock::before {
+            background-color: var(--warning);
+        }
+
+        .kpi-title {
+            font-size: 15px;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 800;
+        }
+
+        .kpi-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark);
+            transition: all 0.3s ease;
+        }
+
+        .kpi-card:hover .kpi-value {
+            color: var(--primary);
+        }
+
+        .kpi-icon {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 50px;
+            opacity: 0.1;
+            color: var(--dark);
+            transition: all 0.3s ease;
+        }
+
+        .kpi-card:hover .kpi-icon {
+            opacity: 0.2;
+            transform: scale(1.1);
+        }
+
+        .dashboard-card {
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 250px;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .chart-container canvas {
+            max-height: 100%;
+            max-width: 100%;
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        .notification-list {
+            max-height: 320px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .notification-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .notification-list::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+
+        .notification-list::-webkit-scrollbar-thumb {
+            background: var(--secondary);
+            border-radius: 3px;
+        }
+
+        .notification-list::-webkit-scrollbar-thumb:hover {
+            background: #2980b9;
+        }
+
+        .notification-item {
+            border-left: 4px solid var(--danger);
+            transition: all 0.3s ease;
+            transform: translateX(-10px);
+            opacity: 0;
+        }
+
+        .notification-item:hover {
+            transform: translateX(0);
+        }
+
+        .notification-item.warning {
+            border-left-color: var(--warning);
+        }
+
+        .notification-item.info {
+            border-left-color: var(--info);
+        }
+
+        .notification-title {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .notification-title i {
+            font-size: 16px;
+        }
+
+        .notification-desc {
+            font-size: 14px;
+            color: #7f8c8d;
+            line-height: 1.5;
+        }
+
+        .notification-time {
+            font-size: 12px;
+            color: #bdc3c7;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(46, 204, 113, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .kpi-card {
+                height: auto;
+                min-height: 150px;
+            }
+
+            .dashboard-card {
+                height: auto;
+                min-height: 350px;
+            }
+
+            .chart-container {
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .kpi-value {
+                font-size: 20px;
+            }
+
+            .kpi-title {
+                font-size: 13px;
+            }
+
+            .chart-container {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="dashboard-header p-4 mb-4">
+            <div class="financial-year-filter">
+                <label for="financial-year">Financial Year:</label>
+                <select id="financial-year">
+                    <option value="2024-25">2024-25</option>
+                    <option value="2025-26" selected>2025-26</option>
+                </select>
+            </div>
+            <h1 class="dashboard-title display-6">MP <span>Khadi</span> Department Dashboard</h1>
+            <div class="last-updated"><i class="fas fa-sync-alt"></i> Last updated: <span id="current-date"></span></div>
+        </div>
+
+        <!-- KPI Cards Section -->
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4 mb-4" id="kpi-container">
+            <div class="col">
+                <div class="kpi-card targets card shadow-sm p-4">
+                    <div class="kpi-title">Allocated Targets</div>
+                    <div class="">
+                        <div>Production: <span class="kpi-value" id="target-production">100</span></div>
+                        <div>Emporium: <span class="kpi-value" id="target-emporium">80</span></div>
+                        <div>Warehouse: <span class="kpi-value" id="target-warehouse">100</span></div>
+                    </div>
+                    <div class="kpi-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="kpi-card production card shadow-sm p-4">
+                    <div class="kpi-title">Total Production</div>
+                    <div class="kpi-value"><span id="production-value">0</span> <span class="fs-5">kg</span></div>
+                    <div class="kpi-change positive text-success">
+                        <i class="fas fa-arrow-up"></i> <span id="production-change">12.5%</span> from last month
+                    </div>
+                    <div class="kpi-icon">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="kpi-card sales pulse card shadow-sm p-4">
+                    <div class="kpi-title">Total Sales</div>
+                    <div class="kpi-value">₹<span id="sales-value">0</span> <span class="fs-5">Lakhs</span></div>
+                    <div class="kpi-change positive text-success">
+                        <i class="fas fa-arrow-up"></i> <span id="sales-change">8.3%</span> from last quarter
+                    </div>
+                    <div class="kpi-icon">
+                        <i class="fas fa-rupee-sign"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="kpi-card orders card shadow-sm p-4">
+                    <div class="kpi-title">Pending Orders</div>
+                    <div class="kpi-value"><span id="orders-value">0</span></div>
+                    <div class="kpi-change negative text-danger">
+                        <i class="fas fa-arrow-down"></i> <span id="orders-change">15%</span> overdue
+                    </div>
+                    <div class="kpi-icon">
+                        <i class="fas fa-clipboard-list"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="kpi-card stock card shadow-sm p-4">
+                    <div class="kpi-title">Finished Product</div>
+                    <div class="kpi-value"><span id="stock-value">0</span> <span class="fs-5">units</span></div>
+                    <div class="kpi-change negative text-danger">
+                        <i class="fas fa-arrow-down"></i> <span id="stock-change">22%</span> below target
+                    </div>
+                    <div class="kpi-icon">
+                        <i class="fas fa-boxes"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Dashboard Sections -->
+        <div class="row g-4 mb-5" id="dashboard-container">
+            <!-- Top 5 Finished Products -->
+            <div class="col-md-4">
+                <div class="dashboard-card card shadow-sm p-4">
+                    <div class="card-header d-flex justify-content-between align-items-center border-bottom pb-3">
+                        <h5 class="card-title mb-0">Top 5 Finished Products</h5>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-outline-secondary btn-sm" id="monthly-btn"><i class="fas fa-calendar-week"></i> Monthly</button>
+                            <button class="btn btn-outline-secondary btn-sm" id="quarterly-btn"><i class="fas fa-calendar-alt"></i> Quarterly</button>
+                            <button class="btn btn-primary btn-sm" id="yearly-btn"><i class="fas fa-calendar-day"></i> Yearly</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="finishedProductsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top 5 Emporium Wise Sale -->
+            <div class="col-md-3">
+                <div class="dashboard-card card shadow-sm p-4">
+                    <div class="card-header d-flex justify-content-between align-items-center border-bottom pb-3">
+                        <h5 class="card-title mb-0">Top 5 Emporium Wise Sales</h5>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-outline-secondary btn-sm" id="quantity-btn"><i class="fas fa-box-open"></i> By Quantity</button>
+                            <button class="btn btn-primary btn-sm" id="revenue-btn"><i class="fas fa-money-bill-wave"></i> By target</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="emporiumSalesChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notification Alerts -->
+            <div class="col-md-5">
+                <div class="dashboard-card card shadow-sm p-4">
+                    <div class="card-header d-flex justify-content-between align-items-center border-bottom pb-3">
+                        <h5 class="card-title mb-0">Notifications & Alerts</h5>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-outline-secondary btn-sm" id="mark-read-btn"><i class="fas fa-check-double"></i> Mark All Read</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="notification-list" id="notification-list">
+                            <div class="notification-item warning card mb-3 p-2">
+                                <div class="notification-title"><i class="fas fa-exclamation-triangle"></i> High Demand: Cotton Khadi Fabric</div>
+                                <div class="d-flex justify-content-between">
+                                    <div class="notification-desc">Demand exceeds supply by 35%. Consider increasing production.</div>
+                                    <div class="notification-time">2 hours ago</div>
+                                </div>
+                            </div>
+                            <div class="notification-item info card mb-3 p-2">
+                                <div class="notification-title"><i class="fas fa-clipboard-check"></i> New Order Received</div>
+                                <div class="d-flex justify-content-between">
+                                    <div class="notification-desc">MP Tourism Dept. ordered 250 units of Khadi stoles.</div>
+                                    <div class="notification-time">5 hours ago</div>
+                                </div>
+                            </div>
+                            <div class="notification-item card mb-3 p-2">
+                                <div class="notification-title"><i class="fas fa-box-open"></i> Stock Alert: Silk Khadi</div>
+                                <div class="d-flex justify-content-between">
+                                    <div class="notification-desc">Only 45 units remaining in Bhopal Emporium.</div>
+                                    <div class="notification-time">1 day ago</div>
+                                </div>
+                            </div>
+                            <div class="notification-item info card mb-3 p-2">
+                                <div class="notification-title"><i class="fas fa-check-circle"></i> Production Completed</div>
+                                <div class="d-flex justify-content-between">
+                                    <div class="notification-desc">Jabalpur unit completed 100% of monthly target.</div>
+                                    <div class="notification-time">2 days ago</div>
+                                </div>
+                            </div>
+                            <div class="notification-item warning card mb-3 p-2">
+                                <div class="notification-title"><i class="fas fa-file-invoice-dollar"></i> Pending Approval</div>
+                                <div class="d-flex justify-content-between">
+                                    <div class="notification-desc">3 vendor invoices awaiting your approval.</div>
+                                    <div class="notification-time">3 days ago</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+
+        
+            <!-- Order vs Supply -->
+            <div class="col-md-6">
+                <div class="dashboard-card card shadow-sm p-4">
+                    <div class="card-header d-flex justify-content-between align-items-center border-bottom pb-3">
+                        <h5 class="card-title mb-0">Total Order Vs Supply</h5>
+                        <div class="d-flex gap-2">
+                            <!-- <button class="btn btn-outline-secondary btn-sm" id="by-department-btn"><i class="fas fa-box-open"></i> By Other Department</button> -->
+                            <button class="btn btn-primary btn-sm" id="by-self-btn"><i class="fas fa-money-bill-wave"></i> By Other Department</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        Total Orders  :- <span id="total-orders" class="fw-bold">0</span> No's
+                        <div class="chart-container">
+                            <canvas id="ordervssupplyChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Plant Production & Stock Details -->
+            <div class="col-md-6">
+                <div class="dashboard-card card shadow-sm p-4">
+                    <div class="card-header d-flex justify-content-between align-items-center border-bottom pb-3">
+                        <h5 class="card-title mb-0">Plant Production & Stock Details</h5>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-outline-secondary btn-sm" id="production-btn"><i class="fas fa-industry"></i> Production</button>
+                            <button class="btn btn-primary btn-sm" id="stock-btn"><i class="fas fa-boxes"></i> Stock</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="plant-table">
+                                <thead>
+                                    <tr>
+                                        <th>Plant Name</th>
+                                        <th>Production (kg)</th>
+                                        <th>Capacity</th>
+                                        <th>Ready Stock</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><i class="fas fa-map-marker-alt me-2"></i>Bhopal Khadi Gram</td>
+                                        <td>1,250</td>
+                                        <td>1,500</td>
+                                        <td>320</td>
+                                        <td><span class="badge bg-success"><i class="fas fa-check-circle me-1"></i>Adequate</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fas fa-map-marker-alt me-2"></i>Indore Khadi Unit</td>
+                                        <td>980</td>
+                                        <td>1,200</td>
+                                        <td>150</td>
+                                        <td><span class="badge bg-warning"><i class="fas fa-exclamation-circle me-1"></i>Low</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fas fa-map-marker-alt me-2"></i>Jabalpur Weaving</td>
+                                        <td>1,100</td>
+                                        <td>1,000</td>
+                                        <td>420</td>
+                                        <td><span class="badge bg-success"><i class="fas fa-check-circle me-1"></i>Adequate</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fas fa-map-marker-alt me-2"></i>Gwalior Spinning</td>
+                                        <td>750</td>
+                                        <td>800</td>
+                                        <td>80</td>
+                                        <td><span class="badge bg-danger"><i class="fas fa-times-circle me-1"></i>Critical</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fas fa-map-marker-alt me-2"></i>Ujjain Handloom</td>
+                                        <td>1,500</td>
+                                        <td>1,800</td>
+                                        <td>280</td>
+                                        <td><span class="badge bg-warning"><i class="fas fa-exclamation-circle me-1"></i>Low</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize anime.js timeline
+            const timeline = anime.timeline({
+                easing: 'easeOutExpo',
+                duration: 0
+            });
+
+            // Set current date with animation
+            document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-IN', {
+                day: 'numeric',
+                month: 'short',
+                year: 'numeric'
+            });
+
+            // Animate KPI cards
+            const kpiCards = document.querySelectorAll('.kpi-card');
+            kpiCards.forEach((card, index) => {
+                timeline.add({
+                    targets: card,
+                    translateY: 0,
+                    opacity: 1,
+                    delay: index * 100
+                });
+            });
+
+            // Animate dashboard cards
+            const dashboardCards = document.querySelectorAll('.dashboard-card');
+            dashboardCards.forEach((card, index) => {
+                timeline.add({
+                    targets: card,
+                    scale: 1,
+                    opacity: 1,
+                    delay: index * 100
+                });
+            });
+
+            // Animate notification items
+            const notificationItems = document.querySelectorAll('.notification-item');
+            notificationItems.forEach((item, index) => {
+                timeline.add({
+                    targets: item,
+                    translateX: 0,
+                    opacity: 1,
+                    delay: index * 100
+                });
+            });
+
+            // Counter animations for KPI values
+            animateValue('target-production', 0, 100, 1500);
+            animateValue('target-emporium', 0, 80, 1500);
+            animateValue('target-warehouse', 0, 100, 1500);
+            animateValue('production-value', 0, 8450, 1500);
+            animateValue('sales-value', 0, 42.8, 1500);
+            animateValue('orders-value', 0, 128, 1500);
+            animateValue('stock-value', 0, 1250, 1500);
+            animateValue('total-orders', 0, 1250, 1500);
+
+            function animateValue(id, start, end, duration) {
+                const obj = document.getElementById(id);
+                if (!obj) return;
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    const value = Math.floor(progress * (end - start) + start);
+                    obj.innerHTML = value.toLocaleString('en-IN');
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+            }
+
+            // Sample data for different time periods and financial years
+            const dataByFinancialYear = {
+                '2024-25': {
+                    finishedProducts: {
+                        monthly: { labels: ['Cotton Khadi', 'Silk Khadi', 'Woolen Khadi', 'Khadi Stoles', 'Khadi Kurtas'], data: [1100, 900, 700, 600, 550] },
+                        quarterly: { labels: ['Cotton Khadi', 'Silk Khadi', 'Woolen Khadi', 'Khadi Stoles', 'Khadi Kurtas'], data: [3300, 2700, 2100, 1800, 1650] },
+                        yearly: { labels: ['Cotton Khadi', 'Silk Khadi', 'Woolen Khadi', 'Khadi Stoles', 'Khadi Kurtas'], data: [13200, 10800, 8400, 7200, 6600] }
+                    },
+                    emporiumSales: {
+                        quantity: { labels: ['Bhopal', 'Indore', 'Jabalpur', 'Gwalior', 'Ujjain'], data: [1150, 900, 800, 600, 550] },
+                        revenue: { labels: ['Bhopal', 'Indore', 'Jabalpur', 'Gwalior', 'Ujjain'], data: [1150000, 900000, 800000, 600000, 550000] }
+                    },
+                    orderVsSupply: {
+                        byDepartment: { labels: ['Supplied (Other Dept)', 'Pending (Other Dept)'], data: [750, 180] },
+                        bySelf: { labels: ['Supplied (Self)', 'Pending (Self)'], data: [400, 280] }
+                    },
+                    kpi: {
+                        targetProduction: 90,
+                        targetEmporium: 70,
+                        targetWarehouse: 90,
+                        productionValue: 8000,
+                        salesValue: 40.5,
+                        ordersValue: 120,
+                        stockValue: 1100
+                    }
+                },
+                '2025-26': {
+                    finishedProducts: {
+                        monthly: { labels: ['Cotton Khadi', 'Silk Khadi', 'Woolen Khadi', 'Khadi Stoles', 'Khadi Kurtas'], data: [1250, 980, 750, 620, 580] },
+                        quarterly: { labels: ['Cotton Khadi', 'Silk Khadi', 'Woolen Khadi', 'Khadi Stoles', 'Khadi Kurtas'], data: [3750, 2940, 2250, 1860, 1740] },
+                        yearly: { labels: ['Cotton Khadi', 'Silk Khadi', 'Woolen Khadi', 'Khadi Stoles', 'Khadi Kurtas'], data: [15000, 11760, 9000, 7440, 6960] }
+                    },
+                    emporiumSales: {
+                        quantity: { labels: ['Bhopal', 'Indore', 'Jabalpur', 'Gwalior', 'Ujjain'], data: [1250, 980, 875, 620, 580] },
+                        revenue: { labels: ['Bhopal', 'Indore', 'Jabalpur', 'Gwalior', 'Ujjain'], data: [1250000, 980000, 875000, 620000, 580000] }
+                    },
+                    orderVsSupply: {
+                        byDepartment: { labels: ['Supplied (Other Dept)', 'Pending (Other Dept)'], data: [800, 200] },
+                        bySelf: { labels: ['Supplied (Self)', 'Pending (Self)'], data: [450, 300] }
+                    },
+                    kpi: {
+                        targetProduction: 100,
+                        targetEmporium: 80,
+                        targetWarehouse: 100,
+                        productionValue: 8450,
+                        salesValue: 42.8,
+                        ordersValue: 128,
+                        stockValue: 1250
+                    }
+                }
+            };
+
+            // Chart 1: Top 5 Finished Products
+            const finishedProductsCtx = document.getElementById('finishedProductsChart')?.getContext('2d');
+            let finishedProductsChart;
+            if (finishedProductsCtx) {
+                finishedProductsChart = new Chart(finishedProductsCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: dataByFinancialYear['2025-26'].finishedProducts.yearly.labels,
+                        datasets: [{
+                            label: 'Quantity Produced (kg)',
+                            data: dataByFinancialYear['2025-26'].finishedProducts.yearly.data,
+                            backgroundColor: ['rgba(52, 152, 219, 0.7)', 'rgba(155, 89, 182, 0.7)', 'rgba(52, 73, 94, 0.7)', 'rgba(39, 174, 96, 0.7)', 'rgba(241, 196, 15, 0.7)'],
+                            borderColor: ['rgba(52, 152, 219, 1)', 'rgba(155, 89, 182, 1)', 'rgba(52, 73, 94, 1)', 'rgba(39, 174, 96, 1)', 'rgba(241, 196, 15, 1)'],
+                            borderWidth: 1,
+                            borderRadius: 6,
+                            borderSkipped: false
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    afterLabel: function (context) {
+                                        const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                        const percentage = Math.round((context.raw / total) * 100);
+                                        return `Percentage: ${percentage}% of total production`;
+                                    }
+                                }
+                            },
+                            datalabels: { display: false }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: { display: true, text: 'Quantity (kg)', font: { weight: 'bold' } },
+                                grid: { color: 'rgba(0, 0, 0, 0.05)' }
+                            },
+                            x: { grid: { display: false } }
+                        },
+                        animation: { duration: 2000, easing: 'easeOutQuart' }
+                    }
+                });
+            }
+
+            // Chart 2: Top 5 Emporium Wise Sales
+            const emporiumSalesCtx = document.getElementById('emporiumSalesChart')?.getContext('2d');
+            let emporiumSalesChart;
+            if (emporiumSalesCtx) {
+                emporiumSalesChart = new Chart(emporiumSalesCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: dataByFinancialYear['2025-26'].emporiumSales.revenue.labels,
+                        datasets: [{
+                            label: 'Sales (₹)',
+                            data: dataByFinancialYear['2025-26'].emporiumSales.revenue.data,
+                            backgroundColor: ['rgba(231, 76, 60, 0.7)', 'rgba(243, 156, 18, 0.7)', 'rgba(46, 204, 113, 0.7)', 'rgba(52, 152, 219, 0.7)', 'rgba(155, 89, 182, 0.7)'],
+                            borderColor: ['rgba(231, 76, 60, 1)', 'rgba(243, 156, 18, 1)', 'rgba(46, 204, 113, 1)', 'rgba(52, 152, 219, 1)', 'rgba(155, 89, 182, 1)'],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { position: 'right' },
+                            tooltip: {
+                                callbacks: {
+                                    label: function (context) {
+                                        const label = context.label || '';
+                                        const value = context.raw || 0;
+                                        const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                        const percentage = Math.round((value / total) * 100);
+                                        return `${label}: ₹${value.toLocaleString('en-IN')} (${percentage}%)`;
+                                    }
+                                }
+                            },
+                            datalabels: {
+                                formatter: (value, ctx) => {
+                                    const total = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                                    const percentage = Math.round((value / total) * 100);
+                                    return `${percentage}%`;
+                                },
+                                color: '#fff',
+                                font: { weight: 'bold' }
+                            }
+                        },
+                        cutout: '50%',
+                        animation: { animateScale: true, animateRotate: true }
+                    },
+                    plugins: [ChartDataLabels]
+                });
+            }
+
+            // Chart 3: Order vs Supply
+            const ordervssupplyCtx = document.getElementById('ordervssupplyChart')?.getContext('2d');
+            let ordervssupplyChart;
+            if (ordervssupplyCtx) {
+                ordervssupplyChart = new Chart(ordervssupplyCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: dataByFinancialYear['2025-26'].orderVsSupply.byDepartment.labels,
+                        datasets: [{
+                            label: 'Orders',
+                            data: dataByFinancialYear['2025-26'].orderVsSupply.bySelf.data,
+                            backgroundColor: ['rgba(46, 204, 113, 0.7)', 'rgba(231, 76, 60, 0.7)'],
+                            borderColor: ['rgba(46, 204, 113, 1)', 'rgba(231, 76, 60, 1)'],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { position: 'right' },
+                            tooltip: {
+                                callbacks: {
+                                    label: function (context) {
+                                        const label = context.label || '';
+                                        const value = context.raw || 0;
+                                        const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                        const percentage = Math.round((value / total) * 100);
+                                        return `${label}: ${value.toLocaleString('en-IN')} orders (${percentage}%)`;
+                                    }
+                                }
+                            },
+                            datalabels: {
+                                formatter: (value, ctx) => {
+                                    const total = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                                    const percentage = Math.round((value / total) * 100);
+                                    return `${percentage}%`;
+                                },
+                                color: '#fff',
+                                font: { weight: 'bold' }
+                            }
+                        },
+                        cutout: '50%',
+                        animation: { animateScale: true, animateRotate: true }
+                    },
+                    plugins: [ChartDataLabels]
+                });
+            }
+
+            // Financial Year Filter
+            const financialYearSelect = document.getElementById('financial-year');
+            financialYearSelect.addEventListener('change', function () {
+                const selectedYear = this.value;
+                const period = document.querySelector('.dashboard-card:first-child .btn-primary')?.id === 'monthly-btn' ? 'monthly' : document.querySelector('.dashboard-card:first-child .btn-primary')?.id === 'quarterly-btn' ? 'quarterly' : 'yearly';
+                const salesType = document.querySelector('.dashboard-card:nth-child(2) .btn-primary')?.id === 'quantity-btn' ? 'quantity' : 'revenue';
+                const orderType = document.querySelector('.dashboard-card:nth-child(4) .btn-primary')?.id === 'by-department-btn' ? 'byDepartment' : 'bySelf';
+
+                // Update KPI values
+                animateValue('target-production', parseInt(document.getElementById('target-production')?.textContent.replace(/,/g, '') || '0'), dataByFinancialYear[selectedYear].kpi.targetProduction, 1000);
+                animateValue('target-emporium', parseInt(document.getElementById('target-emporium')?.textContent.replace(/,/g, '') || '0'), dataByFinancialYear[selectedYear].kpi.targetEmporium, 1000);
+                animateValue('target-warehouse', parseInt(document.getElementById('target-warehouse')?.textContent.replace(/,/g, '') || '0'), dataByFinancialYear[selectedYear].kpi.targetWarehouse, 1000);
+                animateValue('production-value', parseInt(document.getElementById('production-value')?.textContent.replace(/,/g, '') || '0'), dataByFinancialYear[selectedYear].kpi.productionValue, 1000);
+                animateValue('sales-value', parseFloat(document.getElementById('sales-value')?.textContent.replace(/,/g, '') || '0'), dataByFinancialYear[selectedYear].kpi.salesValue, 1000);
+                animateValue('orders-value', parseInt(document.getElementById('orders-value')?.textContent.replace(/,/g, '') || '0'), dataByFinancialYear[selectedYear].kpi.ordersValue, 1000);
+                animateValue('stock-value', parseInt(document.getElementById('stock-value')?.textContent.replace(/,/g, '') || '0'), dataByFinancialYear[selectedYear].kpi.stockValue, 1000);
+
+                // Update Finished Products Chart
+                if (finishedProductsChart) {
+                    finishedProductsChart.data.labels = dataByFinancialYear[selectedYear].finishedProducts[period].labels;
+                    finishedProductsChart.data.datasets[0].data = dataByFinancialYear[selectedYear].finishedProducts[period].data;
+                    finishedProductsChart.update();
+                }
+
+                // Update Emporium Sales Chart
+                if (emporiumSalesChart) {
+                    emporiumSalesChart.data.labels = dataByFinancialYear[selectedYear].emporiumSales[salesType].labels;
+                    emporiumSalesChart.data.datasets[0].data = dataByFinancialYear[selectedYear].emporiumSales[salesType].data;
+                    emporiumSalesChart.update();
+                }
+
+                // Update Order vs Supply Chart
+                if (ordervssupplyChart) {
+                    ordervssupplyChart.data.labels = dataByFinancialYear[selectedYear].orderVsSupply[orderType].labels;
+                    ordervssupplyChart.data.datasets[0].data = dataByFinancialYear[selectedYear].orderVsSupply[orderType].data;
+                    ordervssupplyChart.update();
+                    const totalOrders = dataByFinancialYear[selectedYear].orderVsSupply[orderType].data.reduce((a, b) => a + b, 0);
+                    animateValue('total-orders', parseInt(document.getElementById('total-orders').textContent.replace(/,/g, '') || '0'), totalOrders, 1000);
+                }
+
+                anime({
+                    targets: ['#finishedProductsChart', '#emporiumSalesChart', '#ordervssupplyChart', '.kpi-card'],
+                    scale: [0.95, 1],
+                    opacity: [0.8, 1],
+                    duration: 500
+                });
+            });
+
+            // Filter buttons for Top 5 Finished Products
+            const periodButtons = document.querySelectorAll('.dashboard-card:first-child .btn');
+            periodButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    periodButtons.forEach(btn => {
+                        btn.classList.remove('btn-primary');
+                        btn.classList.add('btn-outline-secondary');
+                    });
+                    this.classList.add('btn-primary');
+                    this.classList.remove('btn-outline-secondary');
+
+                    const period = this.id === 'monthly-btn' ? 'monthly' : this.id === 'quarterly-btn' ? 'quarterly' : 'yearly';
+                    const selectedYear = financialYearSelect.value;
+                    if (finishedProductsChart) {
+                        finishedProductsChart.data.labels = dataByFinancialYear[selectedYear].finishedProducts[period].labels;
+                        finishedProductsChart.data.datasets[0].data = dataByFinancialYear[selectedYear].finishedProducts[period].data;
+                        finishedProductsChart.update();
+                    }
+
+                    anime({
+                        targets: '#finishedProductsChart',
+                        scale: [0.95, 1],
+                        opacity: [0.8, 1],
+                        duration: 500
+                    });
+                });
+            });
+
+            // Filter buttons for Emporium Sales
+            const salesButtons = document.querySelectorAll('.dashboard-card:nth-child(2) .btn');
+            salesButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    salesButtons.forEach(btn => {
+                        btn.classList.remove('btn-primary');
+                        btn.classList.add('btn-outline-secondary');
+                    });
+                    this.classList.add('btn-primary');
+                    this.classList.remove('btn-outline-secondary');
+
+                    const type = this.id === 'quantity-btn' ? 'quantity' : 'revenue';
+                    const selectedYear = financialYearSelect.value;
+                    if (emporiumSalesChart) {
+                        emporiumSalesChart.data.labels = dataByFinancialYear[selectedYear].emporiumSales[type].labels;
+                        emporiumSalesChart.data.datasets[0].data = dataByFinancialYear[selectedYear].emporiumSales[type].data;
+                        emporiumSalesChart.data.datasets[0].label = type === 'quantity' ? 'Units Sold' : 'Sales (₹)';
+                        emporiumSalesChart.options.plugins.tooltip.callbacks.label = function (context) {
+                            const label = context.label || '';
+                            const value = context.raw || 0;
+                            const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                            const percentage = Math.round((value / total) * 100);
+                            return type === 'quantity'
+                                ? `${label}: ${value} units (${percentage}%)`
+                                : `${label}: ₹${value.toLocaleString('en-IN')} (${percentage}%)`;
+                        };
+                        emporiumSalesChart.update();
+                    }
+
+                    anime({
+                        targets: '#emporiumSalesChart',
+                        scale: [0.95, 1],
+                        opacity: [0.8, 1],
+                        duration: 500
+                    });
+                });
+            });
+
+            // Filter buttons for Order vs Supply
+            const orderButtons = document.querySelectorAll('.dashboard-card:nth-child(4) .btn');
+            orderButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    orderButtons.forEach(btn => {
+                        btn.classList.remove('btn-primary');
+                        btn.classList.add('btn-outline-secondary');
+                    });
+                    this.classList.add('btn-primary');
+                    this.classList.remove('btn-outline-secondary');
+
+                    const type = this.id === 'by-department-btn' ? 'byDepartment' : 'bySelf';
+                    const selectedYear = financialYearSelect.value;
+                    if (ordervssupplyChart) {
+                        ordervssupplyChart.data.labels = dataByFinancialYear[selectedYear].orderVsSupply[type].labels;
+                        ordervssupplyChart.data.datasets[0].data = dataByFinancialYear[selectedYear].orderVsSupply[type].data;
+                        ordervssupplyChart.data.datasets[0].label = 'Orders';
+                        ordervssupplyChart.options.plugins.tooltip.callbacks.label = function (context) {
+                            const label = context.label || '';
+                            const value = context.raw || 0;
+                            const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                            const percentage = Math.round((value / total) * 100);
+                            return `${label}: ${value.toLocaleString('en-IN')} orders (${percentage}%)`;
+                        };
+                        ordervssupplyChart.update();
+                    }
+
+                    const totalOrders = dataByFinancialYear[selectedYear].orderVsSupply[type].data.reduce((a, b) => a + b, 0);
+                    animateValue('total-orders', parseInt(document.getElementById('total-orders').textContent.replace(/,/g, '') || '0'), totalOrders, 1000);
+
+                    anime({
+                        targets: '#ordervssupplyChart',
+                        scale: [0.95, 1],
+                        opacity: [0.8, 1],
+                        duration: 500
+                    });
+                });
+            });
+
+            // Filter buttons for Plant Production & Stock
+            const plantButtons = document.querySelectorAll('.dashboard-card:nth-child(5) .btn');
+            const plantTableBody = document.querySelector('#plant-table tbody');
+
+            plantButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    plantButtons.forEach(btn => {
+                        btn.classList.remove('btn-primary');
+                        btn.classList.add('btn-outline-secondary');
+                    });
+                    this.classList.add('btn-primary');
+                    this.classList.remove('btn-outline-secondary');
+
+                    const isProduction = this.id === 'production-btn';
+                    const tableRows = plantTableBody?.querySelectorAll('tr') || [];
+
+                    tableRows.forEach(row => {
+                        const cells = row.querySelectorAll('td');
+                        if (cells.length < 5) return;
+                        const production = parseInt(cells[1].textContent) || 0;
+                        const capacity = parseInt(cells[2].textContent) || 1;
+                        const stock = parseInt(cells[3].textContent) || 0;
+
+                        if (isProduction) {
+                            cells[3].style.display = 'none';
+                            cells[1].style.display = '';
+                            cells[4].innerHTML = getStatusBadge(production, capacity, true);
+                        } else {
+                            cells[1].style.display = 'none';
+                            cells[3].style.display = '';
+                            cells[4].innerHTML = getStatusBadge(stock, 400, false);
+                        }
+                    });
+
+                    anime({
+                        targets: '#plant-table tr',
+                        translateX: [-10, 0],
+                        opacity: [0.7, 1],
+                        duration: 500,
+                        delay: anime.stagger(100)
+                    });
+                });
+            });
+
+            function getStatusBadge(value, threshold, isProduction) {
+                if (isProduction) {
+                    const percentage = (value / threshold) * 100;
+                    if (percentage >= 90) {
+                        return '<span class="badge bg-success"><i class="fas fa-check-circle me-1"></i>Adequate</span>';
+                    } else if (percentage >= 70) {
+                        return '<span class="badge bg-warning"><i class="fas fa-exclamation-circle me-1"></i>Moderate</span>';
+                    } else {
+                        return '<span class="badge bg-danger"><i class="fas fa-times-circle me-1"></i>Low</span>';
+                    }
+                } else {
+                    if (value >= 300) {
+                        return '<span class="badge bg-success"><i class="fas fa-check-circle me-1"></i>Adequate</span>';
+                    } else if (value >= 150) {
+                        return '<span class="badge bg-warning"><i class="fas fa-exclamation-circle me-1"></i>Low</span>';
+                    } else {
+                        return '<span class="badge bg-danger"><i class="fas fa-times-circle me-1"></i>Critical</span>';
+                    }
+                }
+            }
+
+            // Mark all notifications as read
+            const markReadBtn = document.getElementById('mark-read-btn');
+            if (markReadBtn) {
+                markReadBtn.addEventListener('click', function () {
+                    const notifications = document.querySelectorAll('.notification-item');
+                    notifications.forEach(notification => {
+                        notification.style.opacity = '0.6';
+                        notification.style.borderLeftColor = '#bdc3c7';
+                    });
+                    anime({
+                        targets: '#mark-read-btn',
+                        scale: [1, 1.1, 1],
+                        duration: 500
+                    });
+                });
+            }
+
+            // Real-time updates with dynamic data
+            setInterval(() => {
+                const selectedYear = financialYearSelect.value;
+                const period = document.querySelector('.dashboard-card:first-child .btn-primary')?.id === 'monthly-btn' ? 'monthly' : document.querySelector('.dashboard-card:first-child .btn-primary')?.id === 'quarterly-btn' ? 'quarterly' : 'yearly';
+                const salesType = document.querySelector('.dashboard-card:nth-child(2) .btn-primary')?.id === 'quantity-btn' ? 'quantity' : 'revenue';
+                const orderType = document.querySelector('.dashboard-card:nth-child(4) .btn-primary')?.id === 'by-department-btn' ? 'byDepartment' : 'bySelf';
+
+                // Update KPI values
+                const productionChange = (Math.random() * 5 - 2).toFixed(1);
+                const newProductionValue = Math.max(8000, Math.min(9000, dataByFinancialYear[selectedYear].kpi.productionValue + (Math.random() * 500 - 250)));
+                animateValue('production-value', parseInt(document.getElementById('production-value')?.textContent.replace(/,/g, '') || '0'), Math.floor(newProductionValue), 1000);
+                const productionChangeElement = document.getElementById('production-change');
+                if (productionChangeElement) {
+                    productionChangeElement.textContent = productionChange > 0 ? `+${productionChange}%` : `${productionChange}%`;
+                }
+
+                if (productionChange > 0) {
+                    const productionChangeContainer = document.querySelector('.kpi-card.production .kpi-change');
+                    if (productionChangeContainer) {
+                        productionChangeContainer.className = 'kpi-change positive text-success';
+                        const icon = productionChangeContainer.querySelector('i');
+                        if (icon) icon.className = 'fas fa-arrow-up';
+                    }
+                } else {
+                    const productionChangeContainer = document.querySelector('.kpi-card.production .kpi-change');
+                    if (productionChangeContainer) {
+                        productionChangeContainer.className = 'kpi-change negative text-danger';
+                        const icon = productionChangeContainer.querySelector('i');
+                        if (icon) icon.className = 'fas fa-arrow-down';
+                    }
+                }
+
+                anime({
+                    targets: '.kpi-card.production .kpi-value',
+                    scale: [1, 1.1, 1],
+                    duration: 1000
+                });
+
+                // Update chart data
+                dataByFinancialYear[selectedYear].finishedProducts[period].data = dataByFinancialYear[selectedYear].finishedProducts[period].data.map(value =>
+                    Math.max(value * 0.8, Math.min(value * 1.2, value + (Math.random() * value * 0.1 - value * 0.05)))
+                );
+                dataByFinancialYear[selectedYear].emporiumSales[salesType].data = dataByFinancialYear[selectedYear].emporiumSales[salesType].data.map(value =>
+                    Math.max(value * 0.8, Math.min(value * 1.2, value + (Math.random() * value * 0.1 - value * 0.05)))
+                );
+                dataByFinancialYear[selectedYear].orderVsSupply[orderType].data = dataByFinancialYear[selectedYear].orderVsSupply[orderType].data.map(value =>
+                    Math.max(value * 0.8, Math.min(value * 1.2, value + (Math.random() * value * 0.1 - value * 0.05)))
+                );
+
+                if (finishedProductsChart) {
+                    finishedProductsChart.data.datasets[0].data = dataByFinancialYear[selectedYear].finishedProducts[period].data;
+                    finishedProductsChart.update();
+                }
+
+                if (emporiumSalesChart) {
+                    emporiumSalesChart.data.datasets[0].data = dataByFinancialYear[selectedYear].emporiumSales[salesType].data;
+                    emporiumSalesChart.update();
+                }
+
+                if (ordervssupplyChart) {
+                    ordervssupplyChart.data.datasets[0].data = dataByFinancialYear[selectedYear].orderVsSupply[orderType].data;
+                    ordervssupplyChart.update();
+                    const totalOrders = dataByFinancialYear[selectedYear].orderVsSupply[orderType].data.reduce((a, b) => a + b, 0);
+                    animateValue('total-orders', parseInt(document.getElementById('total-orders').textContent.replace(/,/g, '') || '0'), Math.round(totalOrders), 1000);
+                }
+
+                // Update Plant Table
+                const tableRows = plantTableBody?.querySelectorAll('tr') || [];
+                const isProductionView = document.querySelector('#production-btn')?.classList.contains('btn-primary') || false;
+
+                tableRows.forEach(row => {
+                    const cells = row.querySelectorAll('td');
+                    if (cells.length < 5) return;
+                    let production = parseInt(cells[1].textContent) || 0;
+                    let stock = parseInt(cells[3].textContent) || 0;
+
+                    production = Math.max(production * 0.9, Math.min(production * 1.1, production + (Math.random() * 100 - 50)));
+                    stock = Math.max(stock * 0.9, Math.min(stock * 1.1, stock + (Math.random() * 50 - 25)));
+
+                    cells[1].textContent = Math.round(production);
+                    cells[3].textContent = Math.round(stock);
+
+                    const capacity = parseInt(cells[2].textContent) || 1;
+                    cells[4].innerHTML = isProductionView
+                        ? getStatusBadge(production, capacity, true)
+                        : getStatusBadge(stock, 400, false);
+                });
+
+                anime({
+                    targets: ['#finishedProductsChart', '#emporiumSalesChart', '#ordervssupplyChart', '#plant-table'],
+                    scale: [0.98, 1],
+                    opacity: [0.9, 1],
+                    duration: 1000
+                });
+
+            }, 15000);
+        });
+    </script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
