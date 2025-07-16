@@ -326,7 +326,7 @@
         </div>
 
         <!-- KPI Cards Section -->
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4 mb-4" id="kpi-container">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-6 g-4 mb-4" id="kpi-container">
             <div class="col">
                 <div class="kpi-card targets card shadow-sm p-4">
                     <div class="kpi-title">Allocated Targets<small> (lac)</small></div>
@@ -366,16 +366,17 @@
             </div>
             <div class="col">
                 <div class="kpi-card orders card shadow-sm p-4">
-                    <div class="kpi-title">Pending Orders</div>
+                    <div class="kpi-title">Generated Demand</div>
                     <div class="kpi-value"><span id="orders-value">0</span></div>
-                    <div class="kpi-change negative text-danger">
-                        <i class="fas fa-arrow-down"></i> <span id="orders-change">15%</span> overdue
+                    <div class="kpi-change negative text-success">
+                        <i class="fas fa-arrow-up"></i> <span id="orders-change">15%</span> incresed
                     </div>
                     <div class="kpi-icon">
                         <i class="fas fa-clipboard-list"></i>
                     </div>
                 </div>
             </div>
+
             <div class="col">
                 <div class="kpi-card stock card shadow-sm p-4">
                     <div class="kpi-title">Finished Product</div>
@@ -388,15 +389,28 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col">
+                <div class="kpi-card stock card shadow-sm p-4">
+                    <div class="kpi-title">Low Stock Alert</div>
+                    <div class="kpi-value"><span id="stock-value">128</span> <span class="fs-5">units</span></div>
+                    <div class="kpi-change negative text-success">
+                        <i class="fas fa-arrow-up"></i> <span id="stock-change">11%</span> incresed
+                    </div>
+                    <div class="kpi-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Main Dashboard Sections -->
         <div class="row g-4 mb-5" id="dashboard-container">
-            <!-- Top 5 Finished Products -->
+            <!-- Top 5 Finished Products Sales-->
             <div class="col-md-4">
                 <div class="dashboard-card card shadow-sm p-4">
                     <div class="card-header d-flex justify-content-between align-items-center border-bottom pb-3">
-                        <h5 class="card-title mb-0">Top 5 Finished Products</h5>
+                        <h5 class="card-title mb-0">Top 5 Finished Products Sales</h5>
                         <div class="d-flex gap-2">
                             <button class="btn btn-outline-secondary btn-sm" id="monthly-btn"><i
                                     class="fas fa-calendar-week"></i> Monthly</button>
@@ -717,7 +731,7 @@
                 }
             };
 
-            // Chart 1: Top 5 Finished Products
+            // Chart 1: Top 5 Finished Products Sales
             const finishedProductsCtx = document.getElementById('finishedProductsChart')?.getContext('2d');
             let finishedProductsChart;
             if (finishedProductsCtx) {
@@ -910,7 +924,7 @@
                 });
             });
 
-            // Filter buttons for Top 5 Finished Products
+            // Filter buttons for Top 5 Finished Products Sales
             const periodButtons = document.querySelectorAll('.dashboard-card:first-child .btn');
             periodButtons.forEach(button => {
                 button.addEventListener('click', function () {
