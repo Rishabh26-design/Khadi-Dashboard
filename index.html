@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -65,7 +66,7 @@
 
         .financial-year-filter select {
             background-color: rgba(255, 255, 255, 0.1);
-            color: white;
+            color: rgb(255, 255, 255);
             border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 5px;
             padding: 5px 10px;
@@ -247,14 +248,29 @@
         }
 
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(46, 204, 113, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
+            0% {
+                box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(46, 204, 113, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(46, 204, 113, 0);
+            }
         }
 
         @keyframes slideDown {
-            from { transform: translateY(-20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         @media (max-width: 768px) {
@@ -293,9 +309,10 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container-fluid">
-        <div class="dashboard-header p-4 mb-4">
+        <div class="dashboard-header p-3 mb-4">
             <div class="financial-year-filter">
                 <label for="financial-year">Financial Year:</label>
                 <select id="financial-year">
@@ -304,18 +321,19 @@
                 </select>
             </div>
             <h1 class="dashboard-title display-6">MP <span>Khadi</span> Department Dashboard</h1>
-            <div class="last-updated"><i class="fas fa-sync-alt"></i> Last updated: <span id="current-date"></span></div>
+            <div class="last-updated"><i class="fas fa-sync-alt"></i> Last updated: <span id="current-date"></span>
+            </div>
         </div>
 
         <!-- KPI Cards Section -->
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4 mb-4" id="kpi-container">
             <div class="col">
                 <div class="kpi-card targets card shadow-sm p-4">
-                    <div class="kpi-title">Allocated Targets</div>
+                    <div class="kpi-title">Allocated Targets<small> (lac)</small></div>
                     <div class="">
-                        <div>Production: <span class="kpi-value" id="target-production">100</span></div>
-                        <div>Emporium: <span class="kpi-value" id="target-emporium">80</span></div>
-                        <div>Warehouse: <span class="kpi-value" id="target-warehouse">100</span></div>
+                        <div>Production: <span class="kpi-value" id="target-production">1080</span></div>
+                        <div>Emporium: <span class="kpi-value" id="target-emporium">800</span></div>
+                        <div>Warehouse: <span class="kpi-value" id="target-warehouse">1200</span></div>
                     </div>
                     <div class="kpi-icon">
                         <i class="fas fa-bullseye"></i>
@@ -324,20 +342,20 @@
             </div>
             <div class="col">
                 <div class="kpi-card production card shadow-sm p-4">
-                    <div class="kpi-title">Total Production</div>
-                    <div class="kpi-value"><span id="production-value">0</span> <span class="fs-5">kg</span></div>
+                    <div class="kpi-title">Total Production <br><small> (comapared to Target)</small></div>
+                    <div class="kpi-value">₹ <span id="production-value">0</span> <span class="fs-5">Lakhs</span></div>
                     <div class="kpi-change positive text-success">
                         <i class="fas fa-arrow-up"></i> <span id="production-change">12.5%</span> from last month
                     </div>
                     <div class="kpi-icon">
-                        <i class="fas fa-industry"></i>
+                        <i class="fas fa-rupee-sign"></i>
                     </div>
                 </div>
             </div>
             <div class="col">
                 <div class="kpi-card sales pulse card shadow-sm p-4">
                     <div class="kpi-title">Total Sales</div>
-                    <div class="kpi-value">₹<span id="sales-value">0</span> <span class="fs-5">Lakhs</span></div>
+                    <div class="kpi-value">₹ <span id="sales-value">0</span> <span class="fs-5">Lakhs</span></div>
                     <div class="kpi-change positive text-success">
                         <i class="fas fa-arrow-up"></i> <span id="sales-change">8.3%</span> from last quarter
                     </div>
@@ -380,9 +398,12 @@
                     <div class="card-header d-flex justify-content-between align-items-center border-bottom pb-3">
                         <h5 class="card-title mb-0">Top 5 Finished Products</h5>
                         <div class="d-flex gap-2">
-                            <button class="btn btn-outline-secondary btn-sm" id="monthly-btn"><i class="fas fa-calendar-week"></i> Monthly</button>
-                            <button class="btn btn-outline-secondary btn-sm" id="quarterly-btn"><i class="fas fa-calendar-alt"></i> Quarterly</button>
-                            <button class="btn btn-primary btn-sm" id="yearly-btn"><i class="fas fa-calendar-day"></i> Yearly</button>
+                            <button class="btn btn-outline-secondary btn-sm" id="monthly-btn"><i
+                                    class="fas fa-calendar-week"></i> Monthly</button>
+                            <button class="btn btn-outline-secondary btn-sm" id="quarterly-btn"><i
+                                    class="fas fa-calendar-alt"></i> Quarterly</button>
+                            <button class="btn btn-primary btn-sm" id="yearly-btn"><i class="fas fa-calendar-day"></i>
+                                Yearly</button>
                         </div>
                     </div>
                     <div class="card-body">
@@ -394,13 +415,15 @@
             </div>
 
             <!-- Top 5 Emporium Wise Sale -->
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="dashboard-card card shadow-sm p-4">
                     <div class="card-header d-flex justify-content-between align-items-center border-bottom pb-3">
                         <h5 class="card-title mb-0">Top 5 Emporium Wise Sales</h5>
                         <div class="d-flex gap-2">
-                            <button class="btn btn-outline-secondary btn-sm" id="quantity-btn"><i class="fas fa-box-open"></i> By Quantity</button>
-                            <button class="btn btn-primary btn-sm" id="revenue-btn"><i class="fas fa-money-bill-wave"></i> By target</button>
+                            <button class="btn btn-outline-secondary btn-sm" id="quantity-btn"><i
+                                    class="fas fa-box-open"></i> By Quantity</button>
+                            <button class="btn btn-primary btn-sm" id="revenue-btn"><i
+                                    class="fas fa-money-bill-wave"></i> By target</button>
                         </div>
                     </div>
                     <div class="card-body">
@@ -412,46 +435,54 @@
             </div>
 
             <!-- Notification Alerts -->
-            <div class="col-md-5">
+            <div class="col-md-4">
                 <div class="dashboard-card card shadow-sm p-4">
                     <div class="card-header d-flex justify-content-between align-items-center border-bottom pb-3">
                         <h5 class="card-title mb-0">Notifications & Alerts</h5>
                         <div class="d-flex gap-2">
-                            <button class="btn btn-outline-secondary btn-sm" id="mark-read-btn"><i class="fas fa-check-double"></i> Mark All Read</button>
+                            <button class="btn btn-outline-secondary btn-sm" id="mark-read-btn"><i
+                                    class="fas fa-check-double"></i> Mark All Read</button>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="notification-list" id="notification-list">
                             <div class="notification-item warning card mb-3 p-2">
-                                <div class="notification-title"><i class="fas fa-exclamation-triangle"></i> High Demand: Cotton Khadi Fabric</div>
+                                <div class="notification-title"><i class="fas fa-exclamation-triangle"></i> High Demand:
+                                    Cotton Khadi Fabric</div>
                                 <div class="d-flex justify-content-between">
-                                    <div class="notification-desc">Demand exceeds supply by 35%. Consider increasing production.</div>
+                                    <div class="notification-desc">Demand exceeds supply by 35%. Consider increasing
+                                        production.</div>
                                     <div class="notification-time">2 hours ago</div>
                                 </div>
                             </div>
                             <div class="notification-item info card mb-3 p-2">
-                                <div class="notification-title"><i class="fas fa-clipboard-check"></i> New Order Received</div>
+                                <div class="notification-title"><i class="fas fa-clipboard-check"></i> New Order
+                                    Received</div>
                                 <div class="d-flex justify-content-between">
-                                    <div class="notification-desc">MP Tourism Dept. ordered 250 units of Khadi stoles.</div>
+                                    <div class="notification-desc">MP Tourism Dept. ordered 250 units of Khadi stoles.
+                                    </div>
                                     <div class="notification-time">5 hours ago</div>
                                 </div>
                             </div>
                             <div class="notification-item card mb-3 p-2">
-                                <div class="notification-title"><i class="fas fa-box-open"></i> Stock Alert: Silk Khadi</div>
+                                <div class="notification-title"><i class="fas fa-box-open"></i> Stock Alert: Silk Khadi
+                                </div>
                                 <div class="d-flex justify-content-between">
                                     <div class="notification-desc">Only 45 units remaining in Bhopal Emporium.</div>
                                     <div class="notification-time">1 day ago</div>
                                 </div>
                             </div>
                             <div class="notification-item info card mb-3 p-2">
-                                <div class="notification-title"><i class="fas fa-check-circle"></i> Production Completed</div>
+                                <div class="notification-title"><i class="fas fa-check-circle"></i> Production Completed
+                                </div>
                                 <div class="d-flex justify-content-between">
                                     <div class="notification-desc">Jabalpur unit completed 100% of monthly target.</div>
                                     <div class="notification-time">2 days ago</div>
                                 </div>
                             </div>
                             <div class="notification-item warning card mb-3 p-2">
-                                <div class="notification-title"><i class="fas fa-file-invoice-dollar"></i> Pending Approval</div>
+                                <div class="notification-title"><i class="fas fa-file-invoice-dollar"></i> Pending
+                                    Approval</div>
                                 <div class="d-flex justify-content-between">
                                     <div class="notification-desc">3 vendor invoices awaiting your approval.</div>
                                     <div class="notification-time">3 days ago</div>
@@ -461,9 +492,9 @@
                     </div>
                 </div>
             </div>
-        
 
-        
+
+
             <!-- Order vs Supply -->
             <div class="col-md-6">
                 <div class="dashboard-card card shadow-sm p-4">
@@ -471,11 +502,12 @@
                         <h5 class="card-title mb-0">Total Order Vs Supply</h5>
                         <div class="d-flex gap-2">
                             <!-- <button class="btn btn-outline-secondary btn-sm" id="by-department-btn"><i class="fas fa-box-open"></i> By Other Department</button> -->
-                            <button class="btn btn-primary btn-sm" id="by-self-btn"><i class="fas fa-money-bill-wave"></i> By Other Department</button>
+                            <button class="btn btn-primary btn-sm" id="by-self-btn"><i
+                                    class="fas fa-money-bill-wave"></i> By Other Department</button>
                         </div>
                     </div>
                     <div class="card-body">
-                        Total Orders  :- <span id="total-orders" class="fw-bold">0</span> No's
+                        Total Orders :- <span id="total-orders" class="fw-bold">0</span> No's
                         <div class="chart-container">
                             <canvas id="ordervssupplyChart"></canvas>
                         </div>
@@ -489,8 +521,10 @@
                     <div class="card-header d-flex justify-content-between align-items-center border-bottom pb-3">
                         <h5 class="card-title mb-0">Plant Production & Stock Details</h5>
                         <div class="d-flex gap-2">
-                            <button class="btn btn-outline-secondary btn-sm" id="production-btn"><i class="fas fa-industry"></i> Production</button>
-                            <button class="btn btn-primary btn-sm" id="stock-btn"><i class="fas fa-boxes"></i> Stock</button>
+                            <button class="btn btn-outline-secondary btn-sm" id="production-btn"><i
+                                    class="fas fa-industry"></i> Production</button>
+                            <button class="btn btn-primary btn-sm" id="stock-btn"><i class="fas fa-boxes"></i>
+                                Stock</button>
                         </div>
                     </div>
                     <div class="card-body">
@@ -511,35 +545,40 @@
                                         <td>1,250</td>
                                         <td>1,500</td>
                                         <td>320</td>
-                                        <td><span class="badge bg-success"><i class="fas fa-check-circle me-1"></i>Adequate</span></td>
+                                        <td><span class="badge bg-success"><i
+                                                    class="fas fa-check-circle me-1"></i>Adequate</span></td>
                                     </tr>
                                     <tr>
                                         <td><i class="fas fa-map-marker-alt me-2"></i>Indore Khadi Unit</td>
                                         <td>980</td>
                                         <td>1,200</td>
                                         <td>150</td>
-                                        <td><span class="badge bg-warning"><i class="fas fa-exclamation-circle me-1"></i>Low</span></td>
+                                        <td><span class="badge bg-warning"><i
+                                                    class="fas fa-exclamation-circle me-1"></i>Low</span></td>
                                     </tr>
                                     <tr>
                                         <td><i class="fas fa-map-marker-alt me-2"></i>Jabalpur Weaving</td>
                                         <td>1,100</td>
                                         <td>1,000</td>
                                         <td>420</td>
-                                        <td><span class="badge bg-success"><i class="fas fa-check-circle me-1"></i>Adequate</span></td>
+                                        <td><span class="badge bg-success"><i
+                                                    class="fas fa-check-circle me-1"></i>Adequate</span></td>
                                     </tr>
                                     <tr>
                                         <td><i class="fas fa-map-marker-alt me-2"></i>Gwalior Spinning</td>
                                         <td>750</td>
                                         <td>800</td>
                                         <td>80</td>
-                                        <td><span class="badge bg-danger"><i class="fas fa-times-circle me-1"></i>Critical</span></td>
+                                        <td><span class="badge bg-danger"><i
+                                                    class="fas fa-times-circle me-1"></i>Critical</span></td>
                                     </tr>
                                     <tr>
                                         <td><i class="fas fa-map-marker-alt me-2"></i>Ujjain Handloom</td>
                                         <td>1,500</td>
                                         <td>1,800</td>
                                         <td>280</td>
-                                        <td><span class="badge bg-warning"><i class="fas fa-exclamation-circle me-1"></i>Low</span></td>
+                                        <td><span class="badge bg-warning"><i
+                                                    class="fas fa-exclamation-circle me-1"></i>Low</span></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -599,10 +638,10 @@
             });
 
             // Counter animations for KPI values
-            animateValue('target-production', 0, 100, 1500);
-            animateValue('target-emporium', 0, 80, 1500);
-            animateValue('target-warehouse', 0, 100, 1500);
-            animateValue('production-value', 0, 8450, 1500);
+            animateValue('target-production', 0, 1080, 1500);
+            animateValue('target-emporium', 0, 800, 1500);
+            animateValue('target-warehouse', 0, 1200, 1500);
+            animateValue('production-value', 0, 2080, 1500);
             animateValue('sales-value', 0, 42.8, 1500);
             animateValue('orders-value', 0, 128, 1500);
             animateValue('stock-value', 0, 1250, 1500);
@@ -628,13 +667,15 @@
             const dataByFinancialYear = {
                 '2024-25': {
                     finishedProducts: {
-                        monthly: { labels: ['Cotton Khadi', 'Silk Khadi', 'Woolen Khadi', 'Khadi Stoles', 'Khadi Kurtas'], data: [1100, 900, 700, 600, 550] },
-                        quarterly: { labels: ['Cotton Khadi', 'Silk Khadi', 'Woolen Khadi', 'Khadi Stoles', 'Khadi Kurtas'], data: [3300, 2700, 2100, 1800, 1650] },
-                        yearly: { labels: ['Cotton Khadi', 'Silk Khadi', 'Woolen Khadi', 'Khadi Stoles', 'Khadi Kurtas'], data: [13200, 10800, 8400, 7200, 6600] }
+                        monthly: { labels: ['Gents Kurta', 'Saree Kosa Block Print', ' Gents Shirt White FS', 'Woolen Jacket', 'Kurta Regular'], data: [1100, 900, 700, 600, 550] },
+                        quarterly: { labels: ['Gents Kurta', 'Saree Kosa Block Print', ' Gents Shirt White FS', 'Woolen Jacket', 'Kurta Regular'], data: [3300, 2700, 2100, 1800, 1650] },
+                        yearly: { labels: ['Gents Kurta', 'Saree Kosa Block Print', ' Gents Shirt White FS', 'Woolen Jacket', 'Kurta Regular'], data: [13200, 10800, 8400, 7200, 6600] }
                     },
                     emporiumSales: {
-                        quantity: { labels: ['Bhopal', 'Indore', 'Jabalpur', 'Gwalior', 'Ujjain'], data: [1150, 900, 800, 600, 550] },
-                        revenue: { labels: ['Bhopal', 'Indore', 'Jabalpur', 'Gwalior', 'Ujjain'], data: [1150000, 900000, 800000, 600000, 550000] }
+                        quantity: {
+                            labels: ['Jawahar Chowk Emporium', 'Khadi Gramodhyog MP Nagar', 'Khadi Gramodhyog Morena', 'Khadi Gramodhyog Gwalior', 'Khadi Gramodhyog Indore'], data: [1150, 900, 800, 600, 550]
+                        },
+                        revenue: { labels: ['Jawahar Chowk Emporium', 'Khadi Gramodhyog MP Nagar', 'Khadi Gramodhyog Morena', 'Khadi Gramodhyog Gwalior', 'Khadi Gramodhyog Indore'], data: [1150000, 900000, 800000, 600000, 550000] }
                     },
                     orderVsSupply: {
                         byDepartment: { labels: ['Supplied (Other Dept)', 'Pending (Other Dept)'], data: [750, 180] },
@@ -644,7 +685,7 @@
                         targetProduction: 90,
                         targetEmporium: 70,
                         targetWarehouse: 90,
-                        productionValue: 8000,
+                        productionValue: 2080,
                         salesValue: 40.5,
                         ordersValue: 120,
                         stockValue: 1100
@@ -652,22 +693,22 @@
                 },
                 '2025-26': {
                     finishedProducts: {
-                        monthly: { labels: ['Cotton Khadi', 'Silk Khadi', 'Woolen Khadi', 'Khadi Stoles', 'Khadi Kurtas'], data: [1250, 980, 750, 620, 580] },
-                        quarterly: { labels: ['Cotton Khadi', 'Silk Khadi', 'Woolen Khadi', 'Khadi Stoles', 'Khadi Kurtas'], data: [3750, 2940, 2250, 1860, 1740] },
-                        yearly: { labels: ['Cotton Khadi', 'Silk Khadi', 'Woolen Khadi', 'Khadi Stoles', 'Khadi Kurtas'], data: [15000, 11760, 9000, 7440, 6960] }
+                        monthly: { labels: ['Gents Kurta', 'Saree Kosa Block Print', ' Gents Shirt White FS', 'Woolen Jacket', 'Kurta Regular'], data: [1250, 980, 750, 620, 580] },
+                        quarterly: { labels: ['Gents Kurta', 'Saree Kosa Block Print', ' Gents Shirt White FS', 'Woolen Jacket', 'Kurta Regular'], data: [3750, 2940, 2250, 1860, 1740] },
+                        yearly: { labels: ['Gents Kurta', 'Saree Kosa Block Print', ' Gents Shirt White FS', 'Woolen Jacket', 'Kurta Regular'], data: [15000, 11760, 9000, 7440, 6960] }
                     },
                     emporiumSales: {
-                        quantity: { labels: ['Bhopal', 'Indore', 'Jabalpur', 'Gwalior', 'Ujjain'], data: [1250, 980, 875, 620, 580] },
-                        revenue: { labels: ['Bhopal', 'Indore', 'Jabalpur', 'Gwalior', 'Ujjain'], data: [1250000, 980000, 875000, 620000, 580000] }
+                        quantity: { labels: ['Jawahar Chowk Emporium', 'Khadi Gramodhyog MP Nagar', 'Khadi Gramodhyog Morena', 'Khadi Gramodhyog Gwalior', 'Khadi Gramodhyog Indore'], data: [1250, 980, 875, 620, 580] },
+                        revenue: { labels: ['Jawahar Chowk Emporium', 'Khadi Gramodhyog MP Nagar', 'Khadi Gramodhyog Morena', 'Khadi Gramodhyog Gwalior', 'Khadi Gramodhyog Indore'], data: [1250000, 980000, 875000, 620000, 580000] }
                     },
                     orderVsSupply: {
                         byDepartment: { labels: ['Supplied (Other Dept)', 'Pending (Other Dept)'], data: [800, 200] },
                         bySelf: { labels: ['Supplied (Self)', 'Pending (Self)'], data: [450, 300] }
                     },
                     kpi: {
-                        targetProduction: 100,
-                        targetEmporium: 80,
-                        targetWarehouse: 100,
+                        targetProduction: 1080,
+                        targetEmporium: 800,
+                        targetWarehouse: 1200,
                         productionValue: 8450,
                         salesValue: 42.8,
                         ordersValue: 128,
@@ -833,7 +874,7 @@
                 animateValue('target-production', parseInt(document.getElementById('target-production')?.textContent.replace(/,/g, '') || '0'), dataByFinancialYear[selectedYear].kpi.targetProduction, 1000);
                 animateValue('target-emporium', parseInt(document.getElementById('target-emporium')?.textContent.replace(/,/g, '') || '0'), dataByFinancialYear[selectedYear].kpi.targetEmporium, 1000);
                 animateValue('target-warehouse', parseInt(document.getElementById('target-warehouse')?.textContent.replace(/,/g, '') || '0'), dataByFinancialYear[selectedYear].kpi.targetWarehouse, 1000);
-                animateValue('production-value', parseInt(document.getElementById('production-value')?.textContent.replace(/,/g, '') || '0'), dataByFinancialYear[selectedYear].kpi.productionValue, 1000);
+                animateValue('production-value', parseInt(document.getElementById('production-value')?.textContent.replace(/,/g, '') || '0'), dataByFinancialYear[selectedYear].kpi.productionValue, 10);
                 animateValue('sales-value', parseFloat(document.getElementById('sales-value')?.textContent.replace(/,/g, '') || '0'), dataByFinancialYear[selectedYear].kpi.salesValue, 1000);
                 animateValue('orders-value', parseInt(document.getElementById('orders-value')?.textContent.replace(/,/g, '') || '0'), dataByFinancialYear[selectedYear].kpi.ordersValue, 1000);
                 animateValue('stock-value', parseInt(document.getElementById('stock-value')?.textContent.replace(/,/g, '') || '0'), dataByFinancialYear[selectedYear].kpi.stockValue, 1000);
@@ -1065,7 +1106,7 @@
 
                 // Update KPI values
                 const productionChange = (Math.random() * 5 - 2).toFixed(1);
-                const newProductionValue = Math.max(8000, Math.min(9000, dataByFinancialYear[selectedYear].kpi.productionValue + (Math.random() * 500 - 250)));
+                const newProductionValue = Math.max(2530, Math.min(1500, dataByFinancialYear[selectedYear].kpi.productionValue + (Math.random() * 500 - 250)));
                 animateValue('production-value', parseInt(document.getElementById('production-value')?.textContent.replace(/,/g, '') || '0'), Math.floor(newProductionValue), 1000);
                 const productionChangeElement = document.getElementById('production-change');
                 if (productionChangeElement) {
@@ -1157,4 +1198,5 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
