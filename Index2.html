@@ -69,7 +69,7 @@
         .financial-year-filter select {
             background-color: rgba(255, 255, 255, 0.1);
             color: var(--warning);
-            text-shadow: 2px 3px 2px rgba(0,0,0,0.6);
+            text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 5px;
             padding: 5px 10px;
@@ -138,38 +138,33 @@
         }
 
         .kpi-card.orders {
-
             background: linear-gradient(135deg, var(--warning) 0%, #e67e22 100%);
         }
+
         .kpi-card.orders::before {
-            background-color: var(--warning) ;
+            background-color: var(--warning);
         }
-       
 
         .kpi-card.stock {
-
             background: linear-gradient(135deg, var(--teal) 0%, #16a085 100%);
         }
-         .kpi-card.stock::before {
-            background-color: var(--teal) ;
-        }
 
-       
+        .kpi-card.stock::before {
+            background-color: var(--teal);
+        }
 
         .kpi-card.low-stock {
             background: linear-gradient(135deg, #e91e63 0%, #c2185b 100%);
         }
-         .kpi-card.low-stock::before {
-            background-color:  #e91e63;
-        }
 
-        
+        .kpi-card.low-stock::before {
+            background-color: #e91e63;
+        }
 
         .kpi-card .kpi-title,
         .kpi-card .kpi-value,
         .kpi-card .kpi-change {
             color: #ffffff;
-
         }
 
         .kpi-value {
@@ -196,270 +191,265 @@
             color: #ff8a80;
         }
 
-        .kpi-change{
+        .kpi-change {
             margin-top: 2rem;
-            c
         }
-
         .kpi-title {
             font-size: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 800;
         }
-
+        
         .kpi-value {
             font-size: 24px;
             font-weight: 700;
             transition: all 0.3s ease;
         }
 
-        .kpi-icon {
-            position: absolute;
-            right: 20px;
-            top: 3.5rem;
-            font-size: 50px;
-            opacity: 0.1;
-            color: #ffffff;
-            transition: all 0.3s ease;
-        }
-
-        .kpi-card:hover .kpi-icon {
-            opacity: 0.2;
-            transform: scale(1.1);
-        }
-
-        .dashboard-card {
-            height: 400px;
-            overflow: hidden;
-        }
-
-        .chart-container {
-            position: relative;
-            height: 250px;
-            width: 100%;
-            margin-top: 15px;
-        }
-
-        .chart-container canvas {
-            max-height: 100%;
-            max-width: 100%;
-            width: 100% !important;
-            height: 100% !important;
-        }
-
-        .notification-list {
-            max-height: 320px;
-            overflow-y: auto;
-            padding-right: 10px;
-        }
-
-        .notification-list::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .notification-list::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 3px;
-        }
-
-        .notification-list::-webkit-scrollbar-thumb {
-            background: var(--secondary);
-            border-radius: 3px;
-        }
-
-        .notification-list::-webkit-scrollbar-thumb:hover {
-            background: #2980b9;
-        }
-
-        .notification-item {
-            border-left: 4px solid var(--danger);
-            transition: all 0.3s ease;
-            transform: translateX(-10px);
-            opacity: 0;
-        }
-
-        .notification-item:hover {
-            transform: translateX(0);
-        }
-
-        .notification-item.warning {
-            border-left-color: var(--warning);
-        }
-
-        .notification-item.info {
-            border-left-color: var(--info);
-        }
-
-        .notification-title {
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .notification-title i {
-            font-size: 16px;
-        }
-
-        .notification-desc {
-            font-size: 14px;
-            color: #7f8c8d;
-            line-height: 1.5;
-        }
-
-        .notification-time {
-            font-size: 12px;
-            color: #bdc3c7;
-        }
-
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.4);
+            .kpi-icon {
+                position: absolute;
+                right: 20px;
+                top: 3.5rem;
+                font-size: 50px;
+                opacity: 0.1;
+                color: #ffffff;
+                transition: all 0.3s ease;
             }
 
-            70% {
-                box-shadow: 0 0 0 10px rgba(46, 204, 113, 0);
-            }
-
-            100% {
-                box-shadow: 0 0 0 0 rgba(46, 204, 113, 0);
-            }
-        }
-
-        @keyframes slideDown {
-            from {
-                transform: translateY(-20px);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        /* Modal Styles */
-        .modal-content {
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            border: none;
-        }
-
-        .modal-header {
-            background: linear-gradient(135deg, var(--purple), #8e44ad);
-            color: #ffffff;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-            border-bottom: none;
-            padding: 1.5rem;
-        }
-
-        .modal-title {
-            font-weight: 600;
-            font-size: 1.5rem;
-        }
-
-        .modal-body {
-            padding: 1.5rem;
-            background-color: var(--light);
-        }
-
-        .modal-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 14px;
-        }
-
-        .modal-table th,
-        .modal-table td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #dee2e6;
-        }
-
-        .modal-table th {
-            background-color: #f8f9fa;
-            font-weight: 600;
-            color: var(--dark);
-        }
-
-        .modal-table tr:last-child td {
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .modal-table tr:hover {
-            background-color: #f1f1f1;
-        }
-
-        .modal-footer {
-            border-top: none;
-            padding: 1rem;
-            background-color: var(--light);
-        }
-
-        .btn-close {
-            filter: invert(1);
-        }
-
-        @media (max-width: 768px) {
-            .dashboard-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .kpi-card {
-                height: auto;
-                min-height: 150px;
+            .kpi-card:hover .kpi-icon {
+                opacity: 0.2;
+                transform: scale(1.1);
             }
 
             .dashboard-card {
-                height: auto;
-                min-height: 350px;
+                height: 400px;
+                overflow: hidden;
             }
 
             .chart-container {
+                position: relative;
                 height: 250px;
+                width: 100%;
+                margin-top: 15px;
+            }
+
+            .chart-container canvas {
+                max-height: 100%;
+                max-width: 100%;
+                width: 100% !important;
+                height: 100% !important;
+            }
+
+            .notification-list {
+                max-height: 320px;
+                overflow-y: auto;
+                padding-right: 10px;
+            }
+
+            .notification-list::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            .notification-list::-webkit-scrollbar-track {
+                background: #f1f1f1;
+                border-radius: 3px;
+            }
+
+            .notification-list::-webkit-scrollbar-thumb {
+                background: var(--secondary);
+                border-radius: 3px;
+            }
+
+            .notification-list::-webkit-scrollbar-thumb:hover {
+                background: #2980b9;
+            }
+
+            .notification-item {
+                border-left: 4px solid var(--danger);
+                transition: all 0.3s ease;
+                transform: translateX(-10px);
+                opacity: 0;
+            }
+
+            .notification-item:hover {
+                transform: translateX(0);
+            }
+
+            .notification-item.warning {
+                border-left-color: var(--warning);
+            }
+
+            .notification-item.info {
+                border-left-color: var(--info);
+            }
+
+            .notification-title {
+                font-weight: 600;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .notification-title i {
+                font-size: 16px;
+            }
+
+            .notification-desc {
+                font-size: 14px;
+                color: #7f8c8d;
+                line-height: 1.5;
+            }
+
+            .notification-time {
+                font-size: 12px;
+                color: #bdc3c7;
+            }
+
+            .pulse {
+                animation: pulse 2s infinite;
+            }
+
+            @keyframes pulse {
+                0% {
+                    box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.4);
+                }
+
+                70% {
+                    box-shadow: 0 0 0 10px rgba(46, 204, 113, 0);
+                }
+
+                100% {
+                    box-shadow: 0 0 0 0 rgba(46, 204, 113, 0);
+                }
+            }
+
+            @keyframes slideDown {
+                from {
+                    transform: translateY(-20px);
+                    opacity: 0;
+                }
+
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+
+            /* Modal Styles */
+            .modal-content {
+                border-radius: 10px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+                border: none;
+            }
+
+            .modal-header {
+                background: linear-gradient(135deg, var(--purple), #8e44ad);
+                color: #ffffff;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+                border-bottom: none;
+                padding: 1.5rem;
+            }
+
+            .modal-title {
+                font-weight: 600;
+                font-size: 1.5rem;
+            }
+
+            .modal-body {
+                padding: 1.5rem;
+                background-color: var(--light);
             }
 
             .modal-table {
-                font-size: 12px;
+                width: 100%;
+                border-collapse: collapse;
+                font-size: 14px;
             }
 
             .modal-table th,
             .modal-table td {
-                padding: 8px;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .kpi-value {
-                font-size: 20px;
+                padding: 12px;
+                text-align: left;
+                border-bottom: 1px solid #dee2e6;
             }
 
-            .kpi-title {
-                font-size: 13px;
+            .modal-table th {
+                background-color: #f8f9fa;
+                font-weight: 600;
+                color: var(--dark);
             }
 
-            .chart-container {
-                height: 200px;
+            .modal-table tr:last-child td {
+                font-weight: 700;
+                color: var(--primary);
             }
 
-            .modal-table {
-                font-size: 10px;
+            .modal-table tr:hover {
+                background-color: #f1f1f1;
             }
-        }
+
+            .modal-footer {
+                border-top: none;
+                padding: 1rem;
+                background-color: var(--light);
+            }
+
+            .btn-close {
+                filter: invert(1);
+            }
+
+            @media (max-width: 768px) {
+                .dashboard-header {
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+
+                .kpi-card {
+                    height: auto;
+                    min-height: 150px;
+                }
+
+                .dashboard-card {
+                    height: auto;
+                    min-height: 350px;
+                }
+
+                .chart-container {
+                    height: 250px;
+                }
+
+                .modal-table {
+                    font-size: 12px;
+                }
+
+                .modal-table th,
+                .modal-table td {
+                    padding: 8px;
+                }
+            }
+
+            @media (max-width: 576px) {
+                .kpi-value {
+                    font-size: 20px;
+                }
+
+                .kpi-title {
+                    font-size: 13px;
+                }
+
+                .chart-container {
+                    height: 200px;
+                }
+
+                .modal-table {
+                    font-size: 10px;
+                }
+            }
     </style>
 </head>
 
 <body>
     <div class="container-fluid">
-        <div class="dashboard-header p-3 mb-4">
+        <div class="dashboard-header p-3 mb-4 mt-2">
             <div class="financial-year-filter">
                 <label for="financial-year">Financial Year:</label>
                 <select id="financial-year">
@@ -490,11 +480,12 @@
                 </div>
             </div>
             <div class="col">
-                <div class="kpi-card production card shadow-sm p-4">
+                <div class="kpi-card production card shadow-sm p-4" data-bs-toggle="modal"
+                    data-bs-target="#productionModal">
                     <div class="kpi-title">Total Production <br><small> (compared to Target)</small></div>
                     <div class="kpi-value">₹ <span id="production-value">0</span> <span class="fs-5">Lakhs</span></div>
-                    <div class="kpi-change positive   ">
-                        <i class="fas fa-arrow-up "></i> <span id="production-change">12.5%</span> from last month
+                    <div class="kpi-change positive">
+                        <i class="fas fa-arrow-up"></i> <span id="production-change">12.5%</span> from last month
                     </div>
                     <div class="kpi-icon">
                         <i class="fas fa-rupee-sign"></i>
@@ -502,10 +493,11 @@
                 </div>
             </div>
             <div class="col">
-                <div class="kpi-card sales pulse card shadow-sm p-4">
+                <div class="kpi-card sales pulse card shadow-sm p-4" data-bs-toggle="modal"
+                    data-bs-target="#salesModal">
                     <div class="kpi-title">Total Sales</div>
                     <div class="kpi-value">₹ <span id="sales-value">0</span> <span class="fs-5">Lakhs</span></div>
-                    <div class="kpi-change positive ">
+                    <div class="kpi-change positive">
                         <i class="fas fa-arrow-up"></i> <span id="sales-change">8.3%</span> from last quarter
                     </div>
                     <div class="kpi-icon">
@@ -514,10 +506,10 @@
                 </div>
             </div>
             <div class="col">
-                <div class="kpi-card orders card shadow-sm p-4">
+                <div class="kpi-card orders card shadow-sm p-4" data-bs-toggle="modal" data-bs-target="#ordersModal">
                     <div class="kpi-title">Generated Demand</div>
-                    <div class="kpi-value"><span id="orders-value">0</span></div>
-                    <div class="kpi-change negative ">
+                    <div class="kpi-value"><span id="orders-value">0</span> <span class="fs-5">Nos</span></div>
+                    <div class="kpi-change negative">
                         <i class="fas fa-arrow-up"></i> <span id="orders-change">15%</span> increased
                     </div>
                     <div class="kpi-icon">
@@ -526,7 +518,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="kpi-card stock card shadow-sm p-4">
+                <div class="kpi-card stock card shadow-sm p-4" data-bs-toggle="modal" data-bs-target="#stockModal">
                     <div class="kpi-title">Finished Product</div>
                     <div class="kpi-value"><span id="stock-value">0</span> <span class="fs-5">units</span></div>
                     <div class="kpi-change negative">
@@ -538,10 +530,11 @@
                 </div>
             </div>
             <div class="col">
-                <div class="kpi-card low-stock card shadow-sm p-4">
+                <div class="kpi-card low-stock card shadow-sm p-4" data-bs-toggle="modal"
+                    data-bs-target="#lowStockModal">
                     <div class="kpi-title">Low Stock Alert</div>
                     <div class="kpi-value"><span id="stock-value">128</span> <span class="fs-5">units</span></div>
-                    <div class="kpi-change negative ">
+                    <div class="kpi-change negative">
                         <i class="fas fa-arrow-up"></i> <span id="stock-change">11%</span> increased
                     </div>
                     <div class="kpi-icon">
@@ -668,6 +661,354 @@
                                     <td></td>
                                     <td>योग</td>
                                     <td>2000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for Total Production -->
+        <div class="modal fade" id="productionModal" tabindex="-1" aria-labelledby="productionModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="productionModalLabel">Total Production Details (Lakhs)</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="modal-table">
+                            <thead>
+                                <tr>
+                                    <th>क्र.</th>
+                                    <th>उत्पाद</th>
+                                    <th>उत्पादन (लाख में)</th>
+                                    <th>लक्ष्य (लाख में)</th>
+                                    <th>प्रतिशत पूर्ति</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Gents Kurta</td>
+                                    <td>300</td>
+                                    <td>350</td>
+                                    <td>85.7%</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Saree Kosa Block Print</td>
+                                    <td>250</td>
+                                    <td>300</td>
+                                    <td>83.3%</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Gents Shirt White FS</td>
+                                    <td>200</td>
+                                    <td>250</td>
+                                    <td>80.0%</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Woolen Jacket</td>
+                                    <td>150</td>
+                                    <td>200</td>
+                                    <td>75.0%</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Kurta Regular</td>
+                                    <td>180</td>
+                                    <td>200</td>
+                                    <td>90.0%</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>योग</td>
+                                    <td>1080</td>
+                                    <td>1300</td>
+                                    <td>83.1%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for Total Sales -->
+        <div class="modal fade" id="salesModal" tabindex="-1" aria-labelledby="salesModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="salesModalLabel">Total Sales Details (Lakhs)</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="modal-table">
+                            <thead>
+                                <tr>
+                                    <th>क्र.</th>
+                                    <th>एम्पोरियम</th>
+                                    <th>बिक्री (लाख में)</th>
+                                    <th>लक्ष्य (लाख में)</th>
+                                    <th>प्रतिशत पूर्ति</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Jawahar Chowk Emporium</td>
+                                    <td>75</td>
+                                    <td>80</td>
+                                    <td>93.8%</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Khadi Gramodhyog MP Nagar</td>
+                                    <td>70</td>
+                                    <td>80</td>
+                                    <td>87.5%</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Khadi Gramodhyog Morena</td>
+                                    <td>12</td>
+                                    <td>15</td>
+                                    <td>80.0%</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Khadi Gramodhyog Gwalior</td>
+                                    <td>70</td>
+                                    <td>80</td>
+                                    <td>87.5%</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Khadi Gramodhyog Indore</td>
+                                    <td>65</td>
+                                    <td>80</td>
+                                    <td>81.3%</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>योग</td>
+                                    <td>292</td>
+                                    <td>335</td>
+                                    <td>87.2%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for Generated Demand -->
+        <div class="modal fade" id="ordersModal" tabindex="-1" aria-labelledby="ordersModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ordersModalLabel">Generated Demand Details</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="modal-table">
+                            <thead>
+                                <tr>
+                                    <th>क्र.</th>
+                                    <th>ग्राहक</th>
+                                    <th>आर्डर मात्रा (इकाइयाँ)</th>
+                                    <th>उत्पाद</th>
+                                    <th>स्थिति</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>MP Tourism Dept.</td>
+                                    <td>250</td>
+                                    <td>Khadi Stoles</td>
+                                    <td>Pending</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Local Retail</td>
+                                    <td>150</td>
+                                    <td>Gents Kurta</td>
+                                    <td>Confirmed</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Bulk Buyer Inc.</td>
+                                    <td>200</td>
+                                    <td>Saree Kosa</td>
+                                    <td>Processing</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Govt. Supply Co.</td>
+                                    <td>180</td>
+                                    <td>Woolen Jacket</td>
+                                    <td>Confirmed</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Online Store</td>
+                                    <td>120</td>
+                                    <td>Kurta Regular</td>
+                                    <td>Pending</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>योग</td>
+                                    <td>900</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for Finished Product -->
+        <div class="modal fade" id="stockModal" tabindex="-1" aria-labelledby="stockModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="stockModalLabel">Finished Product Stock Details</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="modal-table">
+                            <thead>
+                                <tr>
+                                    <th>क्र.</th>
+                                    <th>उत्पाद</th>
+                                    <th>स्टॉक मात्रा (इकाइयाँ)</th>
+                                    <th>न्यूनतम स्टॉक सीमा</th>
+                                    <th>स्थिति</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Gents Kurta</td>
+                                    <td>300</td>
+                                    <td>200</td>
+                                    <td>Adequate</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Saree Kosa Block Print</td>
+                                    <td>250</td>
+                                    <td>200</td>
+                                    <td>Adequate</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Gents Shirt White FS</td>
+                                    <td>180</td>
+                                    <td>150</td>
+                                    <td>Adequate</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Woolen Jacket</td>
+                                    <td>120</td>
+                                    <td>150</td>
+                                    <td>Low</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Kurta Regular</td>
+                                    <td>400</td>
+                                    <td>200</td>
+                                    <td>Adequate</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>योग</td>
+                                    <td>1250</td>
+                                    <td>900</td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for Low Stock Alert -->
+        <div class="modal fade" id="lowStockModal" tabindex="-1" aria-labelledby="lowStockModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="lowStockModalLabel">Low Stock Alert Details</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="modal-table">
+                            <thead>
+                                <tr>
+                                    <th>क्र.</th>
+                                    <th>उत्पाद</th>
+                                    <th>स्टॉक मात्रा (इकाइयाँ)</th>
+                                    <th>न्यूनतम स्टॉक सीमा</th>
+                                    <th>एम्पोरियम</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Silk Khadi</td>
+                                    <td>45</td>
+                                    <td>100</td>
+                                    <td>Bhopal Emporium</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Woolen Jacket</td>
+                                    <td>30</td>
+                                    <td>100</td>
+                                    <td>Indore Emporium</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Cotton Khadi Fabric</td>
+                                    <td>53</td>
+                                    <td>150</td>
+                                    <td>Gwalior Emporium</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>योग</td>
+                                    <td>128</td>
+                                    <td>350</td>
+                                    <td></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -923,16 +1264,21 @@
                 });
             });
 
-            // Animate modal on show
-            const targetsModal = document.getElementById('targetsModal');
-            targetsModal.addEventListener('show.bs.modal', () => {
-                anime({
-                    targets: '.modal-content',
-                    scale: [0.9, 1],
-                    opacity: [0, 1],
-                    duration: 500,
-                    easing: 'easeOutExpo'
-                });
+            // Animate modals on show
+            const modals = ['targetsModal', 'productionModal', 'salesModal', 'ordersModal', 'stockModal', 'lowStockModal'];
+            modals.forEach(modalId => {
+                const modal = document.getElementById(modalId);
+                if (modal) {
+                    modal.addEventListener('show.bs.modal', () => {
+                        anime({
+                            targets: '.modal-content',
+                            scale: [0.9, 1],
+                            opacity: [0, 1],
+                            duration: 500,
+                            easing: 'easeOutExpo'
+                        });
+                    });
+                }
             });
 
             // Counter animations for KPI values
