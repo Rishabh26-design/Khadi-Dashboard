@@ -30,8 +30,6 @@
             --info: #3498db;
             --light: #ecf0f1;
             --dark: #2c3e50;
-            --teal: #1abc9c;
-            --purple: #9b59b6;
         }
 
         .dashboard-header {
@@ -68,8 +66,7 @@
 
         .financial-year-filter select {
             background-color: rgba(255, 255, 255, 0.1);
-            color: var(--warning);
-            text-shadow: 2px 3px 2px rgba(0,0,0,0.6);
+            color: rgb(255, 255, 255);
             border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 5px;
             padding: 5px 10px;
@@ -88,15 +85,10 @@
             transform: translateY(30px);
             opacity: 0;
             height: 180px;
-            background: linear-gradient(135deg, var(--light) 0%, #ffffff 100%);
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
         }
 
         .kpi-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
         }
 
         .kpi-card::before {
@@ -113,96 +105,29 @@
             width: 7px;
         }
 
-        .kpi-card.targets {
-            background: linear-gradient(135deg, var(--purple) 0%, #8e44ad 100%);
-        }
-
         .kpi-card.targets::before {
-            background-color: var(--purple);
-        }
-
-        .kpi-card.production {
-            background: linear-gradient(135deg, var(--info) 0%, #2980b9 100%);
+            background-color: #9b59b6;
         }
 
         .kpi-card.production::before {
             background-color: var(--info);
         }
 
-        .kpi-card.sales {
-            background: linear-gradient(135deg, var(--success) 0%, #27ae60 100%);
-        }
-
         .kpi-card.sales::before {
             background-color: var(--success);
         }
 
-        .kpi-card.orders {
-
-            background: linear-gradient(135deg, var(--warning) 0%, #e67e22 100%);
-        }
         .kpi-card.orders::before {
-            background-color: var(--warning) ;
-        }
-       
-
-        .kpi-card.stock {
-
-            background: linear-gradient(135deg, var(--teal) 0%, #16a085 100%);
-        }
-         .kpi-card.stock::before {
-            background-color: var(--teal) ;
+            background-color: var(--danger);
         }
 
-       
-
-        .kpi-card.low-stock {
-            background: linear-gradient(135deg, #e91e63 0%, #c2185b 100%);
-        }
-         .kpi-card.low-stock::before {
-            background-color:  #e91e63;
-        }
-
-        
-
-        .kpi-card .kpi-title,
-        .kpi-card .kpi-value,
-        .kpi-card .kpi-change {
-            color: #ffffff;
-
-        }
-
-        .kpi-value {
-            text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.6);
-        }
-
-        .kpi-title {
-            background-color: rgba(240, 248, 255, 0.151);
-            padding: 5px;
-            border-radius: 5px;
-            padding-left: 15px;
-            margin-left: -15px;
-        }
-
-        .kpi-card:hover .kpi-value {
-            color: #f1f1f1;
-        }
-
-        .kpi-card .kpi-change.text-success {
-            color: #b2ff59;
-        }
-
-        .kpi-card .kpi-change.text-danger {
-            color: #ff8a80;
-        }
-
-        .kpi-change{
-            margin-top: 2rem;
-            c
+        .kpi-card.stock::before {
+            background-color: var(--warning);
         }
 
         .kpi-title {
             font-size: 15px;
+            color: #7f8c8d;
             text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: 800;
@@ -211,16 +136,21 @@
         .kpi-value {
             font-size: 24px;
             font-weight: 700;
+            color: var(--dark);
             transition: all 0.3s ease;
+        }
+
+        .kpi-card:hover .kpi-value {
+            color: var(--primary);
         }
 
         .kpi-icon {
             position: absolute;
             right: 20px;
-            top: 3.5rem;
+            top: 20px;
             font-size: 50px;
             opacity: 0.1;
-            color: #ffffff;
+            color: var(--dark);
             transition: all 0.3s ease;
         }
 
@@ -343,70 +273,6 @@
             }
         }
 
-        /* Modal Styles */
-        .modal-content {
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            border: none;
-        }
-
-        .modal-header {
-            background: linear-gradient(135deg, var(--purple), #8e44ad);
-            color: #ffffff;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-            border-bottom: none;
-            padding: 1.5rem;
-        }
-
-        .modal-title {
-            font-weight: 600;
-            font-size: 1.5rem;
-        }
-
-        .modal-body {
-            padding: 1.5rem;
-            background-color: var(--light);
-        }
-
-        .modal-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 14px;
-        }
-
-        .modal-table th,
-        .modal-table td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #dee2e6;
-        }
-
-        .modal-table th {
-            background-color: #f8f9fa;
-            font-weight: 600;
-            color: var(--dark);
-        }
-
-        .modal-table tr:last-child td {
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .modal-table tr:hover {
-            background-color: #f1f1f1;
-        }
-
-        .modal-footer {
-            border-top: none;
-            padding: 1rem;
-            background-color: var(--light);
-        }
-
-        .btn-close {
-            filter: invert(1);
-        }
-
         @media (max-width: 768px) {
             .dashboard-header {
                 flex-direction: column;
@@ -426,15 +292,6 @@
             .chart-container {
                 height: 250px;
             }
-
-            .modal-table {
-                font-size: 12px;
-            }
-
-            .modal-table th,
-            .modal-table td {
-                padding: 8px;
-            }
         }
 
         @media (max-width: 576px) {
@@ -448,10 +305,6 @@
 
             .chart-container {
                 height: 200px;
-            }
-
-            .modal-table {
-                font-size: 10px;
             }
         }
     </style>
@@ -475,14 +328,12 @@
         <!-- KPI Cards Section -->
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-6 g-4 mb-4" id="kpi-container">
             <div class="col">
-                <div class="kpi-card targets card shadow-sm p-4" data-bs-toggle="modal" data-bs-target="#targetsModal">
+                <div class="kpi-card targets card shadow-sm p-4">
                     <div class="kpi-title">Allocated Targets<small> (lac)</small></div>
                     <div class="">
-                        <div class="text-light">Production: <span class="kpi-value" id="target-production">1080</span>
-                        </div>
-                        <div class="text-light">Emporium: <span class="kpi-value" id="target-emporium">800</span></div>
-                        <div class="text-light">Warehouse: <span class="kpi-value" id="target-warehouse">1200</span>
-                        </div>
+                        <div>Production: <span class="kpi-value" id="target-production">1080</span></div>
+                        <div>Emporium: <span class="kpi-value" id="target-emporium">800</span></div>
+                        <div>Warehouse: <span class="kpi-value" id="target-warehouse">1200</span></div>
                     </div>
                     <div class="kpi-icon">
                         <i class="fas fa-bullseye"></i>
@@ -491,10 +342,10 @@
             </div>
             <div class="col">
                 <div class="kpi-card production card shadow-sm p-4">
-                    <div class="kpi-title">Total Production <br><small> (compared to Target)</small></div>
+                    <div class="kpi-title">Total Production <br><small> (comapared to Target)</small></div>
                     <div class="kpi-value">₹ <span id="production-value">0</span> <span class="fs-5">Lakhs</span></div>
-                    <div class="kpi-change positive   ">
-                        <i class="fas fa-arrow-up "></i> <span id="production-change">12.5%</span> from last month
+                    <div class="kpi-change positive text-success">
+                        <i class="fas fa-arrow-up"></i> <span id="production-change">12.5%</span> from last month
                     </div>
                     <div class="kpi-icon">
                         <i class="fas fa-rupee-sign"></i>
@@ -505,7 +356,7 @@
                 <div class="kpi-card sales pulse card shadow-sm p-4">
                     <div class="kpi-title">Total Sales</div>
                     <div class="kpi-value">₹ <span id="sales-value">0</span> <span class="fs-5">Lakhs</span></div>
-                    <div class="kpi-change positive ">
+                    <div class="kpi-change positive text-success">
                         <i class="fas fa-arrow-up"></i> <span id="sales-change">8.3%</span> from last quarter
                     </div>
                     <div class="kpi-icon">
@@ -517,19 +368,20 @@
                 <div class="kpi-card orders card shadow-sm p-4">
                     <div class="kpi-title">Generated Demand</div>
                     <div class="kpi-value"><span id="orders-value">0</span></div>
-                    <div class="kpi-change negative ">
-                        <i class="fas fa-arrow-up"></i> <span id="orders-change">15%</span> increased
+                    <div class="kpi-change negative text-success">
+                        <i class="fas fa-arrow-up"></i> <span id="orders-change">15%</span> incresed
                     </div>
                     <div class="kpi-icon">
                         <i class="fas fa-clipboard-list"></i>
                     </div>
                 </div>
             </div>
+
             <div class="col">
                 <div class="kpi-card stock card shadow-sm p-4">
                     <div class="kpi-title">Finished Product</div>
                     <div class="kpi-value"><span id="stock-value">0</span> <span class="fs-5">units</span></div>
-                    <div class="kpi-change negative">
+                    <div class="kpi-change negative text-danger">
                         <i class="fas fa-arrow-down"></i> <span id="stock-change">22%</span> below target
                     </div>
                     <div class="kpi-icon">
@@ -537,143 +389,16 @@
                     </div>
                 </div>
             </div>
+
             <div class="col">
-                <div class="kpi-card low-stock card shadow-sm p-4">
+                <div class="kpi-card stock card shadow-sm p-4">
                     <div class="kpi-title">Low Stock Alert</div>
                     <div class="kpi-value"><span id="stock-value">128</span> <span class="fs-5">units</span></div>
-                    <div class="kpi-change negative ">
-                        <i class="fas fa-arrow-up"></i> <span id="stock-change">11%</span> increased
+                    <div class="kpi-change negative text-success">
+                        <i class="fas fa-arrow-up"></i> <span id="stock-change">11%</span> incresed
                     </div>
                     <div class="kpi-icon">
                         <i class="fas fa-exclamation-triangle"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal for Allocated Targets -->
-        <div class="modal fade" id="targetsModal" tabindex="-1" aria-labelledby="targetsModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="targetsModalLabel">Allocated Targets (Lakhs)</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <table class="modal-table">
-                            <thead>
-                                <tr>
-                                    <th>क्र.</th>
-                                    <th>एम्पोरियम का नाम</th>
-                                    <th>वार्षिक लक्ष्य (लाख में)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>खादी ग्रामोद्योग एम्पोरियम, एम.पी. नगर</td>
-                                    <td>80</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>खादी ग्रामोद्योग एम्पोरियम भोपाल हॉट</td>
-                                    <td>50</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>खादी ग्रामोद्योग एम्पोरियम मालवीय नगर, विकय केन्द्र, पचमढ़ी</td>
-                                    <td>15</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>खादी ग्रामोद्योग एम्पोरियम, जवाहर चौक</td>
-                                    <td>80</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>खादी ग्रामोद्योग एम्पोरियम रविशंकर नगर</td>
-                                    <td>20</td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>खादी ग्रामोद्योग एम्पोरियम, नर्मदापुरम</td>
-                                    <td>20</td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td>खादी ग्रामोद्योग एम्पोरियम, इंदौर</td>
-                                    <td>80</td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td>खादी ग्रामोद्योग एम्पोरियम, सागर</td>
-                                    <td>15</td>
-                                </tr>
-                                <tr>
-                                    <td>9</td>
-                                    <td>खादी ग्रामोद्योग एम्पोरियम, खरगौन</td>
-                                    <td>25</td>
-                                </tr>
-                                <tr>
-                                    <td>10</td>
-                                    <td>खादी ग्रामोद्योग एम्पोरियम, उज्जैन</td>
-                                    <td>55</td>
-                                </tr>
-                                <tr>
-                                    <td>11</td>
-                                    <td>खादी ग्रामोद्योग एम्पोरियम, देवास</td>
-                                    <td>40</td>
-                                </tr>
-                                <tr>
-                                    <td>12</td>
-                                    <td>खादी ग्रामोद्योग एम्पोरियम, नीमच</td>
-                                    <td>50</td>
-                                </tr>
-                                <tr>
-                                    <td>13</td>
-                                    <td>खादी ग्रामोद्योग एम्पोरियम, ग्वालियर</td>
-                                    <td>80</td>
-                                </tr>
-                                <tr>
-                                    <td>14</td>
-                                    <td>खादी ग्रामोद्योग एम्पोरियम, मुरैना</td>
-                                    <td>15</td>
-                                </tr>
-                                <tr>
-                                    <td>15</td>
-                                    <td>खादी ग्रामोद्योग एम्पोरियम, जबलपुर</td>
-                                    <td>80</td>
-                                </tr>
-                                <tr>
-                                    <td>16</td>
-                                    <td>खादी ग्रामोद्योग एम्पोरियम, रीवा</td>
-                                    <td>60</td>
-                                </tr>
-                                <tr>
-                                    <td>17</td>
-                                    <td>खादी ग्रामोद्योग एम्पोरियम, शहडोल</td>
-                                    <td>15</td>
-                                </tr>
-                                <tr>
-                                    <td>18</td>
-                                    <td>कम्बल केन्द्र, मंदसौर विक्रय केन्द्र</td>
-                                    <td>20</td>
-                                </tr>
-                                <tr>
-                                    <td>19</td>
-                                    <td>केन्द्रीय खादी वस्त्रागार, भोपाल</td>
-                                    <td>1200</td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>योग</td>
-                                    <td>2000</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
@@ -782,12 +507,15 @@
                 </div>
             </div>
 
+
+
             <!-- Order vs Supply -->
             <div class="col-md-6">
                 <div class="dashboard-card card shadow-sm p-4">
                     <div class="card-header d-flex justify-content-between align-items-center border-bottom pb-3">
                         <h5 class="card-title mb-0">Total Order Vs Supply</h5>
                         <div class="d-flex gap-2">
+                            <!-- <button class="btn btn-outline-secondary btn-sm" id="by-department-btn"><i class="fas fa-box-open"></i> By Other Department</button> -->
                             <button class="btn btn-primary btn-sm" id="by-self-btn"><i
                                     class="fas fa-money-bill-wave"></i> By Other Department</button>
                         </div>
@@ -920,18 +648,6 @@
                     translateX: 0,
                     opacity: 1,
                     delay: index * 100
-                });
-            });
-
-            // Animate modal on show
-            const targetsModal = document.getElementById('targetsModal');
-            targetsModal.addEventListener('show.bs.modal', () => {
-                anime({
-                    targets: '.modal-content',
-                    scale: [0.9, 1],
-                    opacity: [0, 1],
-                    duration: 500,
-                    easing: 'easeOutExpo'
                 });
             });
 
@@ -1414,14 +1130,14 @@
                 if (productionChange > 0) {
                     const productionChangeContainer = document.querySelector('.kpi-card.production .kpi-change');
                     if (productionChangeContainer) {
-                        productionChangeContainer.className = 'kpi-change positive text-succes';
+                        productionChangeContainer.className = 'kpi-change positive text-success';
                         const icon = productionChangeContainer.querySelector('i');
                         if (icon) icon.className = 'fas fa-arrow-up';
                     }
                 } else {
                     const productionChangeContainer = document.querySelector('.kpi-card.production .kpi-change');
                     if (productionChangeContainer) {
-                        productionChangeContainer.className = 'kpi-change negative text-dange';
+                        productionChangeContainer.className = 'kpi-change negative text-danger';
                         const icon = productionChangeContainer.querySelector('i');
                         if (icon) icon.className = 'fas fa-arrow-down';
                     }
