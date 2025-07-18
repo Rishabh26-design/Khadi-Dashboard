@@ -34,6 +34,10 @@
             --purple: #9b59b6;
         }
 
+        body {
+            overflow-x: hidden;
+        }
+
         .dashboard-header {
             background: linear-gradient(135deg, var(--primary), #1a252f);
             color: white;
@@ -115,51 +119,57 @@
 
         .kpi-card.targets {
             background: linear-gradient(135deg, var(--purple) 0%, #8e44ad 100%);
+            box-shadow: 0px 0px 26px -1px rgba(0, 0, 0, 0.30) inset;
         }
 
-        .kpi-card.targets::before {
+        /* .kpi-card.targets::before {
             background-color: var(--purple);
-        }
+        } */
 
         .kpi-card.production {
             background: linear-gradient(135deg, var(--info) 0%, #2980b9 100%);
+            box-shadow: 0px 0px 26px -1px rgba(0, 0, 0, 0.30) inset;
         }
 
-        .kpi-card.production::before {
+        /* .kpi-card.production::before {
             background-color: var(--info);
-        }
+        } */
 
         .kpi-card.sales {
             background: linear-gradient(135deg, var(--success) 0%, #27ae60 100%);
+            box-shadow: 0px 0px 26px -1px rgba(0, 0, 0, 0.30) inset;
         }
 
-        .kpi-card.sales::before {
+        /* .kpi-card.sales::before {
             background-color: var(--success);
-        }
+        } */
 
         .kpi-card.orders {
             background: linear-gradient(135deg, var(--warning) 0%, #e67e22 100%);
+            box-shadow: 0px 0px 26px -1px rgba(0, 0, 0, 0.30) inset;
         }
 
-        .kpi-card.orders::before {
+        /* .kpi-card.orders::before {
             background-color: var(--warning);
-        }
+        } */
 
         .kpi-card.stock {
             background: linear-gradient(135deg, var(--teal) 0%, #16a085 100%);
+            box-shadow: 0px 0px 26px -1px rgba(0, 0, 0, 0.30) inset;
         }
 
-        .kpi-card.stock::before {
+        /* .kpi-card.stock::before {
             background-color: var(--teal);
-        }
+        } */
 
         .kpi-card.low-stock {
             background: linear-gradient(135deg, #e91e63 0%, #c2185b 100%);
+            box-shadow: 0px 0px 26px -1px rgba(0, 0, 0, 0.30) inset;
         }
 
-        .kpi-card.low-stock::before {
+        /* .kpi-card.low-stock::before {
             background-color: #e91e63;
-        }
+        } */
 
         .kpi-card .kpi-title,
         .kpi-card .kpi-value,
@@ -227,6 +237,9 @@
         .dashboard-card {
             height: 400px;
             overflow: hidden;
+            box-shadow: 0px 0px 26px -15px rgba(0, 0, 0, 0.75) inset;
+            background-color: White;
+
         }
 
         .chart-container {
@@ -491,9 +504,9 @@
     </div>
 
     <!-- KPI Cards Section -->
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-6 g-3 mb-3 px-3" id="kpi-container">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-6 g-3 mb-2 px-3" id="kpi-container">
         <div class="col">
-            <div class="kpi-card targets card shadow-sm p-4" data-bs-toggle="modal" data-bs-target="#targetsModal">
+            <div class="kpi-card targets card  p-4" data-bs-toggle="modal" data-bs-target="#targetsModal">
                 <div class="kpi-title">Allocated Targets<small> (lakhs)</small></div>
                 <div class="">
                     <div class="text-light">Production: <span class="kpi-value" id="target-production">1080</span>
@@ -508,8 +521,7 @@
             </div>
         </div>
         <div class="col">
-            <div class="kpi-card production card shadow-sm p-4" data-bs-toggle="modal"
-                data-bs-target="#productionModal">
+            <div class="kpi-card production card  p-4" data-bs-toggle="modal" data-bs-target="#productionModal">
                 <div class="kpi-title"> Production <br><small> (Achieved Target)</small></div>
                 <div class="kpi-value py-3">₹ <span id="production-value">0</span> <span class="fs-5">Lakhs</span></div>
                 <!-- <div class="kpi-change positive">
@@ -521,7 +533,7 @@
             </div>
         </div>
         <div class="col">
-            <div class="kpi-card sales pulse card shadow-sm p-4" data-bs-toggle="modal" data-bs-target="#salesModal">
+            <div class="kpi-card sales  card  p-4" data-bs-toggle="modal" data-bs-target="#salesModal">
                 <div class="kpi-title">Emporium Sales</div>
                 <div class="kpi-value py-3">₹ <span id="sales-value">0</span> <span class="fs-5">Lakhs</span></div>
                 <!-- <div class="kpi-change positive">
@@ -533,7 +545,7 @@
             </div>
         </div>
         <div class="col">
-            <div class="kpi-card orders card shadow-sm p-4" data-bs-toggle="modal" data-bs-target="#ordersModal">
+            <div class="kpi-card orders card  p-4" data-bs-toggle="modal" data-bs-target="#ordersModal">
                 <div class="kpi-title">Demand Details (internal)</div>
                 <div class="kpi-value py-3"><span id="orders-value">0</span> <span class="fs-5">Offices</span></div>
                 <!-- <div class="kpi-change negative">
@@ -545,7 +557,7 @@
             </div>
         </div>
         <div class="col">
-            <div class="kpi-card stock card shadow-sm p-4" data-bs-toggle="modal" data-bs-target="#stockModal">
+            <div class="kpi-card stock card  p-4" data-bs-toggle="modal" data-bs-target="#stockModal">
                 <div class="kpi-title">Finished Product</div>
                 <div class="kpi-value py-3"><span id="stock-value">0</span> <span class="fs-5">Units</span></div>
                 <!-- <div class="kpi-change negative">
@@ -557,9 +569,9 @@
             </div>
         </div>
         <div class="col">
-            <div class="kpi-card low-stock card shadow-sm p-4" data-bs-toggle="modal" data-bs-target="#lowStockModal">
+            <div class="kpi-card low-stock card  p-4" data-bs-toggle="modal" data-bs-target="#lowStockModal">
                 <div class="kpi-title">Low Stock Alert</div>
-                <div class="kpi-value py-3"><span id="stock-value">5</span> <span class="fs-5">Offices</span></div>
+                <div class="kpi-value py-3"><span id="lowstock-value">5</span> <span class="fs-5">Offices</span></div>
                 <!-- <div class="kpi-change negative">
                         <i class="fas fa-arrow-up"></i> <span id="stock-change">11%</span> increased
                     </div> -->
@@ -1261,13 +1273,15 @@
     </div>
 
     <!-- Main Dashboard Sections -->
-    <div class="row g-4 mb-5" id="dashboard-container">
-        <!-- Top 5 Finished Products Sales-->
+    <div class="row g-3 mb-5 p-3" id="dashboard-container">
+        <!-- Top 5 / Below 5 Finished Products Sales -->
         <div class="col-md-4">
-            <div class="dashboard-card card shadow-sm p-4">
+            <div class="dashboard-card card  p-4">
                 <div class="card-header d-flex justify-content-between align-items-center border-bottom pb-3">
-                    <h5 class="card-title mb-0">Top 5 Finished Products Sales</h5>
+                    <h5 class="card-title mb-0" id="finishedProductsTitle">Top 5 Finished Products Sales</h5>
                     <div class="d-flex gap-2">
+                        <button class="btn btn-outline-secondary btn-sm" id="finished-toggle-btn"
+                            data-toggle="top">Toggle to Below 5</button>
                         <button class="btn btn-outline-secondary btn-sm" id="monthly-btn"><i
                                 class="fas fa-calendar-week"></i> Monthly</button>
                         <button class="btn btn-outline-secondary btn-sm" id="quarterly-btn"><i
@@ -1284,16 +1298,18 @@
             </div>
         </div>
 
-        <!-- Top 5 Emporium Wise Sale -->
+        <!-- Top 5 / Below 5 Emporium Wise Sales -->
         <div class="col-md-4">
-            <div class="dashboard-card card shadow-sm p-4">
+            <div class="dashboard-card card  p-4">
                 <div class="card-header d-flex justify-content-between align-items-center border-bottom pb-3">
-                    <h5 class="card-title mb-0">Top 5 Emporium Wise Sales</h5>
+                    <h5 class="card-title mb-0" id="emporiumSalesTitle">Top 5 Emporium Wise Sales</h5>
                     <div class="d-flex gap-2">
+                        <button class="btn btn-outline-secondary btn-sm" id="emporium-toggle-btn"
+                            data-toggle="top">Toggle to Below 5</button>
                         <!-- <button class="btn btn-outline-secondary btn-sm" id="quantity-btn"><i
-                                    class="fas fa-box-open"></i> By Quantity</button>
-                            <button class="btn btn-primary btn-sm" id="revenue-btn"><i
-                                    class="fas fa-money-bill-wave"></i> By target</button> -->
+                                class="fas fa-box-open"></i> By Quantity</button>
+                        <button class="btn btn-primary btn-sm" id="revenue-btn"><i class="fas fa-money-bill-wave"></i>
+                            By Revenue</button> -->
                     </div>
                 </div>
                 <div class="card-body">
@@ -1306,7 +1322,7 @@
 
         <!-- Notification Alerts -->
         <div class="col-md-4">
-            <div class="dashboard-card card shadow-sm p-4">
+            <div class="dashboard-card card  p-4">
                 <div class="card-header d-flex justify-content-between align-items-center border-bottom pb-3">
                     <h5 class="card-title mb-0">Notifications & Alerts</h5>
                     <div class="d-flex gap-2">
@@ -1375,7 +1391,7 @@
 
         <!-- Order vs Supply -->
         <div class="col-md-6">
-            <div class="dashboard-card card shadow-sm p-4">
+            <div class="dashboard-card card  p-4">
                 <div class="card-header d-flex justify-content-between align-items-center border-bottom pb-3">
                     <h5 class="card-title mb-0">Other Department Order Vs Supply</h5>
                     <div class="d-flex gap-2">
@@ -1394,7 +1410,7 @@
 
         <!-- Plant Production & Stock Details -->
         <div class="col-md-6">
-            <div class="dashboard-card card shadow-sm p-4">
+            <div class="dashboard-card card  p-4">
                 <div class="card-header d-flex justify-content-between align-items-center border-bottom pb-3">
                     <h5 class="card-title mb-0">Plant Production & Stock Details</h5>
                     <div class="d-flex gap-2">
@@ -2074,13 +2090,6 @@
                 duration: 0
             });
 
-            // Set current date with animation
-            // document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-IN', {
-            //     day: 'numeric',
-            //     month: 'short',
-            //     year: 'numeric'
-            // });
-
             // Animate KPI cards
             const kpiCards = document.querySelectorAll('.kpi-card');
             kpiCards.forEach((card, index) => {
@@ -2115,7 +2124,7 @@
             });
 
             // Animate modals on show
-            const modals = ['targetsModal', 'productionModal', 'salesModal', 'ordersModal', 'stockModal', 'lowStockModal'];
+            const modals = ['targetsModal', 'productionModal', 'salesModal', 'ordersModal', 'stockModal', 'lowStockModal', 'modalGwaliorKambal', 'modalIndoreKhadi', 'modalUjjainPolytextile', 'modalDewasCharm', 'modalGwaliorTelghani'];
             modals.forEach(modalId => {
                 const modal = document.getElementById(modalId);
                 if (modal) {
@@ -2132,14 +2141,11 @@
             });
 
             // Counter animations for KPI values
-            animateValue('target-production', 0, 1080, 1500);
-            animateValue('target-emporium', 0, 800, 1500);
-            animateValue('target-warehouse', 0, 1200, 1500);
             animateValue('production-value', 0, 710, 1500);
             animateValue('sales-value', 0, 292, 1500);
             animateValue('orders-value', 0, 5, 1500);
             animateValue('stock-value', 0, 1064, 1500);
-            animateValue('total-orders', 0, 1064, 1500);
+            animateValue('total-orders', 0, 1000, 1500);
 
             function animateValue(id, start, end, duration) {
                 const obj = document.getElementById(id);
@@ -2157,61 +2163,131 @@
                 window.requestAnimationFrame(step);
             }
 
-            // Sample data for different time periods and financial years
+            // Data for different financial years
             const dataByFinancialYear = {
                 '2024-25': {
                     finishedProducts: {
-                        monthly: { labels: ['Gents Kurta', 'Saree Kosa Block Print', ' Gents Shirt White FS', 'Woolen Jacket', 'Kurta Regular'], data: [1100, 900, 700, 600, 550] },
-                        quarterly: { labels: ['Gents Kurta', 'Saree Kosa Block Print', ' Gents Shirt White FS', 'Woolen Jacket', 'Kurta Regular'], data: [3300, 2700, 2100, 1800, 1650] },
-                        yearly: { labels: ['Gents Kurta', 'Saree Kosa Block Print', ' Gents Shirt White FS', 'Woolen Jacket', 'Kurta Regular'], data: [13200, 10800, 8400, 7200, 6600] }
+                        monthly: {
+                            labels: ['Gents Kurta', 'Saree Kosa Block Print', 'Gents Shirt White FS', 'Woolen Jacket', 'Kurta Regular'],
+                            data: [1100, 900, 700, 600, 550]
+                        },
+                        quarterly: {
+                            labels: ['Gents Kurta', 'Saree Kosa Block Print', 'Gents Shirt White FS', 'Woolen Jacket', 'Kurta Regular'],
+                            data: [3300, 2700, 2100, 1800, 1650]
+                        },
+                        yearly: {
+                            labels: ['Gents Kurta', 'Saree Kosa Block Print', 'Gents Shirt White FS', 'Woolen Jacket', 'Kurta Regular'],
+                            data: [13200, 10800, 8400, 7200, 6600]
+                        }
+                    },
+                    belowFinishedProducts: {
+                        monthly: {
+                            labels: ['Tikamgarh Kambal', 'Chhindwara Kambal', 'Khargone Khadi', 'Maheshwar Silk', 'Indore Khadi'],
+                            data: [18, 24, 24, 25, 26]
+                        },
+                        quarterly: {
+                            labels: ['Tikamgarh Kambal', 'Chhindwara Kambal', 'Khargone Khadi', 'Maheshwar Silk', 'Indore Khadi'],
+                            data: [54, 72, 72, 75, 78]
+                        },
+                        yearly: {
+                            labels: ['Tikamgarh Kambal', 'Chhindwara Kambal', 'Khargone Khadi', 'Maheshwar Silk', 'Indore Khadi'],
+                            data: [216, 288, 288, 300, 312]
+                        }
                     },
                     emporiumSales: {
                         quantity: {
-                            labels: ['Jawahar Chowk Emporium', 'Khadi Gramodhyog MP Nagar', 'Khadi Gramodhyog Morena', 'Khadi Gramodhyog Gwalior', 'Khadi Gramodhyog Indore'], data: [1150, 900, 800, 600, 550]
+                            labels: ['Jawahar Chowk', 'MP Nagar', 'Morena', 'Gwalior', 'Indore'],
+                            data: [1150, 900, 800, 600, 550]
                         },
-                        revenue: { labels: ['Jawahar Chowk Emporium', 'Khadi Gramodhyog MP Nagar', 'Khadi Gramodhyog Morena', 'Khadi Gramodhyog Gwalior', 'Khadi Gramodhyog Indore'], data: [1150000, 900000, 800000, 600000, 550000] }
+                        revenue: {
+                            labels: ['Jawahar Chowk', 'MP Nagar', 'Morena', 'Gwalior', 'Indore'],
+                            data: [1150000, 900000, 800000, 600000, 550000]
+                        }
+                    },
+                    belowEmporiumSales: {
+                        quantity: {
+                            labels: ['Morena', 'Bhopal Hot', 'Pachmarhi', 'Ravishankar Nagar', 'Narmadapuram'],
+                            data: [10, 0, 0, 0, 0]
+                        },
+                        revenue: {
+                            labels: ['Morena', 'Bhopal Hot', 'Pachmarhi', 'Ravishankar Nagar', 'Narmadapuram'],
+                            data: [9600, 0, 0, 0, 0]
+                        }
                     },
                     orderVsSupply: {
                         byDepartment: { labels: ['Supplied (Other Dept)', 'Pending (Other Dept)'], data: [750, 180] },
                         bySelf: { labels: ['Supplied (Self)', 'Pending (Self)'], data: [400, 280] }
                     },
                     kpi: {
-                        targetProduction: 90,
-                        targetEmporium: 70,
-                        targetWarehouse: 90,
-                        productionValue: 2080,
-                        salesValue: 40.5,
-                        ordersValue: 120,
-                        stockValue: 1100
+                        productionValue: 568,
+                        salesValue: 233.6,
+                        ordersValue: 720,
+                        stockValue: 851.2
                     }
                 },
                 '2025-26': {
                     finishedProducts: {
-                        monthly: { labels: ['Gents Kurta', 'Saree Kosa Block Print', ' Gents Shirt White FS', 'Woolen Jacket', 'Kurta Regular'], data: [1064, 980, 750, 620, 580] },
-                        quarterly: { labels: ['Gents Kurta', 'Saree Kosa Block Print', ' Gents Shirt White FS', 'Woolen Jacket', 'Kurta Regular'], data: [3750, 2940, 2250, 1860, 1740] },
-                        yearly: { labels: ['Gents Kurta', 'Saree Kosa Block Print', ' Gents Shirt White FS', 'Woolen Jacket', 'Kurta Regular'], data: [15000, 11760, 9000, 7440, 6960] }
+                        monthly: {
+                            labels: ['Gents Kurta', 'Saree Kosa Block Print', 'Gents Shirt White FS', 'Woolen Jacket', 'Kurta Regular'],
+                            data: [1064, 980, 750, 620, 580]
+                        },
+                        quarterly: {
+                            labels: ['Gents Kurta', 'Saree Kosa Block Print', 'Gents Shirt White FS', 'Woolen Jacket', 'Kurta Regular'],
+                            data: [3750, 2940, 2250, 1860, 1740]
+                        },
+                        yearly: {
+                            labels: ['Gents Kurta', 'Saree Kosa Block Print', 'Gents Shirt White FS', 'Woolen Jacket', 'Kurta Regular'],
+                            data: [15000, 11760, 9000, 7440, 6960]
+                        }
+                    },
+                    belowFinishedProducts: {
+                        monthly: {
+                            labels: ['Tikamgarh Kambal', 'Chhindwara Kambal', 'Khargone Khadi', 'Maheshwar Silk', 'Indore Khadi'],
+                            data: [22, 30, 30, 31, 33]
+                        },
+                        quarterly: {
+                            labels: ['Tikamgarh Kambal', 'Chhindwara Kambal', 'Khargone Khadi', 'Maheshwar Silk', 'Indore Khadi'],
+                            data: [66, 90, 90, 93, 99]
+                        },
+                        yearly: {
+                            labels: ['Tikamgarh Kambal', 'Chhindwara Kambal', 'Khargone Khadi', 'Maheshwar Silk', 'Indore Khadi'],
+                            data: [264, 360, 360, 372, 396]
+                        }
                     },
                     emporiumSales: {
-                        quantity: { labels: ['Jawahar Chowk Emporium', 'Khadi Gramodhyog MP Nagar', 'Khadi Gramodhyog Morena', 'Khadi Gramodhyog Gwalior', 'Khadi Gramodhyog Indore'], data: [1250, 980, 875, 620, 580] },
-                        revenue: { labels: ['Jawahar Chowk Emporium', 'Khadi Gramodhyog MP Nagar', 'Khadi Gramodhyog Morena', 'Khadi Gramodhyog Gwalior', 'Khadi Gramodhyog Indore'], data: [1250000, 980000, 875000, 620000, 580000] }
+                        quantity: {
+                            labels: ['Jawahar Chowk', 'MP Nagar', 'Morena', 'Gwalior', 'Indore'],
+                            data: [1250, 980, 875, 620, 580]
+                        },
+                        revenue: {
+                            labels: ['Jawahar Chowk', 'MP Nagar', 'Morena', 'Gwalior', 'Indore'],
+                            data: [1250000, 980000, 875000, 620000, 580000]
+                        }
+                    },
+                    belowEmporiumSales: {
+                        quantity: {
+                            labels: ['Morena', 'Bhopal Hot', 'Pachmarhi', 'Ravishankar Nagar', 'Narmadapuram'],
+                            data: [12, 15, 24, 35, 8]
+                        },
+                        revenue: {
+                            labels: ['Morena', 'Bhopal Hot', 'Pachmarhi', 'Ravishankar Nagar', 'Narmadapuram'],
+                            data: [12000, 15000, 24000, 35000, 8000]
+                        }
                     },
                     orderVsSupply: {
                         byDepartment: { labels: ['Supplied (Other Dept)', 'Pending (Other Dept)'], data: [800, 200] },
                         bySelf: { labels: ['Supplied (Self)', 'Pending (Self)'], data: [450, 300] }
                     },
                     kpi: {
-                        targetProduction: 1080,
-                        targetEmporium: 800,
-                        targetWarehouse: 1200,
-                        productionValue: 8450,
+                        productionValue: 710,
                         salesValue: 292,
-                        ordersValue: 5,
-                        stockValue: 1250
+                        ordersValue: 900,
+                        stockValue: 1064
                     }
                 }
             };
 
-            // Chart 1: Top 5 Finished Products Sales
+            // Chart 1: Top 5 / Below 5 Finished Products Sales
             const finishedProductsCtx = document.getElementById('finishedProductsChart')?.getContext('2d');
             let finishedProductsChart;
             if (finishedProductsCtx) {
@@ -2220,7 +2296,7 @@
                     data: {
                         labels: dataByFinancialYear['2025-26'].finishedProducts.yearly.labels,
                         datasets: [{
-                            label: 'Quantity Produced (kg)',
+                            label: 'Quantity Produced (Nos)',
                             data: dataByFinancialYear['2025-26'].finishedProducts.yearly.data,
                             backgroundColor: ['rgba(52, 152, 219, 0.7)', 'rgba(155, 89, 182, 0.7)', 'rgba(52, 73, 94, 0.7)', 'rgba(39, 174, 96, 0.7)', 'rgba(241, 196, 15, 0.7)'],
                             borderColor: ['rgba(52, 152, 219, 1)', 'rgba(155, 89, 182, 1)', 'rgba(52, 73, 94, 1)', 'rgba(39, 174, 96, 1)', 'rgba(241, 196, 15, 1)'],
@@ -2258,7 +2334,7 @@
                 });
             }
 
-            // Chart 2: Top 5 Emporium Wise Sales
+            // Chart 2: Top 5 / Below 5 Emporium Wise Sales
             const emporiumSalesCtx = document.getElementById('emporiumSalesChart')?.getContext('2d');
             let emporiumSalesChart;
             if (emporiumSalesCtx) {
@@ -2285,7 +2361,7 @@
                                         const label = context.label || '';
                                         const value = context.raw || 0;
                                         const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                                        const percentage = Math.round((value / total) * 100);
+                                        const percentage = total > 0 ? Math.round((value / total) * 100) : 0;
                                         return `${label}: ₹${value.toLocaleString('en-IN')} (${percentage}%)`;
                                     }
                                 }
@@ -2293,7 +2369,7 @@
                             datalabels: {
                                 formatter: (value, ctx) => {
                                     const total = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
-                                    const percentage = Math.round((value / total) * 100);
+                                    const percentage = total > 0 ? Math.round((value / total) * 100) : 0;
                                     return `${percentage}%`;
                                 },
                                 color: '#fff',
@@ -2360,31 +2436,46 @@
             const financialYearSelect = document.getElementById('financial-year');
             financialYearSelect.addEventListener('change', function () {
                 const selectedYear = this.value;
-                const period = document.querySelector('.dashboard-card:first-child .btn-primary')?.id === 'monthly-btn' ? 'monthly' : document.querySelector('.dashboard-card:first-child .btn-primary')?.id === 'quarterly-btn' ? 'quarterly' : 'yearly';
+                const period = document.querySelector('.dashboard-card:nth-child(1) .btn-primary')?.id === 'monthly-btn' ? 'monthly' : document.querySelector('.dashboard-card:nth-child(1) .btn-primary')?.id === 'quarterly-btn' ? 'quarterly' : 'yearly';
                 const salesType = document.querySelector('.dashboard-card:nth-child(2) .btn-primary')?.id === 'quantity-btn' ? 'quantity' : 'revenue';
-                const orderType = document.querySelector('.dashboard-card:nth-child(4) .btn-primary')?.id === 'by-department-btn' ? 'byDepartment' : 'bySelf';
+                const orderType = document.querySelector('.dashboard-card:nth-child(3) .btn-primary')?.id === 'by-department-btn' ? 'byDepartment' : 'bySelf';
+                const finishedToggle = document.getElementById('finished-toggle-btn')?.dataset.toggle || 'top';
+                const emporiumToggle = document.getElementById('emporium-toggle-btn')?.dataset.toggle || 'top';
 
                 // Update KPI values
-                animateValue('target-production', parseInt(document.getElementById('target-production')?.textContent.replace(/,/g, '') || '0'), dataByFinancialYear[selectedYear].kpi.targetProduction, 1000);
-                animateValue('target-emporium', parseInt(document.getElementById('target-emporium')?.textContent.replace(/,/g, '') || '0'), dataByFinancialYear[selectedYear].kpi.targetEmporium, 1000);
-                animateValue('target-warehouse', parseInt(document.getElementById('target-warehouse')?.textContent.replace(/,/g, '') || '0'), dataByFinancialYear[selectedYear].kpi.targetWarehouse, 1000);
-                animateValue('production-value', parseInt(document.getElementById('production-value')?.textContent.replace(/,/g, '') || '0'), dataByFinancialYear[selectedYear].kpi.productionValue, 1);
-                animateValue('sales-value', parseFloat(document.getElementById('sales-value')?.textContent.replace(/,/g, '') || '0'), dataByFinancialYear[selectedYear].kpi.salesValue, 1000);
-                animateValue('orders-value', parseInt(document.getElementById('orders-value')?.textContent.replace(/,/g, '') || '0'), dataByFinancialYear[selectedYear].kpi.ordersValue, 1000);
-                animateValue('stock-value', parseInt(document.getElementById('stock-value')?.textContent.replace(/,/g, '') || '0'), dataByFinancialYear[selectedYear].kpi.stockValue, 1000);
+                animateValue('production-value', parseInt(document.getElementById('production-value')?.textContent.replace(/,/g, '') || '0'), dataByFinancialYear[selectedYear].kpi.productionValue, 1500);
+                animateValue('sales-value', parseInt(document.getElementById('sales-value')?.textContent.replace(/,/g, '') || '0'), dataByFinancialYear[selectedYear].kpi.salesValue, 1500);
+                animateValue('orders-value', parseInt(document.getElementById('orders-value')?.textContent.replace(/,/g, '') || '0'), dataByFinancialYear[selectedYear].kpi.ordersValue, 1500);
+                animateValue('stock-value', parseInt(document.getElementById('stock-value')?.textContent.replace(/,/g, '') || '0'), dataByFinancialYear[selectedYear].kpi.stockValue, 1500);
 
                 // Update Finished Products Chart
                 if (finishedProductsChart) {
-                    finishedProductsChart.data.labels = dataByFinancialYear[selectedYear].finishedProducts[period].labels;
-                    finishedProductsChart.data.datasets[0].data = dataByFinancialYear[selectedYear].finishedProducts[period].data;
+                    const dataKey = finishedToggle === 'top' ? 'finishedProducts' : 'belowFinishedProducts';
+                    finishedProductsChart.data.labels = dataByFinancialYear[selectedYear][dataKey][period].labels;
+                    finishedProductsChart.data.datasets[0].data = dataByFinancialYear[selectedYear][dataKey][period].data;
+                    finishedProductsChart.data.datasets[0].label = finishedToggle === 'top' ? 'Quantity Produced (kg)' : 'Production (Lakhs)';
+                    finishedProductsChart.options.scales.y.title.text = finishedToggle === 'top' ? 'Quantity (Nos)' : 'Quantity (Nos)';
                     finishedProductsChart.update();
+                    document.getElementById('finishedProductsTitle').textContent = finishedToggle === 'top' ? 'Top 5 Finished Products Sales' : 'Below 5 Finished Products Sales';
                 }
 
                 // Update Emporium Sales Chart
                 if (emporiumSalesChart) {
-                    emporiumSalesChart.data.labels = dataByFinancialYear[selectedYear].emporiumSales[salesType].labels;
-                    emporiumSalesChart.data.datasets[0].data = dataByFinancialYear[selectedYear].emporiumSales[salesType].data;
+                    const dataKey = emporiumToggle === 'top' ? 'emporiumSales' : 'belowEmporiumSales';
+                    emporiumSalesChart.data.labels = dataByFinancialYear[selectedYear][dataKey][salesType].labels;
+                    emporiumSalesChart.data.datasets[0].data = dataByFinancialYear[selectedYear][dataKey][salesType].data;
+                    emporiumSalesChart.data.datasets[0].label = salesType === 'quantity' ? 'Units Sold' : 'Sales (₹)';
+                    emporiumSalesChart.options.plugins.tooltip.callbacks.label = function (context) {
+                        const label = context.label || '';
+                        const value = context.raw || 0;
+                        const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                        const percentage = total > 0 ? Math.round((value / total) * 100) : 0;
+                        return salesType === 'quantity'
+                            ? `${label}: ${value} units (${percentage}%)`
+                            : `${label}: ₹${value.toLocaleString('en-IN')} (${percentage}%)`;
+                    };
                     emporiumSalesChart.update();
+                    document.getElementById('emporiumSalesTitle').textContent = emporiumToggle === 'top' ? 'Top 5 Emporium Wise Sales' : 'Below 5 Emporium Wise Sales';
                 }
 
                 // Update Order vs Supply Chart
@@ -2404,8 +2495,74 @@
                 });
             });
 
-            // Filter buttons for Top 5 Finished Products Sales
-            const periodButtons = document.querySelectorAll('.dashboard-card:first-child .btn');
+            // Toggle Button for Finished Products
+            const finishedToggleBtn = document.getElementById('finished-toggle-btn');
+            if (finishedToggleBtn) {
+                finishedToggleBtn.addEventListener('click', function () {
+                    const toggleState = this.dataset.toggle === 'top' ? 'below' : 'top';
+                    this.dataset.toggle = toggleState;
+                    this.textContent = toggleState === 'top' ? 'Toggle to Below 5' : 'Toggle to Top 5';
+                    const selectedYear = financialYearSelect.value;
+                    const period = document.querySelector('.dashboard-card:nth-child(1) .btn-primary')?.id === 'monthly-btn' ? 'monthly' : document.querySelector('.dashboard-card:nth-child(1) .btn-primary')?.id === 'quarterly-btn' ? 'quarterly' : 'yearly';
+                    const dataKey = toggleState === 'top' ? 'finishedProducts' : 'belowFinishedProducts';
+
+                    if (finishedProductsChart) {
+                        finishedProductsChart.data.labels = dataByFinancialYear[selectedYear][dataKey][period].labels;
+                        finishedProductsChart.data.datasets[0].data = dataByFinancialYear[selectedYear][dataKey][period].data;
+                        finishedProductsChart.data.datasets[0].label = toggleState === 'top' ? 'Quantity Produced (kg)' : 'Production (Lakhs)';
+                        finishedProductsChart.options.scales.y.title.text = toggleState === 'top' ? 'Quantity (Nos)' : 'Quantity (Nos)';
+                        finishedProductsChart.update();
+                        document.getElementById('finishedProductsTitle').textContent = toggleState === 'top' ? 'Top 5 Finished Products Sales' : 'Below 5 Finished Products Sales';
+                    }
+
+                    anime({
+                        targets: '#finishedProductsChart',
+                        scale: [0.95, 1],
+                        opacity: [0.8, 1],
+                        duration: 500
+                    });
+                });
+            }
+
+            // Toggle Button for Emporium Sales
+            const emporiumToggleBtn = document.getElementById('emporium-toggle-btn');
+            if (emporiumToggleBtn) {
+                emporiumToggleBtn.addEventListener('click', function () {
+                    const toggleState = this.dataset.toggle === 'top' ? 'below' : 'top';
+                    this.dataset.toggle = toggleState;
+                    this.textContent = toggleState === 'top' ? 'Toggle to Below 5' : 'Toggle to Top 5';
+                    const selectedYear = financialYearSelect.value;
+                    const salesType = document.querySelector('.dashboard-card:nth-child(2) .btn-primary')?.id === 'quantity-btn' ? 'quantity' : 'revenue';
+                    const dataKey = toggleState === 'top' ? 'emporiumSales' : 'belowEmporiumSales';
+
+                    if (emporiumSalesChart) {
+                        emporiumSalesChart.data.labels = dataByFinancialYear[selectedYear][dataKey][salesType].labels;
+                        emporiumSalesChart.data.datasets[0].data = dataByFinancialYear[selectedYear][dataKey][salesType].data;
+                        emporiumSalesChart.data.datasets[0].label = salesType === 'quantity' ? 'Units Sold' : 'Sales (₹)';
+                        emporiumSalesChart.options.plugins.tooltip.callbacks.label = function (context) {
+                            const label = context.label || '';
+                            const value = context.raw || 0;
+                            const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                            const percentage = total > 0 ? Math.round((value / total) * 100) : 0;
+                            return salesType === 'quantity'
+                                ? `${label}: ${value} units (${percentage}%)`
+                                : `${label}: ₹${value.toLocaleString('en-IN')} (${percentage}%)`;
+                        };
+                        emporiumSalesChart.update();
+                        document.getElementById('emporiumSalesTitle').textContent = toggleState === 'top' ? 'Top 5 Emporium Wise Sales' : 'Below 5 Emporium Wise Sales';
+                    }
+
+                    anime({
+                        targets: '#emporiumSalesChart',
+                        scale: [0.95, 1],
+                        opacity: [0.8, 1],
+                        duration: 500
+                    });
+                });
+            }
+
+            // Filter buttons for Finished Products Sales
+            const periodButtons = document.querySelectorAll('.dashboard-card:nth-child(1) .btn:not(#finished-toggle-btn)');
             periodButtons.forEach(button => {
                 button.addEventListener('click', function () {
                     periodButtons.forEach(btn => {
@@ -2417,9 +2574,14 @@
 
                     const period = this.id === 'monthly-btn' ? 'monthly' : this.id === 'quarterly-btn' ? 'quarterly' : 'yearly';
                     const selectedYear = financialYearSelect.value;
+                    const toggleState = document.getElementById('finished-toggle-btn')?.dataset.toggle || 'top';
+                    const dataKey = toggleState === 'top' ? 'finishedProducts' : 'belowFinishedProducts';
+
                     if (finishedProductsChart) {
-                        finishedProductsChart.data.labels = dataByFinancialYear[selectedYear].finishedProducts[period].labels;
-                        finishedProductsChart.data.datasets[0].data = dataByFinancialYear[selectedYear].finishedProducts[period].data;
+                        finishedProductsChart.data.labels = dataByFinancialYear[selectedYear][dataKey][period].labels;
+                        finishedProductsChart.data.datasets[0].data = dataByFinancialYear[selectedYear][dataKey][period].data;
+                        finishedProductsChart.data.datasets[0].label = toggleState === 'top' ? 'Quantity Produced (kg)' : 'Production (Lakhs)';
+                        finishedProductsChart.options.scales.y.title.text = toggleState === 'top' ? 'Quantity (Nos)' : 'Production (Lakhs)';
                         finishedProductsChart.update();
                     }
 
@@ -2433,7 +2595,7 @@
             });
 
             // Filter buttons for Emporium Sales
-            const salesButtons = document.querySelectorAll('.dashboard-card:nth-child(2) .btn');
+            const salesButtons = document.querySelectorAll('.dashboard-card:nth-child(2) .btn:not(#emporium-toggle-btn)');
             salesButtons.forEach(button => {
                 button.addEventListener('click', function () {
                     salesButtons.forEach(btn => {
@@ -2445,15 +2607,18 @@
 
                     const type = this.id === 'quantity-btn' ? 'quantity' : 'revenue';
                     const selectedYear = financialYearSelect.value;
+                    const toggleState = document.getElementById('emporium-toggle-btn')?.dataset.toggle || 'top';
+                    const dataKey = toggleState === 'top' ? 'emporiumSales' : 'belowEmporiumSales';
+
                     if (emporiumSalesChart) {
-                        emporiumSalesChart.data.labels = dataByFinancialYear[selectedYear].emporiumSales[type].labels;
-                        emporiumSalesChart.data.datasets[0].data = dataByFinancialYear[selectedYear].emporiumSales[type].data;
+                        emporiumSalesChart.data.labels = dataByFinancialYear[selectedYear][dataKey][type].labels;
+                        emporiumSalesChart.data.datasets[0].data = dataByFinancialYear[selectedYear][dataKey][type].data;
                         emporiumSalesChart.data.datasets[0].label = type === 'quantity' ? 'Units Sold' : 'Sales (₹)';
                         emporiumSalesChart.options.plugins.tooltip.callbacks.label = function (context) {
                             const label = context.label || '';
                             const value = context.raw || 0;
                             const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                            const percentage = Math.round((value / total) * 100);
+                            const percentage = total > 0 ? Math.round((value / total) * 100) : 0;
                             return type === 'quantity'
                                 ? `${label}: ${value} units (${percentage}%)`
                                 : `${label}: ₹${value.toLocaleString('en-IN')} (${percentage}%)`;
@@ -2471,7 +2636,7 @@
             });
 
             // Filter buttons for Order vs Supply
-            const orderButtons = document.querySelectorAll('.dashboard-card:nth-child(4) .btn');
+            const orderButtons = document.querySelectorAll('.dashboard-card:nth-child(3) .btn');
             orderButtons.forEach(button => {
                 button.addEventListener('click', function () {
                     orderButtons.forEach(btn => {
@@ -2510,7 +2675,7 @@
             });
 
             // Filter buttons for Plant Production & Stock
-            const plantButtons = document.querySelectorAll('.dashboard-card:nth-child(5) .btn');
+            const plantButtons = document.querySelectorAll('.dashboard-card:nth-child(4) .btn');
             const plantTableBody = document.querySelector('#plant-table tbody');
 
             plantButtons.forEach(button => {
@@ -2574,66 +2739,32 @@
                 }
             }
 
-            // Mark all notifications as read
-            const markReadBtn = document.getElementById('mark-read-btn');
-            if (markReadBtn) {
-                markReadBtn.addEventListener('click', function () {
-                    const notifications = document.querySelectorAll('.notification-item');
-                    notifications.forEach(notification => {
-                        notification.style.opacity = '0.6';
-                        notification.style.borderLeftColor = '#bdc3c7';
-                    });
-                    anime({
-                        targets: '#mark-read-btn',
-                        scale: [1, 1.1, 1],
-                        duration: 500
-                    });
-                });
-            }
-
             // Real-time updates with dynamic data
             setInterval(() => {
                 const selectedYear = financialYearSelect.value;
-                const period = document.querySelector('.dashboard-card:first-child .btn-primary')?.id === 'monthly-btn' ? 'monthly' : document.querySelector('.dashboard-card:first-child .btn-primary')?.id === 'quarterly-btn' ? 'quarterly' : 'yearly';
+                const period = document.querySelector('.dashboard-card:nth-child(1) .btn-primary')?.id === 'monthly-btn' ? 'monthly' : document.querySelector('.dashboard-card:nth-child(1) .btn-primary')?.id === 'quarterly-btn' ? 'quarterly' : 'yearly';
                 const salesType = document.querySelector('.dashboard-card:nth-child(2) .btn-primary')?.id === 'quantity-btn' ? 'quantity' : 'revenue';
-                const orderType = document.querySelector('.dashboard-card:nth-child(4) .btn-primary')?.id === 'by-department-btn' ? 'byDepartment' : 'bySelf';
+                const orderType = document.querySelector('.dashboard-card:nth-child(3) .btn-primary')?.id === 'by-department-btn' ? 'byDepartment' : 'bySelf';
+                const finishedToggle = document.getElementById('finished-toggle-btn')?.dataset.toggle || 'top';
+                const emporiumToggle = document.getElementById('emporium-toggle-btn')?.dataset.toggle || 'top';
 
                 // Update KPI values
-                const productionChange = (Math.random() * 5 - 2).toFixed(1);
-                const newProductionValue = Math.max(710, Math.min(710, dataByFinancialYear[selectedYear].kpi.productionValue + (Math.random() * 500 - 250)));
-                animateValue('production-value', parseInt(document.getElementById('production-value')?.textContent.replace(/,/g, '') || '0'), Math.floor(newProductionValue), 1);
-                const productionChangeElement = document.getElementById('production-change');
-                if (productionChangeElement) {
-                    productionChangeElement.textContent = productionChange > 0 ? `+${productionChange}%` : `${productionChange}%`;
-                }
-
-                if (productionChange > 0) {
-                    const productionChangeContainer = document.querySelector('.kpi-card.production .kpi-change');
-                    if (productionChangeContainer) {
-                        productionChangeContainer.className = 'kpi-change positive text-succes';
-                        const icon = productionChangeContainer.querySelector('i');
-                        if (icon) icon.className = 'fas fa-arrow-up';
-                    }
-                } else {
-                    const productionChangeContainer = document.querySelector('.kpi-card.production .kpi-change');
-                    if (productionChangeContainer) {
-                        productionChangeContainer.className = 'kpi-change negative text-dange';
-                        const icon = productionChangeContainer.querySelector('i');
-                        if (icon) icon.className = 'fas fa-arrow-down';
-                    }
-                }
-
-                anime({
-                    targets: '.kpi-card.production .kpi-value',
-                    scale: [1, 1.1, 1],
-                    duration: 1000
-                });
+                const newProductionValue = Math.max(710, Math.min(710, dataByFinancialYear[selectedYear].kpi.productionValue + (Math.random() * 50 - 25)));
+                animateValue('production-value', parseInt(document.getElementById('production-value')?.textContent.replace(/,/g, '') || '0'), Math.floor(newProductionValue), 1500);
+                const newSalesValue = Math.max(292, Math.min(292, dataByFinancialYear[selectedYear].kpi.salesValue + (Math.random() * 20 - 10)));
+                animateValue('sales-value', parseInt(document.getElementById('sales-value')?.textContent.replace(/,/g, '') || '0'), Math.floor(newSalesValue), 1500);
+                const newOrdersValue = Math.max(900, Math.min(900, dataByFinancialYear[selectedYear].kpi.ordersValue + (Math.random() * 20 - 10)));
+                animateValue('orders-value', parseInt(document.getElementById('orders-value')?.textContent.replace(/,/g, '') || '0'), Math.floor(newOrdersValue), 1500);
+                const newStockValue = Math.max(1064, Math.min(1064, dataByFinancialYear[selectedYear].kpi.stockValue + (Math.random() * 50 - 25)));
+                animateValue('stock-value', parseInt(document.getElementById('stock-value')?.textContent.replace(/,/g, '') || '0'), Math.floor(newStockValue), 1500);
 
                 // Update chart data
-                dataByFinancialYear[selectedYear].finishedProducts[period].data = dataByFinancialYear[selectedYear].finishedProducts[period].data.map(value =>
+                const finishedDataKey = finishedToggle === 'top' ? 'finishedProducts' : 'belowFinishedProducts';
+                dataByFinancialYear[selectedYear][finishedDataKey][period].data = dataByFinancialYear[selectedYear][finishedDataKey][period].data.map(value =>
                     Math.max(value * 0.8, Math.min(value * 1.2, value + (Math.random() * value * 0.1 - value * 0.05)))
                 );
-                dataByFinancialYear[selectedYear].emporiumSales[salesType].data = dataByFinancialYear[selectedYear].emporiumSales[salesType].data.map(value =>
+                const emporiumDataKey = emporiumToggle === 'top' ? 'emporiumSales' : 'belowEmporiumSales';
+                dataByFinancialYear[selectedYear][emporiumDataKey][salesType].data = dataByFinancialYear[selectedYear][emporiumDataKey][salesType].data.map(value =>
                     Math.max(value * 0.8, Math.min(value * 1.2, value + (Math.random() * value * 0.1 - value * 0.05)))
                 );
                 dataByFinancialYear[selectedYear].orderVsSupply[orderType].data = dataByFinancialYear[selectedYear].orderVsSupply[orderType].data.map(value =>
@@ -2641,12 +2772,16 @@
                 );
 
                 if (finishedProductsChart) {
-                    finishedProductsChart.data.datasets[0].data = dataByFinancialYear[selectedYear].finishedProducts[period].data;
+                    finishedProductsChart.data.labels = dataByFinancialYear[selectedYear][finishedDataKey][period].labels;
+                    finishedProductsChart.data.datasets[0].data = dataByFinancialYear[selectedYear][finishedDataKey][period].data;
+                    finishedProductsChart.data.datasets[0].label = finishedToggle === 'top' ? 'Quantity Produced (kg)' : 'Production (Lakhs)';
+                    finishedProductsChart.options.scales.y.title.text = finishedToggle === 'top' ? 'Quantity (Nos)' : 'Production (Lakhs)';
                     finishedProductsChart.update();
                 }
 
                 if (emporiumSalesChart) {
-                    emporiumSalesChart.data.datasets[0].data = dataByFinancialYear[selectedYear].emporiumSales[salesType].data;
+                    emporiumSalesChart.data.labels = dataByFinancialYear[selectedYear][emporiumDataKey][salesType].labels;
+                    emporiumSalesChart.data.datasets[0].data = dataByFinancialYear[selectedYear][emporiumDataKey][salesType].data;
                     emporiumSalesChart.update();
                 }
 
@@ -2685,10 +2820,10 @@
                     opacity: [0.9, 1],
                     duration: 1000
                 });
-
             }, 15000);
         });
     </script>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
