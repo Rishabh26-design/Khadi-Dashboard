@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MP Khadi Department Dashboard</title>
+    <title>MPKVIC Dashboard</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Chart.js -->
@@ -29,7 +29,7 @@
             --warning: #f39c12;
             --info: #3498db;
             --light: #ecf0f1;
-            --dark: #2c3e50;
+            --dark: #000000;
             --teal: #1abc9c;
             --purple: #9b59b6;
         }
@@ -187,6 +187,7 @@
             border-radius: 5px;
             padding-left: 15px;
             margin-left: -15px;
+            text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.6);
         }
 
         .kpi-card:hover .kpi-value {
@@ -235,7 +236,7 @@
         }
 
         .dashboard-card {
-            height: 400px;
+            height: 420px;
             overflow: hidden;
             box-shadow: 0px 0px 26px -15px rgba(0, 0, 0, 0.75) inset;
             background-color: White;
@@ -356,6 +357,8 @@
             border-radius: 10px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             border: none;
+            max-width: 90vw;
+            margin: auto;
         }
 
         .modal-header {
@@ -375,12 +378,14 @@
         .modal-body {
             padding: 1.5rem;
             background-color: var(--light);
+            width: 100%;
+            overflow-x: auto;
         }
 
         .modal-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 14px;
+            font-size: 12px;
         }
 
         .modal-table th,
@@ -388,6 +393,10 @@
             padding: 12px;
             text-align: left;
             border-bottom: 1px solid #dee2e6;
+            white-space: normal;
+            overflow-wrap: break-word;
+            min-width: 100px;
+            max-width: 200px;
         }
 
         .modal-table th {
@@ -405,6 +414,26 @@
             background-color: #f1f1f1;
         }
 
+        .modal-table tr.success-row {
+            background-color: var(--success);
+            /* Bootstrap success green */
+        }
+
+        .modal-table tr.warning-row {
+            background-color: var(--warning);
+            /* Bootstrap warning yellow */
+        }
+
+        .modal-table tr.danger-row {
+            background-color: var(--danger);
+            /* Bootstrap danger red */
+        }
+
+        .modal-table tr:last-child {
+            background-color: transparent !important;
+            /* Override for total row */
+        }
+
         .modal-footer {
             border-top: none;
             padding: 1rem;
@@ -413,6 +442,19 @@
 
         .btn-close {
             filter: invert(1);
+        }
+
+        @media (min-width: 768px) {
+            .modal-table {
+                font-size: 14px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .modal-table {
+                font-size: 14px;
+                /* Restore original font size on larger screens */
+            }
         }
 
         @media (max-width: 768px) {
@@ -493,12 +535,12 @@
             </div>
             <div class="d-flex gap-2">
                 <img class="" src="Khadi Logo.png" height="50px">
-                <h1 class="dashboard-title display-6 ">MP <span>Khadi</span> Department Dashboard</h1>
+                <h1 class="dashboard-title display-6 ">MP <span>KVIC</span> Dashboard</h1>
             </div>
             <!-- <div class="last-updated d-flex "><i class="fas fa-sync-alt"></i> Last updated: <span id="current-date"></span> -->
             <div class="last-updated user-info">
                 <img src="user.jpg" alt="User Profile">
-                <span id="user-title" style="cursor: pointer;" onclick="toggleUserTitle()">Managing Director</span>
+                <span id="user-title" style="cursor: pointer;">Managing Director</span>
             </div>
         </div>
     </div>
@@ -506,78 +548,67 @@
     <!-- KPI Cards Section -->
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-6 g-3 mb-2 px-3" id="kpi-container">
         <div class="col">
-            <div class="kpi-card targets card  p-4" data-bs-toggle="modal" data-bs-target="#targetsModal">
-                <div class="kpi-title">Allocated Targets<small> (lakhs)</small></div>
-                <div class="">
-                    <div class="text-light">Production: <span class="kpi-value" id="target-production">1080</span>
-                    </div>
+            <div class="kpi-card targets card p-4" data-bs-toggle="modal" data-bs-target="#targetsModal">
+                <div class="kpi-title">Allocated Targets <small>(lakhs)</small></div>
+                <div>
+                    <div class="text-light">Production: <span class="kpi-value" id="target-production">1080</span></div>
                     <div class="text-light">Emporium: <span class="kpi-value" id="target-emporium">800</span></div>
-                    <div class="text-light">Warehouse: <span class="kpi-value" id="target-warehouse">1200</span>
-                    </div>
+                    <div class="text-light">Warehouse: <span class="kpi-value" id="target-warehouse">1200</span></div>
                 </div>
                 <div class="kpi-icon">
                     <i class="fas fa-bullseye"></i>
                 </div>
+                <button class="btn btn-sm btn-outline-light position-absolute bottom-0 end-0 m-3">View More</button>
             </div>
         </div>
         <div class="col">
-            <div class="kpi-card production card  p-4" data-bs-toggle="modal" data-bs-target="#productionModal">
-                <div class="kpi-title"> Production <br><small> (Achieved Target)</small></div>
+            <div class="kpi-card production card p-4" data-bs-toggle="modal" data-bs-target="#productionModal">
+                <div class="kpi-title">Production <br><small>(Achieved Target)</small></div>
                 <div class="kpi-value py-3">₹ <span id="production-value">0</span> <span class="fs-5">Lakhs</span></div>
-                <!-- <div class="kpi-change positive">
-                        <i class="fas fa-arrow-up"></i> <span id="production-change">12.5%</span> from last month
-                    </div> -->
                 <div class="kpi-icon">
                     <i class="fas fa-rupee-sign"></i>
                 </div>
+                <button class="btn btn-sm btn-outline-light position-absolute bottom-0 end-0 m-3">View More</button>
             </div>
         </div>
         <div class="col">
-            <div class="kpi-card sales  card  p-4" data-bs-toggle="modal" data-bs-target="#salesModal">
+            <div class="kpi-card sales card p-4" data-bs-toggle="modal" data-bs-target="#salesModal">
                 <div class="kpi-title">Emporium Sales</div>
                 <div class="kpi-value py-3">₹ <span id="sales-value">0</span> <span class="fs-5">Lakhs</span></div>
-                <!-- <div class="kpi-change positive">
-                        <i class="fas fa-arrow-up"></i> <span id="sales-change">8.3%</span> from last quarter
-                    </div> -->
                 <div class="kpi-icon">
                     <i class="fas fa-rupee-sign"></i>
                 </div>
+                <button class="btn btn-sm btn-outline-light position-absolute bottom-0 end-0 m-3">View More</button>
             </div>
         </div>
         <div class="col">
-            <div class="kpi-card orders card  p-4" data-bs-toggle="modal" data-bs-target="#ordersModal">
+            <div class="kpi-card orders card p-4" data-bs-toggle="modal" data-bs-target="#ordersModal">
                 <div class="kpi-title">Demand Details (internal)</div>
                 <div class="kpi-value py-3"><span id="orders-value">0</span> <span class="fs-5">Offices</span></div>
-                <!-- <div class="kpi-change negative">
-                        <i class="fas fa-arrow-up"></i> <span id="orders-change">15%</span> increased
-                    </div> -->
                 <div class="kpi-icon">
                     <i class="fas fa-clipboard-list"></i>
                 </div>
+                <button class="btn btn-sm btn-outline-light position-absolute bottom-0 end-0 m-3">View More</button>
             </div>
         </div>
         <div class="col">
-            <div class="kpi-card stock card  p-4" data-bs-toggle="modal" data-bs-target="#stockModal">
+            <div class="kpi-card stock card p-4" data-bs-toggle="modal" data-bs-target="#stockModal">
                 <div class="kpi-title">Finished Product</div>
                 <div class="kpi-value py-3"><span id="stock-value">0</span> <span class="fs-5">Units</span></div>
-                <!-- <div class="kpi-change negative">
-                        <i class="fas fa-arrow-down"></i> <span id="stock-change">22%</span> below target
-                    </div> -->
                 <div class="kpi-icon">
                     <i class="fas fa-boxes"></i>
                 </div>
+                <button class="btn btn-sm btn-outline-light position-absolute bottom-0 end-0 m-3">View More</button>
             </div>
         </div>
         <div class="col">
-            <div class="kpi-card low-stock card  p-4" data-bs-toggle="modal" data-bs-target="#lowStockModal">
+            <div class="kpi-card low-stock card p-4" data-bs-toggle="modal" data-bs-target="#lowStockModal">
                 <div class="kpi-title">Low Stock Alert</div>
                 <div class="kpi-value py-3"><span id="lowstock-value">5</span> <span class="fs-5">Offices</span></div>
-                <!-- <div class="kpi-change negative">
-                        <i class="fas fa-arrow-up"></i> <span id="stock-change">11%</span> increased
-                    </div> -->
                 <div class="kpi-icon">
                     <i class="fas fa-exclamation-triangle"></i>
                 </div>
+                <button class="btn btn-sm btn-outline-light position-absolute bottom-0 end-0 m-3">View More</button>
             </div>
         </div>
     </div>
@@ -854,155 +885,152 @@
                     <h5 class="modal-title" id="salesModalLabel">Emporium Sales Details (Lakhs)</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <table class="modal-table">
-                        <thead>
-                            <tr>
-                                <th>क्र.</th>
-                                <th>एम्पोरियम का नाम</th>
-                                <th>लक्ष्य (लाख में)</th>
-                                <th>बिक्री (लाख में)</th>
-                                <th>प्रतिशत पूर्ति</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>खादी ग्रामोद्योग एम्पोरियम, एम.पी. नगर</td>
-                                <td>80</td>
-                                <td>70</td>
-                                <td>87.50%</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>खादी ग्रामोद्योग एम्पोरियम भोपाल हॉट</td>
-                                <td>50</td>
-                                <td>0</td>
-                                <td>0.00%</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>खादी ग्रामोद्योग एम्पोरियम मालवीय नगर, विकय केन्द्र, पचमढ़ी</td>
-                                <td>15</td>
-                                <td>0</td>
-                                <td>0.00%</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>खादी ग्रामोद्योग एम्पोरियम, जवाहर चौक</td>
-                                <td>80</td>
-                                <td>75</td>
-                                <td>93.75%</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>खादी ग्रामोद्योग एम्पोरियम रविशंकर नगर</td>
-                                <td>20</td>
-                                <td>0</td>
-                                <td>0.00%</td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>खादी ग्रामोद्योग एम्पोरियम, नर्मदापुरम</td>
-                                <td>20</td>
-                                <td>0</td>
-                                <td>0.00%</td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>खादी ग्रामोद्योग एम्पोरियम, इंदौर</td>
-                                <td>80</td>
-                                <td>65</td>
-                                <td>81.25%</td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>खादी ग्रामोद्योग एम्पोरियम, सागर</td>
-                                <td>15</td>
-                                <td>0</td>
-                                <td>0.00%</td>
-                            </tr>
-                            <tr>
-                                <td>9</td>
-                                <td>खादी ग्रामोद्योग एम्पोरियम, खरगौन</td>
-                                <td>25</td>
-                                <td>0</td>
-                                <td>0.00%</td>
-                            </tr>
-                            <tr>
-                                <td>10</td>
-                                <td>खादी ग्रामोद्योग एम्पोरियम, उज्जैन</td>
-                                <td>55</td>
-                                <td>0</td>
-                                <td>0.00%</td>
-                            </tr>
-                            <tr>
-                                <td>11</td>
-                                <td>खादी ग्रामोद्योग एम्पोरियम, देवास</td>
-                                <td>40</td>
-                                <td>0</td>
-                                <td>0.00%</td>
-                            </tr>
-                            <tr>
-                                <td>12</td>
-                                <td>खादी ग्रामोद्योग एम्पोरियम, नीमच</td>
-                                <td>50</td>
-                                <td>0</td>
-                                <td>0.00%</td>
-                            </tr>
-                            <tr>
-                                <td>13</td>
-                                <td>खादी ग्रामोद्योग एम्पोरियम, ग्वालियर</td>
-                                <td>80</td>
-                                <td>70</td>
-                                <td>87.50%</td>
-                            </tr>
-                            <tr>
-                                <td>14</td>
-                                <td>खादी ग्रामोद्योग एम्पोरियम, मुरैना</td>
-                                <td>15</td>
-                                <td>12</td>
-                                <td>80.00%</td>
-                            </tr>
-                            <tr>
-                                <td>15</td>
-                                <td>खादी ग्रामोद्योग एम्पोरियम, जबलपुर</td>
-                                <td>80</td>
-                                <td>0</td>
-                                <td>0.00%</td>
-                            </tr>
-                            <tr>
-                                <td>16</td>
-                                <td>खादी ग्रामोद्योग एम्पोरियम, रीवा</td>
-                                <td>60</td>
-                                <td>0</td>
-                                <td>0.00%</td>
-                            </tr>
-                            <tr>
-                                <td>17</td>
-                                <td>खादी ग्रामोद्योग एम्पोरियम, शहडोल</td>
-                                <td>15</td>
-                                <td>0</td>
-                                <td>0.00%</td>
-                            </tr>
-                            <tr>
-                                <td>18</td>
-                                <td>कम्बल केन्द्र, मंदसौर विक्रय केन्द्र</td>
-                                <td>20</td>
-                                <td>0</td>
-                                <td>0.00%</td>
-                            </tr>
-
-                            <tr>
-                                <td></td>
-                                <td>योग</td>
-                                <td>800</td>
-                                <td>292</td>
-                                <td>36.5%</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <table class="modal-table">
+                    <thead>
+                        <tr>
+                            <th>क्र.</th>
+                            <th>एम्पोरियम का नाम</th>
+                            <th>लक्ष्य (लाख में)</th>
+                            <th>बिक्री (लाख में)</th>
+                            <th>प्रतिशत पूर्ति</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>खादी ग्रामोद्योग एम्पोरियम, एम.पी. नगर</td>
+                            <td>80</td>
+                            <td>70</td>
+                            <td>87.50%</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>खादी ग्रामोद्योग एम्पोरियम भोपाल हॉट</td>
+                            <td>50</td>
+                            <td>24</td>
+                            <td>48.00%</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>खादी ग्रामोद्योग एम्पोरियम मालवीय नगर, विकय केन्द्र, पचमढ़ी</td>
+                            <td>15</td>
+                            <td>5</td>
+                            <td>33.33%</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>खादी ग्रामोद्योग एम्पोरियम, जवाहर चौक</td>
+                            <td>80</td>
+                            <td>75</td>
+                            <td>93.75%</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>खादी ग्रामोद्योग एम्पोरियम रविशंकर नगर</td>
+                            <td>20</td>
+                            <td>0</td>
+                            <td>0.00%</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>खादी ग्रामोद्योग एम्पोरियम, नर्मदापुरम</td>
+                            <td>20</td>
+                            <td>0</td>
+                            <td>0.00%</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>खादी ग्रामोद्योग एम्पोरियम, इंदौर</td>
+                            <td>80</td>
+                            <td>65</td>
+                            <td>81.25%</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>खादी ग्रामोद्योग एम्पोरियम, सागर</td>
+                            <td>15</td>
+                            <td>0</td>
+                            <td>0.00%</td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>खादी ग्रामोद्योग एम्पोरियम, खरगौन</td>
+                            <td>25</td>
+                            <td>0</td>
+                            <td>0.00%</td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>खादी ग्रामोद्योग एम्पोरियम, उज्जैन</td>
+                            <td>55</td>
+                            <td>11</td>
+                            <td>20.00%</td>
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td>खादी ग्रामोद्योग एम्पोरियम, देवास</td>
+                            <td>40</td>
+                            <td>0</td>
+                            <td>0.00%</td>
+                        </tr>
+                        <tr>
+                            <td>12</td>
+                            <td>खादी ग्रामोद्योग एम्पोरियम, नीमच</td>
+                            <td>50</td>
+                            <td>0</td>
+                            <td>0.00%</td>
+                        </tr>
+                        <tr>
+                            <td>13</td>
+                            <td>खादी ग्रामोद्योग एम्पोरियम, ग्वालियर</td>
+                            <td>80</td>
+                            <td>70</td>
+                            <td>87.50%</td>
+                        </tr>
+                        <tr>
+                            <td>14</td>
+                            <td>खादी ग्रामोद्योग एम्पोरियम, मुरैना</td>
+                            <td>15</td>
+                            <td>12</td>
+                            <td>80.00%</td>
+                        </tr>
+                        <tr>
+                            <td>15</td>
+                            <td>खादी ग्रामोद्योग एम्पोरियम, जबलपुर</td>
+                            <td>80</td>
+                            <td>10</td>
+                            <td>12.50%</td>
+                        </tr>
+                        <tr>
+                            <td>16</td>
+                            <td>खादी ग्रामोद्योग एम्पोरियम, रीवा</td>
+                            <td>60</td>
+                            <td>0</td>
+                            <td>0.00%</td>
+                        </tr>
+                        <tr>
+                            <td>17</td>
+                            <td>खादी ग्रामोद्योग एम्पोरियम, शहडोल</td>
+                            <td>15</td>
+                            <td>0</td>
+                            <td>0.00%</td>
+                        </tr>
+                        <tr>
+                            <td>18</td>
+                            <td>कम्बल केन्द्र, मंदसौर विक्रय केन्द्र</td>
+                            <td>20</td>
+                            <td>0</td>
+                            <td>0.00%</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>योग</td>
+                            <td>800</td>
+                            <td>292</td>
+                            <td>36.50%</td>
+                        </tr>
+                    </tbody>
+                </table>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
@@ -1025,8 +1053,13 @@
                                 <th>क्र.</th>
                                 <th>कार्यालय का नाम</th>
                                 <th>मांग संख्या</th>
+                                <th>मांग तिथि</th>
+                                <th>मांग प्रकार</th>
                                 <th>कुल मात्रा</th>
                                 <th>उत्पाद</th>
+                                <th>समाप्त उत्पाद मांग राशि</th>
+                                <th>मशीनरी का नाम</th>
+                                <th>मांग राशि</th>
                                 <th>स्थिति</th>
                             </tr>
                         </thead>
@@ -1035,47 +1068,142 @@
                                 <td>1</td>
                                 <td>Jawahar Chowk Emporium</td>
                                 <td>JCE/2025/EMP/0001</td>
+                                <td>-</td>
+                                <td>-</td>
                                 <td>250</td>
                                 <td>Khadi Stoles</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
                                 <td>Pending</td>
                             </tr>
                             <tr>
                                 <td>2</td>
                                 <td>Khadi Gramodhyog Morena</td>
                                 <td>KGM/2025/EMP/1365</td>
+                                <td>-</td>
+                                <td>-</td>
                                 <td>150</td>
                                 <td>Gents Kurta</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
                                 <td>Confirmed</td>
                             </tr>
                             <tr>
                                 <td>3</td>
                                 <td>Kambal Utpadan Kendra, Gwalior</td>
                                 <td>PU/GWL/2025/FP/1458</td>
+                                <td>-</td>
+                                <td>-</td>
                                 <td>200</td>
                                 <td>Saree Kosa</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
                                 <td>Processing</td>
                             </tr>
                             <tr>
                                 <td>4</td>
                                 <td>Kambal Utpadan Kendra Tikamgarh</td>
                                 <td>PU/KUT/2025/FP/7451</td>
+                                <td>-</td>
+                                <td>-</td>
                                 <td>180</td>
                                 <td>Woolen Jacket</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
                                 <td>Confirmed</td>
                             </tr>
                             <tr>
                                 <td>5</td>
                                 <td>Silk Centre Production Unit Maheshwar Khargone</td>
                                 <td>PU/KHR/2025/RAW/74457</td>
+                                <td>-</td>
+                                <td>-</td>
                                 <td>120</td>
                                 <td>Kurta Regular</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
                                 <td>Pending</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>Jawahar Chowk Emporium</td>
+                                <td>D2025/PU/07/10365</td>
+                                <td>6/25/2025</td>
+                                <td>Finished Product</td>
+                                <td>105</td>
+                                <td>-</td>
+                                <td>148756.36</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>Pending</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>Kambal Utpadan Kendra Gwalior</td>
+                                <td>D2025/PU/07/10365</td>
+                                <td>6/28/2025</td>
+                                <td>Raw Material</td>
+                                <td>250</td>
+                                <td>-</td>
+                                <td>748569886.3</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>Processing</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>Polyvastra Utpadan Kendra Tikamgarh</td>
+                                <td>D2025/PU/07/10025</td>
+                                <td>6/30/2025</td>
+                                <td>Machinery</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>Bleaching/Dyeing machines</td>
+                                <td>-</td>
+                                <td>Confirmed</td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td>Khadi Utpadan Kendra Indore</td>
+                                <td>D2025/PU/07/10365</td>
+                                <td>6/27/2025</td>
+                                <td>Amount</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>1056983</td>
+                                <td>Confirmed</td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td>Kendriya Khadi Vastragaar Govindpura</td>
+                                <td>D2025/PU/07/10025</td>
+                                <td>6/29/2025</td>
+                                <td>Amount</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>1136983</td>
+                                <td>Confirmed</td>
                             </tr>
                             <tr>
                                 <td></td>
                                 <td>योग</td>
                                 <td></td>
-                                <td>900</td>
+                                <td></td>
+                                <td></td>
+                                <td>1255</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                             </tr>
@@ -1281,7 +1409,7 @@
                     <h5 class="card-title mb-0" id="finishedProductsTitle">Top 5 Finished Products Sales</h5>
                     <div class="d-flex gap-2">
                         <button class="btn btn-outline-secondary btn-sm" id="finished-toggle-btn"
-                            data-toggle="top">Toggle to Below 5</button>
+                            data-toggle="top">Below 5</button>
                         <button class="btn btn-outline-secondary btn-sm" id="monthly-btn"><i
                                 class="fas fa-calendar-week"></i> Monthly</button>
                         <button class="btn btn-outline-secondary btn-sm" id="quarterly-btn"><i
@@ -1298,6 +1426,125 @@
             </div>
         </div>
 
+        <!-- Top 5 / Below 5 Vidhya Velley Sales -->
+        <div class="col-md-4">
+            <div class="dashboard-card card  p-4">
+                <div class="card-header d-flex justify-content-between align-items-center border-bottom pb-3">
+                    <h5 class="card-title mb-0" id="vindhyavalley">Top 5 Vindhya Valley Sales</h5>
+                    <div class="d-flex gap-2">
+                        <!-- <button class="btn btn-outline-secondary btn-sm" id="finished-toggle-btn"
+                            data-toggle="top">Toggle to Below 5</button>
+                        <button class="btn btn-outline-secondary btn-sm" id="monthly-btn"><i
+                                class="fas fa-calendar-week"></i> Monthly</button>
+                        <button class="btn btn-outline-secondary btn-sm" id="quarterly-btn"><i
+                                class="fas fa-calendar-alt"></i> Quarterly</button>
+                        <button class="btn btn-primary btn-sm" id="yearly-btn"><i class="fas fa-calendar-day"></i>
+                            Yearly</button> -->
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="vindhyavalleyChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notification Card -->
+        <div class="col-md-4">
+            <div class="dashboard-card card p-4">
+                <div class="card-header d-flex justify-content-between align-items-center border-bottom pb-3">
+                    <h5 class="card-title mb-0">Notifications & Alerts</h5>
+                    <div class="d-flex gap-2">
+                        <i class="fas fa-bell mt-2" style="--fa-animation-duration: 2s;"></i>
+                        <button class="btn btn-outline-secondary btn-sm" id="mark-read-btn"><i
+                                class="fas fa-check-double"></i> Mark All Read</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="notification-list" id="notification-list">
+                        <div class="notification-item warning card mb-3 p-2" data-notification-id="1"
+                            data-demand-number="PU/2025/10254" data-emporium="Gwalior">
+                            <div class="notification-title"><i class="fas fa-exclamation-triangle"></i> Kambal Utpadan
+                                Kendra, Gwalior</div>
+                            <div class="d-flex justify-content-between">
+                                <div class="notification-desc">the purchase for the above demand has been
+                                    placed.<br><strong>Demand Number: PU/2025/10254</strong></div>
+                                <div class="notification-time">5 hours Ago</div>
+                            </div>
+                        </div>
+                        <div class="notification-item info card mb-3 p-2" data-notification-id="2"
+                            data-demand-number="HO/MARKETING/00215" data-emporium="None">
+                            <div class="notification-title"><i class="fas fa-clipboard-check"></i> MP Khadi Department
+                                work order HO/MARKETING/00215</div>
+                            <div class="d-flex justify-content-between">
+                                <div class="notification-desc">the purchase for the above demand has been placed</div>
+                                <div class="notification-time">2 hours Ago</div>
+                            </div>
+                        </div>
+                        <div class="notification-item card mb-3 p-2" data-notification-id="3"
+                            data-demand-number="PU/2025/10254" data-emporium="Gwalior">
+                            <div class="notification-title"><i class="fas fa-box-open"></i> Kambal Utpadan Kendra,
+                                Gwalior</div>
+                            <div class="d-flex justify-content-between">
+                                <div class="notification-desc">Supplier has supplied the raw material
+                                    for<br><strong>Demand Number: PU/2025/10254</strong></div>
+                                <div class="notification-time">1 day ago</div>
+                            </div>
+                        </div>
+                        <div class="notification-item warning card mb-3 p-2" data-notification-id="4"
+                            data-demand-number="PU/2025/10260" data-emporium="Mandsaur">
+                            <div class="notification-title"><i class="fas fa-exclamation-triangle"></i> Kambal Utpadan
+                                Kendra, Mandsaur</div>
+                            <div class="d-flex justify-content-between">
+                                <div class="notification-desc">the purchase for the above demand has been
+                                    placed.<br><strong>Demand Number: PU/2025/10260</strong></div>
+                                <div class="notification-time">5 hours Ago</div>
+                            </div>
+                        </div>
+                        <div class="notification-item card mb-3 p-2" data-notification-id="5"
+                            data-demand-number="PU/2025/10254" data-emporium="Gwalior">
+                            <div class="notification-title"><i class="fas fa-box-open"></i> Kambal Utpadan Kendra,
+                                Gwalior</div>
+                            <div class="d-flex justify-content-between">
+                                <div class="notification-desc">Supplier has supplied the raw material
+                                    for<br><strong>Demand Number: PU/2025/10254</strong></div>
+                                <div class="notification-time">1 day ago</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category Wise Sales -->
+        <div class="col-md-4">
+            <div class="dashboard-card card  p-4">
+                <div class="card-header d-flex justify-content-between align-items-center border-bottom pb-3">
+                    <h5 class="card-title mb-0" id="vindhyavalley">Main Category Wise Sales</h5>
+                    <div class="d-flex gap-2">
+                        <!-- <button class="btn btn-outline-secondary btn-sm" id="finished-toggle-btn"
+                            data-toggle="top">Toggle to Below 5</button>
+                        <button class="btn btn-outline-secondary btn-sm" id="monthly-btn"><i
+                                class="fas fa-calendar-week"></i> Monthly</button>
+                        <button class="btn btn-outline-secondary btn-sm" id="quarterly-btn"><i
+                                class="fas fa-calendar-alt"></i> Quarterly</button>
+                        <button class="btn btn-primary btn-sm" id="yearly-btn"><i class="fas fa-calendar-day"></i>
+                            Yearly</button> -->
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="categorywisesaleChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
         <!-- Top 5 / Below 5 Emporium Wise Sales -->
         <div class="col-md-4">
             <div class="dashboard-card card  p-4">
@@ -1305,7 +1552,7 @@
                     <h5 class="card-title mb-0" id="emporiumSalesTitle">Top 5 Emporium Wise Sales</h5>
                     <div class="d-flex gap-2">
                         <button class="btn btn-outline-secondary btn-sm" id="emporium-toggle-btn"
-                            data-toggle="top">Toggle to Below 5</button>
+                            data-toggle="top">Below 5</button>
                         <!-- <button class="btn btn-outline-secondary btn-sm" id="quantity-btn"><i
                                 class="fas fa-box-open"></i> By Quantity</button>
                         <button class="btn btn-primary btn-sm" id="revenue-btn"><i class="fas fa-money-bill-wave"></i>
@@ -1320,83 +1567,48 @@
             </div>
         </div>
 
-        <!-- Notification Alerts -->
-        <div class="col-md-4">
-            <div class="dashboard-card card  p-4">
-                <div class="card-header d-flex justify-content-between align-items-center border-bottom pb-3">
-                    <h5 class="card-title mb-0">Notifications & Alerts</h5>
-                    <div class="d-flex gap-2">
-                        <i class="fas fa-bell mt-2" style="--fa-animation-duration: 2s;"></i>
-                        <button class="btn btn-outline-secondary btn-sm" id="mark-read-btn"><i
-                                class="fas fa-check-double"></i> Mark All Read</button>
+
+
+        <!-- Modal for Notification Details -->
+        <div class="modal fade" id="notificationModal" tabindex="-1" aria-labelledby="notificationModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="notificationModalLabel"> <i class="fas fa-bell me-2 text-light"></i>
+                            Notification Details</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                </div>
-                <div class="card-body">
-                    <div class="notification-list" id="notification-list">
-                        <div class="notification-item warning card mb-3 p-2">
-                            <div class="notification-title"><i class="fas fa-exclamation-triangle"></i> Kambal Utpadan
-                                Kendra, Gwalior</div>
-                            <div class="d-flex justify-content-between">
-                                <div class="notification-desc">the purchase for the above demand has been placed.
-                                    <br><strong> Demand Number: PU/2025/10254</strong>
-                                </div>
-                                <div class="notification-time">5 hours Ago</div>
-                            </div>
+                    <div class="modal-body">
+                        <div class="notification-card">
+                            <!-- <h6><i class="fas fa-bell me-2 text-primary"></i></h6> -->
+                            <p><strong>Title:</strong> <span id="modal-title"></span></p>
+                            <p><strong>Description:</strong> <span id="modal-desc"></span></p>
+                            <p><strong>Demand Number:</strong> <span id="modal-demand" class="badge"></span></p>
+                            <p><strong>Time:</strong> <span id="modal-time"></span></p>
                         </div>
-                        <div class="notification-item info card mb-3 p-2">
-                            <div class="notification-title"><i class="fas fa-clipboard-check"></i> MP Khadi Department
-                                work order HO/MARKETING/00215</div>
-                            <div class="d-flex justify-content-between">
-                                <div class="notification-desc"> the purchase for the above demand has been placed
-                                </div>
-                                <div class="notification-time">2 hours Ago</div>
-                            </div>
-                        </div>
-                        <div class="notification-item card mb-3 p-2">
-                            <div class="notification-title"><i class="fas fa-box-open"></i> Kambal Utpadan Kendra,
-                                Gwalior
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <div class="notification-desc">Supplier has supplied the raw material for<br>
-                                    <Strong>Demand Number: PU/2025/10254 </Strong>
-                                </div>
-                                <div class="notification-time">1 day ago</div>
-                            </div>
-                        </div>
-                        <div class="notification-item warning card mb-3 p-2">
-                            <div class="notification-title"><i class="fas fa-exclamation-triangle"></i> Kambal Utpadan
-                                Kendra, Mandsaur</div>
-                            <div class="d-flex justify-content-between">
-                                <div class="notification-desc">the purchase for the above demand has been placed.
-                                    <br><strong> Demand Number: PU/2025/10260</strong>
-                                </div>
-                                <div class="notification-time">5 hours Ago</div>
-                            </div>
-                        </div>
-                        <div class="notification-item card mb-3 p-2">
-                            <div class="notification-title"><i class="fas fa-box-open"></i> Kambal Utpadan Kendra,
-                                Gwalior
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <div class="notification-desc">Supplier has supplied the raw material for<br>
-                                    <Strong>Demand Number: PU/2025/10254 </Strong>
-                                </div>
-                                <div class="notification-time">1 day ago</div>
-                            </div>
-                        </div>
+                        <div class="sales-card" id="modal-sales-data"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" id="dismiss-notification">Dismiss</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#salesModal">View All Sales</button> -->
                     </div>
                 </div>
             </div>
         </div>
 
+
+
         <!-- Order vs Supply -->
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="dashboard-card card  p-4">
                 <div class="card-header d-flex justify-content-between align-items-center border-bottom pb-3">
                     <h5 class="card-title mb-0">Other Department Order Vs Supply</h5>
                     <div class="d-flex gap-2">
-                        <button class="btn btn-primary btn-sm" id="by-self-btn"><i class="fas fa-money-bill-wave"></i>
-                            By Other Department</button>
+                        <!-- <button class="btn btn-primary btn-sm" id="by-self-btn"><i class="fas fa-money-bill-wave"></i>
+                            By Other Department</button> -->
                     </div>
                 </div>
                 <div class="card-body">
@@ -1407,6 +1619,84 @@
                 </div>
             </div>
         </div>
+
+        <!-- Processing Center Details -->
+        <div class="col-md-6">
+            <div class="dashboard-card card  p-4">
+                <div class="card-header d-flex justify-content-between align-items-center border-bottom pb-3">
+                    <h5 class="card-title mb-0">Processing Center Details</h5>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-outline-secondary btn-sm" id="production-btn"><i
+                                class="fas fa-industry"></i> Production</button>
+                        <button class="btn btn-primary btn-sm" id="stock-btn"><i class="fas fa-boxes"></i>
+                            Stock</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="plant-table">
+                            <thead>
+                                <tr>
+                                    <th>Production Center Name</th>
+                                    <th>Raw Material</th>
+                                    <th>Ready Stock</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr data-bs-toggle="modal" data-bs-target="#modalGwaliorKambal">
+                                    <td><i class="fas fa-map-marker-alt me-2"></i> <a href="#"
+                                            style="color: #007bff; text-decoration: none;">Kambal Kendra, Gwalior</a>
+                                    </td>
+                                    <td>1,500</td>
+                                    <td>540</td>
+                                    <td><span class="badge bg-success"><i
+                                                class="fas fa-check-circle me-1"></i>Adequate</span></td>
+                                </tr>
+                                <tr data-bs-toggle="modal" data-bs-target="#modalIndoreKhadi">
+                                    <td><i class="fas fa-map-marker-alt me-2"></i> <a href="#"
+                                            style="color: #007bff; text-decoration: none;">Khadi Production Centre,
+                                            Indore</a></td>
+                                    <td>1,200</td>
+                                    <td>150</td>
+                                    <td><span class="badge bg-warning"><i
+                                                class="fas fa-exclamation-circle me-1"></i>Low</span></td>
+                                </tr>
+                                <tr data-bs-toggle="modal" data-bs-target="#modalUjjainPolytextile">
+                                    <td><i class="fas fa-map-marker-alt me-2"></i> <a href="#"
+                                            style="color: #007bff; text-decoration: none;">Polytextile Production
+                                            Centre, Ujjain</a></td>
+                                    <td>1,000</td>
+                                    <td>420</td>
+                                    <td><span class="badge bg-success"><i
+                                                class="fas fa-check-circle me-1"></i>Adequate</span></td>
+                                </tr>
+                                <tr data-bs-toggle="modal" data-bs-target="#modalDewasCharm">
+                                    <td><i class="fas fa-map-marker-alt me-2"></i> <a href="#"
+                                            style="color: #007bff; text-decoration: none;">Charm Shivan Kendra,
+                                            Dewas</a></td>
+                                    <td>800</td>
+                                    <td>80</td>
+                                    <td><span class="badge bg-danger"><i
+                                                class="fas fa-times-circle me-1"></i>Critical</span></td>
+                                </tr>
+                                <tr data-bs-toggle="modal" data-bs-target="#modalGwaliorTelghani">
+                                    <td><i class="fas fa-map-marker-alt me-2"></i> <a href="#"
+                                            style="color: #007bff; text-decoration: none;">Telghani Centre, Gwalior</a>
+                                    </td>
+                                    <td>1,800</td>
+                                    <td>280</td>
+                                    <td><span class="badge bg-warning"><i
+                                                class="fas fa-exclamation-circle me-1"></i>Low</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 
         <!-- Plant Production & Stock Details -->
         <div class="col-md-6">
@@ -1498,28 +1788,34 @@
                             <thead>
                                 <tr>
                                     <th>Product/ Item</th>
+                                    <th>Unit</th>
                                     <th>Stock Quantity</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>BLANKET FINE 55*90</td>
+                                    <td>Inch</td>
                                     <td>252</td>
                                 </tr>
                                 <tr>
                                     <td>BLANKET FINE 54*90 FANCY</td>
+                                    <td>Inch</td>
                                     <td>20 </td>
                                 </tr>
                                 <tr>
                                     <td>BLANKET 54*90 PLAIN</td>
+                                    <td>Inch</td>
                                     <td>154</td>
                                 </tr>
                                 <tr>
                                     <td>COATING FABRIC FINE 54</td>
+                                    <td>Inch</td>
                                     <td>114 </td>
                                 </tr>
                                 <tr>
                                     <td>योग</td>
+                                    <td></td>
                                     <td>540</td>
                                 </tr>
                             </tbody>
@@ -1546,19 +1842,23 @@
                             <thead>
                                 <tr>
                                     <th>Product</th>
+                                    <th>Unit</th>
                                     <th>Stock Quantity</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>Khadi Cloth</td>
+                                    <td>-</td>
                                     <td>150</td>
                                 </tr>
                                 <tr>
                                     <td>Raw Cotton</td>
+                                    <td>-</td>
                                     <td>10 kg</td>
                                 </tr>
                                 <tr>
+                                    <td></td>
                                     <td></td>
                                     <td></td>
                                 </tr>
@@ -1587,19 +1887,23 @@
                             <thead>
                                 <tr>
                                     <th>Product</th>
+                                    <th>Unit</th>
                                     <th>Stock Quantity</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>Polytextile Fabric</td>
+                                    <td>-</td>
                                     <td>400</td>
                                 </tr>
                                 <tr>
                                     <td>Raw Polyester</td>
+                                    <td>-</td>
                                     <td>20 kg</td>
                                 </tr>
                                 <tr>
+                                    <td></td>
                                     <td></td>
                                     <td></td>
                                 </tr>
@@ -1627,19 +1931,23 @@
                             <thead>
                                 <tr>
                                     <th>Product</th>
+                                    <th>Unit</th>
                                     <th>Stock Quantity</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>Charm Shivan Fabric</td>
+                                    <td>-</td>
                                     <td>80</td>
                                 </tr>
                                 <tr>
                                     <td>Raw Silk</td>
+                                    <td>-</td>
                                     <td>5 kg</td>
                                 </tr>
                                 <tr>
+                                    <td></td>
                                     <td></td>
                                     <td></td>
                                 </tr>
@@ -1667,21 +1975,25 @@
                             <thead>
                                 <tr>
                                     <th>Product</th>
+                                    <th>Unit</th>
                                     <th>Stock Quantity</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>Telghani Cloth</td>
+                                    <td>-</td>
                                     <td>250</td>
                                 </tr>
                                 <tr>
                                     <td>Raw Fiber</td>
+                                    <td>-</td>
                                     <td>30 kg</td>
                                 </tr>
                                 <tr>
                                     <td></td>
                                     <td></td>
+                                    <td></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1693,384 +2005,159 @@
             </div>
         </div>
 
-        <!-- Modal for Blanket Center, Gwalior -->
-        <div class="modal fade" id="modalGwaliorBlanket" tabindex="-1" aria-labelledby="modalGwaliorBlanketLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalGwaliorBlanketLabel">Blanket Center, Gwalior Details</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <table class="modal-table">
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Stock Quantity</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Wool Blankets</td>
-                                    <td>300</td>
-                                </tr>
-                                <tr>
-                                    <td>Raw Wool</td>
-                                    <td>20 kg</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- Modal for Blanket Center, Mandsaur -->
-        <div class="modal fade" id="modalMandsaurBlanket" tabindex="-1" aria-labelledby="modalMandsaurBlanketLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalMandsaurBlanketLabel">Blanket Center, Mandsaur Details</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <table class="modal-table">
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Stock Quantity</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Wool Blankets</td>
-                                    <td>150</td>
-                                </tr>
-                                <tr>
-                                    <td>Raw Wool</td>
-                                    <td>10 kg</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal for Blanket Center, Tikamgarh -->
-        <div class="modal fade" id="modalTikamgarhBlanket" tabindex="-1" aria-labelledby="modalTikamgarhBlanketLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalTikamgarhBlanketLabel">Blanket Center, Tikamgarh Details</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <table class="modal-table">
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Stock Quantity</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Wool Blankets</td>
-                                    <td>400</td>
-                                </tr>
-                                <tr>
-                                    <td>Raw Wool</td>
-                                    <td>20 kg</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal for Blanket Center, Chhindwara -->
-        <div class="modal fade" id="modalChhindwaraBlanket" tabindex="-1" aria-labelledby="modalChhindwaraBlanketLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalChhindwaraBlanketLabel">Blanket Center, Chhindwara Details</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <table class="modal-table">
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Stock Quantity</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Wool Blankets</td>
-                                    <td>80</td>
-                                </tr>
-                                <tr>
-                                    <td>Raw Wool</td>
-                                    <td>5 kg</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal for Khadi Production Center, Gwalior -->
-        <div class="modal fade" id="modalGwaliorKhadi" tabindex="-1" aria-labelledby="modalGwaliorKhadiLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalGwaliorKhadiLabel">Khadi Production Center, Gwalior Details
-                        </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <table class="modal-table">
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Stock Quantity</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Khadi Cloth</td>
-                                    <td>250</td>
-                                </tr>
-                                <tr>
-                                    <td>Raw Cotton</td>
-                                    <td>30 kg</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal for Blanket Center, Gwalior -->
-        <div class="modal fade" id="modalGwaliorBlanket" tabindex="-1" aria-labelledby="modalGwaliorBlanketLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalGwaliorBlanketLabel">Blanket Center, Gwalior Details</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <table class="modal-table">
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Stock Quantity</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Wool Blankets</td>
-                                    <td>300</td>
-                                    <td><span class="badge bg-success">Adequate</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Raw Wool</td>
-                                    <td>20 kg</td>
-                                    <td><span class="badge bg-success">Adequate</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal for Blanket Center, Mandsaur -->
-        <div class="modal fade" id="modalMandsaurBlanket" tabindex="-1" aria-labelledby="modalMandsaurBlanketLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalMandsaurBlanketLabel">Blanket Center, Mandsaur Details</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <table class="modal-table">
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Stock Quantity</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Wool Blankets</td>
-                                    <td>150</td>
-                                    <td><span class="badge bg-warning">Low</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Raw Wool</td>
-                                    <td>10 kg</td>
-                                    <td><span class="badge bg-warning">Low</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal for Blanket Center, Tikamgarh -->
-        <div class="modal fade" id="modalTikamgarhBlanket" tabindex="-1" aria-labelledby="modalTikamgarhBlanketLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalTikamgarhBlanketLabel">Blanket Center, Tikamgarh Details</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <table class="modal-table">
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Stock Quantity</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Wool Blankets</td>
-                                    <td>400</td>
-                                    <td><span class="badge bg-success">Adequate</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Raw Wool</td>
-                                    <td>20 kg</td>
-                                    <td><span class="badge bg-success">Adequate</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal for Blanket Center, Chhindwara -->
-        <div class="modal fade" id="modalChhindwaraBlanket" tabindex="-1" aria-labelledby="modalChhindwaraBlanketLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalChhindwaraBlanketLabel">Blanket Center, Chhindwara Details</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <table class="modal-table">
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Stock Quantity</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Wool Blankets</td>
-                                    <td>80</td>
-                                    <td><span class="badge bg-danger">Critical</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Raw Wool</td>
-                                    <td>5 kg</td>
-                                    <td><span class="badge bg-danger">Critical</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal for Khadi Production Center, Gwalior -->
-        <div class="modal fade" id="modalGwaliorKhadi" tabindex="-1" aria-labelledby="modalGwaliorKhadiLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalGwaliorKhadiLabel">Khadi Production Center, Gwalior Details
-                        </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <table class="modal-table">
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Stock Quantity</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Khadi Cloth</td>
-                                    <td>250</td>
-                                    <td><span class="badge bg-warning">Low</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Raw Cotton</td>
-                                    <td>30 kg</td>
-                                    <td><span class="badge bg-warning">Low</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
     </div>
+
+    <script>
+        // Sample sales data from previous table
+        const salesData = [
+            { emporium: "ग्वालियर", target: 80, sales: 70, percentage: 87.5 },
+            { emporium: "मंदसौर", target: 20, sales: 0, percentage: 0.0 }
+        ];
+
+        document.addEventListener('DOMContentLoaded', function () {
+            try {
+                const notificationItems = document.querySelectorAll('.notification-item');
+                const modal = new bootstrap.Modal(document.getElementById('notificationModal'), { backdrop: true });
+                const modalTitle = document.getElementById('modal-title');
+                const modalDesc = document.getElementById('modal-desc');
+                const modalDemand = document.getElementById('modal-demand');
+                const modalTime = document.getElementById('modal-time');
+                const modalSalesData = document.getElementById('modal-sales-data');
+                const notificationList = document.getElementById('notification-list');
+                let currentNotification = null;
+
+                // Function to populate modal
+                function populateModal(item) {
+                    try {
+                        currentNotification = item; // Store the clicked item
+                        const title = item.querySelector('.notification-title')?.innerHTML || 'N/A';
+                        const desc = item.querySelector('.notification-desc')?.textContent || 'No description';
+                        const demand = item.dataset?.demandNumber || 'N/A';
+                        const time = item.querySelector('.notification-time')?.textContent || 'Unknown time';
+                        const emporium = item.dataset?.emporium || 'None';
+                        const isWarning = item.classList.contains('warning');
+                        const isInfo = item.classList.contains('info');
+
+                        if (modalTitle) modalTitle.innerHTML = title;
+                        if (modalDesc) modalDesc.textContent = desc;
+                        if (modalDemand) {
+                            modalDemand.textContent = demand;
+                            modalDemand.className = 'badge';
+                            modalDemand.classList.add(isWarning ? 'bg-warning' : isInfo ? 'bg-info' : 'bg-secondary');
+                        }
+                        if (modalTime) modalTime.textContent = time;
+
+                        // Display sales data if emporium matches
+                        if (modalSalesData) {
+                            modalSalesData.innerHTML = '';
+                            if (emporium !== 'None') {
+                                const data = salesData.find(row => row.emporium.includes(emporium));
+                                if (data) {
+                                    const percentageClass = data.percentage >= 50 ? 'success' :
+                                        data.percentage >= 30 ? 'warning' : 'danger';
+                                    modalSalesData.innerHTML = `
+                                        <h6><i class="fas fa-chart-line me-2 text-success"></i>Sales Data for ${emporium}</h6>
+                                        <table class="sales-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Target (Lakhs)</th>
+                                                    <th>Sales (Lakhs)</th>
+                                                    <th>Percentage Fulfillment</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>${data.target}</td>
+                                                    <td>${data.sales}</td>
+                                                    <td class="${percentageClass}">${data.percentage}%</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    `;
+                                }
+                            }
+                        }
+                    } catch (error) {
+                        console.error('Error populating modal:', error);
+                    }
+                }
+
+                // Click event
+                notificationItems.forEach(item => {
+                    item.addEventListener('click', function () {
+                        try {
+                            populateModal(this);
+                            modal.show();
+                        } catch (error) {
+                            console.error('Error opening modal:', error);
+                        }
+                    });
+                });
+
+                // Mark All Read button
+                const markReadBtn = document.getElementById('mark-read-btn');
+                if (markReadBtn) {
+                    markReadBtn.addEventListener('click', function () {
+                        try {
+                            notificationItems.forEach(item => {
+                                item.classList.remove('warning', 'info');
+                                item.classList.add('read');
+                            });
+                        } catch (error) {
+                            console.error('Error marking all read:', error);
+                        }
+                    });
+                }
+
+                // Dismiss Notification button
+                const dismissBtn = document.getElementById('dismiss-notification');
+                if (dismissBtn) {
+                    dismissBtn.addEventListener('click', function () {
+                        try {
+                            if (currentNotification && notificationList && notificationList.contains(currentNotification)) {
+                                notificationList.removeChild(currentNotification);
+                                modal.hide();
+                                currentNotification = null;
+                            } else {
+                                console.warn('No valid notification to dismiss or notification list not found');
+                            }
+                        } catch (error) {
+                            console.error('Error dismissing notification:', error);
+                        }
+                    });
+                }
+            } catch (error) {
+                console.error('Script initialization error:', error);
+            }
+        });
+    </script>
+    <!-- Color Badge for table -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const table = document.querySelector('#salesModal .modal-table tbody');
+            const rows = table.querySelectorAll('tr:not(:last-child)'); // Exclude the total row
+
+            rows.forEach(row => {
+                const percentageCell = row.querySelector('td:last-child');
+                const percentageText = percentageCell.textContent.trim();
+                const percentage = parseFloat(percentageText.replace('%', ''));
+
+                if (isNaN(percentage)) {
+                    // Handle rows with invalid/missing percentage (not set)
+                    row.classList.add('default-row'); // Optional: can apply a default style if needed
+                } else if (percentage >= 50) {
+                    row.classList.add('success-row');
+                } else if (percentage >= 30 && percentage <= 49) {
+                    row.classList.add('warning-row');
+                } else if (percentage >= 0 && percentage <= 29) {
+                    row.classList.add('danger-row');
+                }
+            });
+        });
+    </script>
+
     <script>
         function toggleUserTitle() {
             const userTitle = document.getElementById('user-title');
@@ -2240,6 +2327,38 @@
                             data: [15000, 11760, 9000, 7440, 6960]
                         }
                     },
+
+                    vindhyavalley: {
+                        monthly: {
+                            labels: ['Gents Kurta', 'Saree Kosa Block Print', 'Gents Shirt White FS', 'Woolen Jacket', 'Kurta Regular'],
+                            data: [1064, 980, 750, 620, 580]
+                        },
+                        quarterly: {
+                            labels: ['Gents Kurta', 'Saree Kosa Block Print', 'Gents Shirt White FS', 'Woolen Jacket', 'Kurta Regular'],
+                            data: [3750, 2940, 2250, 1860, 1740]
+                        },
+                        yearly: {
+                            labels: ['Gents Kurta', 'Saree Kosa Block Print', 'Gents Shirt White FS', 'Woolen Jacket', 'Kurta Regular'],
+                            data: [500, 2176, 2100, 744, 2960]
+                        }
+                    },
+
+                    categorywisesale: {
+                        monthly: {
+                            labels: ['Cotton', 'Woolen', 'Silk', 'Leather', 'Other'],
+                            data: [1064, 980, 750, 620, 580]
+                        },
+                        quarterly: {
+                            labels: ['Cotton', 'Woolen', 'Silk', 'Leather', 'Other'],
+                            data: [3750, 2940, 2250, 1860, 1740]
+                        },
+                        yearly: {
+                            labels: ['Cotton', 'Woolen', 'Silk', 'Leather', 'Other'],
+                            data: [19000, 10760, 30000, 3000, 15000]
+                        }
+                    },
+
+
                     belowFinishedProducts: {
                         monthly: {
                             labels: ['Tikamgarh Kambal', 'Chhindwara Kambal', 'Khargone Khadi', 'Maheshwar Silk', 'Indore Khadi'],
@@ -2281,7 +2400,7 @@
                     kpi: {
                         productionValue: 710,
                         salesValue: 292,
-                        ordersValue: 900,
+                        ordersValue: 5,
                         stockValue: 1064
                     }
                 }
@@ -2333,6 +2452,102 @@
                     }
                 });
             }
+
+
+            // Chart 1: Top 5 / Below 5 Finished Products Sales
+            const vindhyavalleyCtx = document.getElementById('vindhyavalleyChart')?.getContext('2d');
+            let vindhyavalleyChart;
+            if (vindhyavalleyCtx) {
+                vindhyavalleyChart = new Chart(vindhyavalleyCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: dataByFinancialYear['2025-26'].vindhyavalley.yearly.labels,
+                        datasets: [{
+                            label: 'Quantity Produced (Nos)',
+                            data: dataByFinancialYear['2025-26'].vindhyavalley.yearly.data,
+                            backgroundColor: ['rgba(52, 152, 219, 0.7)', 'rgba(155, 89, 182, 0.7)', 'rgba(52, 73, 94, 0.7)', 'rgba(39, 174, 96, 0.7)', 'rgba(241, 196, 15, 0.7)'],
+                            borderColor: ['rgba(52, 152, 219, 1)', 'rgba(155, 89, 182, 1)', 'rgba(52, 73, 94, 1)', 'rgba(39, 174, 96, 1)', 'rgba(241, 196, 15, 1)'],
+                            borderWidth: 1,
+                            borderRadius: 6,
+                            borderSkipped: false
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    afterLabel: function (context) {
+                                        const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                        const percentage = Math.round((context.raw / total) * 100);
+                                        return `Percentage: ${percentage}% of total production`;
+                                    }
+                                }
+                            },
+                            datalabels: { display: false }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: { display: true, text: 'Quantity (Nos)', font: { weight: 'bold' } },
+                                grid: { color: 'rgba(0, 0, 0, 0.05)' }
+                            },
+                            x: { grid: { display: false } }
+                        },
+                        animation: { duration: 2000, easing: 'easeOutQuart' }
+                    }
+                });
+            }
+
+            // Main category Wise Sales
+            const categorywisesaleCtx = document.getElementById('categorywisesaleChart')?.getContext('2d');
+            let categorywisesaleChart;
+            if (categorywisesaleCtx) {
+                vindhyavalleyChart = new Chart(categorywisesaleCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: dataByFinancialYear['2025-26'].categorywisesale.yearly.labels,
+                        datasets: [{
+                            label: 'Quantity Produced (Nos)',
+                            data: dataByFinancialYear['2025-26'].categorywisesale.yearly.data,
+                            backgroundColor: ['rgba(52, 152, 219, 0.7)', 'rgba(155, 89, 182, 0.7)', 'rgba(52, 73, 94, 0.7)', 'rgba(39, 174, 96, 0.7)', 'rgba(241, 196, 15, 0.7)'],
+                            borderColor: ['rgba(52, 152, 219, 1)', 'rgba(155, 89, 182, 1)', 'rgba(52, 73, 94, 1)', 'rgba(39, 174, 96, 1)', 'rgba(241, 196, 15, 1)'],
+                            borderWidth: 1,
+                            borderRadius: 6,
+                            borderSkipped: false
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    afterLabel: function (context) {
+                                        const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                        const percentage = Math.round((context.raw / total) * 100);
+                                        return `Percentage: ${percentage}% of total production`;
+                                    }
+                                }
+                            },
+                            datalabels: { display: false }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: { display: true, text: 'Quantity (Nos)', font: { weight: 'bold' } },
+                                grid: { color: 'rgba(0, 0, 0, 0.05)' }
+                            },
+                            x: { grid: { display: false } }
+                        },
+                        animation: { duration: 2000, easing: 'easeOutQuart' }
+                    }
+                });
+            }
+
 
             // Chart 2: Top 5 / Below 5 Emporium Wise Sales
             const emporiumSalesCtx = document.getElementById('emporiumSalesChart')?.getContext('2d');
@@ -2447,6 +2662,17 @@
                 animateValue('sales-value', parseInt(document.getElementById('sales-value')?.textContent.replace(/,/g, '') || '0'), dataByFinancialYear[selectedYear].kpi.salesValue, 1500);
                 animateValue('orders-value', parseInt(document.getElementById('orders-value')?.textContent.replace(/,/g, '') || '0'), dataByFinancialYear[selectedYear].kpi.ordersValue, 1500);
                 animateValue('stock-value', parseInt(document.getElementById('stock-value')?.textContent.replace(/,/g, '') || '0'), dataByFinancialYear[selectedYear].kpi.stockValue, 1500);
+
+                // Update Finished Products Chart
+                if (vindhyavalleyChart) {
+                    const dataKey = finishedToggle === 'top' ? 'finishedProducts' : 'belowFinishedProducts';
+                    vindhyavalleyChart.data.labels = dataByFinancialYear[selectedYear][dataKey][period].labels;
+                    vindhyavalleyChart.data.datasets[0].data = dataByFinancialYear[selectedYear][dataKey][period].data;
+                    vindhyavalleyChart.data.datasets[0].label = finishedToggle === 'top' ? 'Quantity Produced (kg)' : 'Production (Lakhs)';
+                    vindhyavalleyChart.options.scales.y.title.text = finishedToggle === 'top' ? 'Quantity (Nos)' : 'Quantity (Nos)';
+                    vindhyavalleyChart.update();
+                    document.getElementById('finishedProductsTitle').textContent = finishedToggle === 'top' ? 'Top 5 Finished Products Sales' : 'Below 5 Finished Products Sales';
+                }
 
                 // Update Finished Products Chart
                 if (finishedProductsChart) {
@@ -2753,7 +2979,7 @@
                 animateValue('production-value', parseInt(document.getElementById('production-value')?.textContent.replace(/,/g, '') || '0'), Math.floor(newProductionValue), 1500);
                 const newSalesValue = Math.max(292, Math.min(292, dataByFinancialYear[selectedYear].kpi.salesValue + (Math.random() * 20 - 10)));
                 animateValue('sales-value', parseInt(document.getElementById('sales-value')?.textContent.replace(/,/g, '') || '0'), Math.floor(newSalesValue), 1500);
-                const newOrdersValue = Math.max(900, Math.min(900, dataByFinancialYear[selectedYear].kpi.ordersValue + (Math.random() * 20 - 10)));
+                const newOrdersValue = Math.max(5, Math.min(5, dataByFinancialYear[selectedYear].kpi.ordersValue + (Math.random() * 20 - 10)));
                 animateValue('orders-value', parseInt(document.getElementById('orders-value')?.textContent.replace(/,/g, '') || '0'), Math.floor(newOrdersValue), 1500);
                 const newStockValue = Math.max(1064, Math.min(1064, dataByFinancialYear[selectedYear].kpi.stockValue + (Math.random() * 50 - 25)));
                 animateValue('stock-value', parseInt(document.getElementById('stock-value')?.textContent.replace(/,/g, '') || '0'), Math.floor(newStockValue), 1500);
