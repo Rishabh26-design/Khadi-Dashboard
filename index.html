@@ -384,7 +384,7 @@
         }
 
         .modal-table tr:last-child td {
-            font-weight: 300;
+            font-weight: 700;
             color: #000000;
         }
 
@@ -535,7 +535,7 @@
         <div class="col">
             <div class="kpi-card orders card shadow-sm p-4" data-bs-toggle="modal" data-bs-target="#ordersModal">
                 <div class="kpi-title">Demand Details (internal)</div>
-                <div class="kpi-value py-3"><span id="orders-value">0</span> <span class="fs-5">Nos</span></div>
+                <div class="kpi-value py-3"><span id="orders-value">0</span> <span class="fs-5">Offices</span></div>
                 <!-- <div class="kpi-change negative">
                         <i class="fas fa-arrow-up"></i> <span id="orders-change">15%</span> increased
                     </div> -->
@@ -1013,7 +1013,7 @@
                                 <th>क्र.</th>
                                 <th>कार्यालय का नाम</th>
                                 <th>मांग संख्या</th>
-                                <th>कुल आर्डर</th>
+                                <th>कुल मात्रा</th>
                                 <th>उत्पाद</th>
                                 <th>स्थिति</th>
                             </tr>
@@ -1246,6 +1246,10 @@
                                 <td>SHIRT WHITE FS</td>
                                 <td>5 Nos</td>
                             </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -1417,7 +1421,7 @@
                                             style="color: #007bff; text-decoration: none;">Kambal Kendra, Gwalior</a>
                                     </td>
                                     <td>1,500</td>
-                                    <td>320</td>
+                                    <td>540</td>
                                     <td><span class="badge bg-success"><i
                                                 class="fas fa-check-circle me-1"></i>Adequate</span></td>
                                 </tr>
@@ -1498,6 +1502,10 @@
                                     <td>COATING FABRIC FINE 54</td>
                                     <td>114 </td>
                                 </tr>
+                                <tr>
+                                    <td>योग</td>
+                                    <td>540</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -1533,6 +1541,10 @@
                                 <tr>
                                     <td>Raw Cotton</td>
                                     <td>10 kg</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1571,6 +1583,10 @@
                                     <td>Raw Polyester</td>
                                     <td>20 kg</td>
                                 </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -1607,6 +1623,10 @@
                                     <td>Raw Silk</td>
                                     <td>5 kg</td>
                                 </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -1642,6 +1662,10 @@
                                 <tr>
                                     <td>Raw Fiber</td>
                                     <td>30 kg</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -2113,7 +2137,7 @@
             animateValue('target-warehouse', 0, 1200, 1500);
             animateValue('production-value', 0, 710, 1500);
             animateValue('sales-value', 0, 292, 1500);
-            animateValue('orders-value', 0, 128, 1500);
+            animateValue('orders-value', 0, 5, 1500);
             animateValue('stock-value', 0, 1064, 1500);
             animateValue('total-orders', 0, 1064, 1500);
 
@@ -2181,7 +2205,7 @@
                         targetWarehouse: 1200,
                         productionValue: 8450,
                         salesValue: 292,
-                        ordersValue: 128,
+                        ordersValue: 5,
                         stockValue: 1250
                     }
                 }
