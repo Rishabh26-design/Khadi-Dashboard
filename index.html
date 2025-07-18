@@ -483,9 +483,9 @@
                 <h1 class="dashboard-title display-6 ">MP <span>Khadi</span> Department Dashboard</h1>
             </div>
             <!-- <div class="last-updated d-flex "><i class="fas fa-sync-alt"></i> Last updated: <span id="current-date"></span> -->
-            <div class=" last-updated user-info">
-                <img src="user.jpg" alt="MD">
-                <span>Managing Director</span>
+            <div class="last-updated user-info">
+                <img src="user.jpg" alt="User Profile">
+                <span id="user-title" style="cursor: pointer;" onclick="toggleUserTitle()">Managing Director</span>
             </div>
         </div>
     </div>
@@ -1490,7 +1490,7 @@
                                     <td>BLANKET FINE 54*90 FANCY</td>
                                     <td>20 </td>
                                 </tr>
-                                 <tr>
+                                <tr>
                                     <td>BLANKET 54*90 PLAIN</td>
                                     <td>154</td>
                                 </tr>
@@ -2031,7 +2031,17 @@
         </div>
     </div>
     </div>
-
+    <script>
+        function toggleUserTitle() {
+            const userTitle = document.getElementById('user-title');
+            if (userTitle.textContent === 'Managing Director') {
+                userTitle.textContent = 'Principal Secretary';
+                window.location.href = 'Index2.html'; // Redirect to the Managing Director page
+            } else {
+                userTitle.textContent = 'Managing Director';
+            }
+        }
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Initialize anime.js timeline
