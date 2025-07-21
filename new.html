@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Dashboard Header</title>
+    <style>
+        :root {
+            --primary: #007bff;
+            --warning: #ffc107;
+            --light: #ffffff;
+        }
+
+        .container-fluid {
+            width: 100%;
+            padding: 0 15px;
+            box-sizing: border-box;
+        }
+
+        .dashboard-header {
+            background: linear-gradient(135deg, var(--primary), #1a252f);
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(-20px);
+            opacity: 0;
+            animation: slideDown 0.6s forwards 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 1rem;
+        }
+
+        @keyframes slideDown {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .dashboard-title {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .dashboard-title span {
+            color: var(--warning);
+        }
+
+        .filters {
+            display: flex;
+            flex-wrap: nowrap; /* Ensure dropdowns stay side by side */
+            gap: 15px;
+            align-items: center;
+        }
+
+        .financial-year-filter,
+        .quarter-filter {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+            flex-shrink: 0; /* Prevent shrinking */
+        }
+
+        .financial-year-filter select,
+        .quarter-filter select {
+            background-color: rgb(255, 255, 255);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+            cursor: pointer;
+            min-width: 120px; /* Ensure consistent width */
+        }
+
+        .financial-year-filter select:focus,
+        .quarter-filter select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .last-updated.user-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+        }
+
+        .last-updated img {
+            height: 30px;
+            width: 30px;
+            border-radius: 50%;
+        }
+
+        .logo-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .logo-title img {
+            height: 50px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 0.75rem;
+            }
+
+            .filters {
+                flex-wrap: nowrap; /* Keep dropdowns side by side */
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .financial-year-filter,
+            .quarter-filter {
+                flex: 1; /* Allow equal space distribution */
+                min-width: 0; /* Allow shrinking if needed */
+            }
+
+            .financial-year-filter select,
+            .quarter-filter select {
+                width: 100%;
+                min-width: 100px; /* Adjust minimum width */
+            }
+
+            .logo-title {
+                justify-content: flex-start;
+                width: 100%;
+                margin: 0.5rem 0;
+            }
+
+            .dashboard-title {
+                font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+            }
+
+            .last-updated.user-info {
+                width: 100%;
+                justify-content: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dashboard-header {
+                gap: 10px;
+                padding: 0.5rem;
+            }
+
+            .filters {
+                flex-wrap: nowrap; /* Keep side by side even on small screens */
+                gap: 10px;
+            }
+
+            .financial-year-filter select,
+            .quarter-filter select {
+                font-size: clamp(0.7rem, 2.5vw, 0.8rem);
+                padding: 4px 8px;
+                min-width: 90px; /* Smaller minimum width for mobile */
+            }
+
+            .dashboard-title {
+                font-size: clamp(1rem, 3vw, 1.2rem);
+            }
+
+            .logo-title img {
+                height: 40px;
+            }
+
+            .last-updated.user-info {
+                font-size: clamp(0.7rem, 2.5vw, 0.8rem);
+                padding: 6px 12px;
+            }
+
+            .last-updated img {
+                height: 25px;
+                width: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="dashboard-header">
+            <div class="filters">
+                <div class="financial-year-filter">
+                    <label for="financial-year">Financial Year:</label>
+                    <select id="financial-year">
+                        <option value="2024-25">2024-25</option>
+                        <option value="2025-26" selected>2025-26</option>
+                    </select>
+                </div>
+                <div class="quarter-filter">
+                    <label for="quarter">Quarter:</label>
+                    <select id="quarter">
+                        <option value="ALL" selected>ALL</option>
+                        <option value="Q1">Q1 (Apr-Jun)</option>
+                        <option value="Q2">Q2 (Jul-Sep)</option>
+                        <option value="Q3">Q3 (Oct-Dec)</option>
+                        <option value="Q4">Q4 (Jan-Mar)</option>
+                        <option value="Qmonth">Current Month</option>
+                    </select>
+                </div>
+            </div>
+            <div class="logo-title">
+                <img src="asset/Khadi Logo.png" alt="Khadi Logo" height="50px">
+                <h1 class="dashboard-title display-6">MP <span>KVIC</span> Dashboard</h1>
+            </div>
+            <div class="last-updated user-info">
+                <img src="asset/user.jpg" alt="User Profile">
+                <span id="user-title" style="cursor: pointer;">Managing Director</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
