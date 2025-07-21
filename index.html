@@ -21,14 +21,28 @@
 <body>
     <div class="container-fluid">
         <div class="dashboard-header p-3 mb-4 mt-2">
-            <div class="financial-year-filter">
-                <label for="financial-year">Financial Year:</label>
-                <select id="financial-year">
-                    <option value="2024-25">2024-25</option>
-                    <option value="2025-26" selected>2025-26</option>
-                </select>
+            <div class="d-flex">
+                <div class="financial-year-filter">
+                    <label for="financial-year">Financial Year : </label>
+                    <select id="financial-year">
+                        <option value="2024-25">2024-25</option>
+                        <option value="2025-26" selected>2025-26</option>
+                    </select>
+                </div>
+                <div class="quarter-filter">
+                    <label for="quarter">Quarter : </label>
+                    <select id="quarter">
+                        <option value="ALL" selected>ALL</option>
+                        <option value="Q1">Q1 (Apr-Jun)</option>
+                        <option value="Q2">Q2 (Jul-Sep)</option>
+                        <option value="Q3">Q3 (Oct-Dec)</option>
+                        <option value="Q4">Q4 (Jan-Mar)</option>
+                         <option value="Qmonth">Current Month</option>
+                    </select>
+                </div>
             </div>
-            <div class="d-flex gap-2">
+
+            <div class="d-flex gap-2" style="margin-right: 16rem;">
                 <img class="" src="asset/Khadi Logo.png" height="50px">
                 <h1 class="dashboard-title display-6 ">MP <span>KVIC</span> Dashboard</h1>
             </div>
@@ -46,9 +60,9 @@
             <div class="kpi-card targets card p-4" data-bs-toggle="modal" data-bs-target="#targetsModal">
                 <div class="kpi-title">Allocated Targets <small>(lakhs)</small></div>
                 <div>
-                    <div class="text-light">Production: <span class="kpi-value" id="target-production">1080</span></div>
-                    <div class="text-light">Emporium: <span class="kpi-value" id="target-emporium">800</span></div>
-                    <div class="text-light">Warehouse: <span class="kpi-value" id="target-warehouse">1200</span></div>
+                    <div class="text-light">Production : <span class="h5 shad fw-bold" id="target-production">1080</span></div>
+                    <div class="text-light">Emporium  : <span class="h5 shad fw-bold" id="target-emporium">800</span></div>
+                    <div class="text-light">Warehouse : <span class="h5 shad fw-bold" id="target-warehouse">1200</span></div>
                 </div>
                 <div class="kpi-icon">
                     <i class="fas fa-bullseye"></i>
